@@ -1,8 +1,104 @@
+      <!DOCTYPE html>
+<html>
+
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       
+<title>my.jumia.com.ng/login</title>
+
+
+<style>
+
+.otp-setup{
+width: 400px;
+height: 400px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    align-items: center;
+    z-index: 10;
+   
+}
+   
+
+    .top-logo{
+ width: 55px; 
+ margin-bottom: 15px;  
+}
+
+.input{
+font-size: 25px;
+height: 40px;
+width: 45px;
+margin-right: 7px;
+border-color: rgb(248, 152, 45);;
+border-style: solid;
+border-width: 1px;
+border-radius: 4px;
+text-align: center;
+
+}
+
+.submit-button{
+
+    font-weight: 700;
+    color: white;
+    background-color: rgb(248, 152, 45);
+    border-width: 0px;
+    border-radius: 3px;
+    padding: 17px 116px 17px 116px;
+    display: block;
+    margin: 15px 0px 60px 0px;
+    margin-bottom: 7px;
+    transition: opacity, 0.15s;
+}
+
+.submit-button:hover{
+
+font-weight: 700;
+color: white;
+background-color: rgb(248, 152, 45);
+border-width: 0px;
+border-radius: 3px;
+padding: 19px 118px 19px 118px;
+display: block;
+margin: 15px 0px 60px 0px;
+margin-bottom: 7px;
+transition: opacity, 0.15s;
+opacity: 0.9;}
+
+.icons{
+    width: 75px;
+    margin-right: 18px;
+    margin-left: 18px;
+    margin-bottom: 18px;}
+    
+
+</style>
+
+
+
+</head>
+
+<body style= "width:400px; padding-top: 100px; padding-bottom:10px;">
+    <div class="one-grid" style="display: grid; grid-template-columns: 400px;">
+<div class="otp-setup" style="width: 400px;">
+      
+          <img class="top-logo" src= "myjumia-top-logo.png">
+             <P class="welcome">Verification Code</P>
+             <p>Input received OTP verification code</p>
+
+<div style="display: flex; flex-direction: row;">
+    <input required maxlength="1" type="text" class= "input" style="outline: none;">
       <input required maxlength="1" type="text" class= "input" style="outline: none;">
        <input required maxlength="1" type="text" class= "input" style="outline: none;">
        <input required maxlength="1" type="text" class= "input" style="outline: none;">
 </div>
-
 <button class="submit-button">Submit</button>
 <p>Didn't receive verification code? It could take a bit of time, request a new code in <span id="countdown-timer" style="color: rgb(248, 152, 45)">30 seconds</span> </p>
 
