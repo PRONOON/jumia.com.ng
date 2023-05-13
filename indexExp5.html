@@ -1,96 +1,60 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Background Image with Media Queries</title>
-	<style>
-		body {
-			margin: 0;
-			padding: 0;
-			background-image: url(https://jumia-ng-electronics-category-nig.github.io/jumia.com.ng/loading-page.jpg);
-			background-size: cover;
-			background-position: center center;
-			background-repeat: no-repeat;
-		}
+@media only screen and (max-width: 575px) {
+  body {
+    background-image: url('https://jumia-ng-electronics-category-nig.github.io/jumia.com.ng/loading-page.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100vh;
+  }
+}
 
-		/* Samsung A13 */
-		@media only screen 
-			and (min-device-width: 360px) 
-			and (max-device-width: 360px) 
-			and (max-device-height: 710px) 
-			and (-webkit-device-pixel-ratio: 2) {
-			body {
-				background-size: auto 100%;
-			}
-		}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  body {
+    background-image: url('https://jumia-ng-electronics-category-nig.github.io/jumia.com.ng/loading-page.jpg');
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100vh;
+  }
+}
 
-		/* Infinix Hot 10 Play */
-		@media only screen 
-			and (min-device-width: 720px) 
-			and (max-device-width: 720px) 
-			and (max-device-height: 1640px) 
-			and (-webkit-device-pixel-ratio: 2) {
-			body {
-				background-size: auto 100%;
-			}
-		}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  body {
+    background-image: url('https://jumia-ng-electronics-category-nig.github.io/jumia.com.ng/loading-page.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100vh;
+  }
+}
 
-		/* Tecno Spark Go 2020 */
-		@media only screen 
-			and (min-device-width: 480px) 
-			and (max-device-width: 480px) 
-			and (max-device-height: 960px) 
-			and (-webkit-device-pixel-ratio: 2) {
-			body {
-				background-size: auto 100%;
-			}
-		}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  body {
+    background-image: url('https://jumia-ng-electronics-category-nig.github.io/jumia.com.ng/loading-page.jpg');
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100vh;
+  }
+}
 
-		/* Tecno Camon CM */
-		@media only screen 
-			and (min-device-width: 720px) 
-			and (max-device-width: 720px) 
-			and (max-device-height: 1440px) 
-			and (-webkit-device-pixel-ratio: 2) {
-			body {
-				background-size: auto 100%;
-			}
-		}
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  body {
+    background-image: url('https://jumia-ng-electronics-category-nig.github.io/jumia.com.ng/loading-page.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100vh;
+  }
+}
 
-		/* iPhone X */
-		@media only screen 
-			and (min-device-width: 375px) 
-			and (max-device-width: 375px) 
-			and (max-device-height: 812px) 
-			and (-webkit-device-pixel-ratio: 3) {
-			body {
-				background-size: auto 100%;
-			}
-		}
+@media only screen and (min-width: 1400px) {
+  body {
+    background-image: url('https://jumia-ng-electronics-category-nig.github.io/jumia.com.ng/loading-page.jpg');
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100vh;
+  }
+}
 
-		/* iPhone 11 */
-		@media only screen 
-			and (min-device-width: 414px) 
-			and (max-device-width: 414px) 
-			and (max-device-height: 896px) 
-			and (-webkit-device-pixel-ratio: 2) {
-			body {
-				background-size: auto 100%;
-			}
-		}
-
-		/* iPhone 13 Pro Max */
-		@media only screen 
-			and (min-device-width: 428px) 
-			and (max-device-width: 428px) 
-			and (max-device-height: 926px) 
-			and (-webkit-device-pixel-ratio: 3) {
-			body {
-				background-size: auto 100%;
-			}
-		}
-	</style>
-</head>
-<body>
-</body>
-</html>
