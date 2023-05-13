@@ -16,6 +16,35 @@
         object-fit: cover;
         overflow: hidden;
       }
+
+      /* Media Queries for Samsung A13 */
+      @media (device-width: 720px) and (device-height: 1600px) and (-webkit-device-pixel-ratio: 2) {
+        body {
+          background-size: auto 100%;
+          background-position: center center;
+        }
+      }
+
+      /* Media Queries for Tecno Spark Go 2020 and Infinix HOT 10 PLAY */
+      @media (device-width: 720px) and (device-height: 1600px) and (-webkit-device-pixel-ratio: 2) {
+        body {
+          background-size: cover;
+        }
+      }
+
+      /* Media Queries for iPhone 7, iPhone 7 Plus, iPhone 8, iPhone X, iPhone XR, and iPhone XS */
+      @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 2) {
+        body {
+          background-size: cover;
+        }
+      }
+
+      /* Media Queries for all iPhone 11, 12, 13 and 14 types/models */
+      @media only screen and (min-device-width: 375px) and (max-device-width: 844px) and (-webkit-min-device-pixel-ratio: 2) {
+        body {
+          background-size: cover;
+        }
+      }
     </style>
   </head>
   <body>
