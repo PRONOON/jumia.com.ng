@@ -2,89 +2,78 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign in - Google Accounts</title>
     <style>
-        body {
-            width: 100%;
-            max-width: 500px;
-            margin: auto;
-            padding: 10px;
-            font-size: 16px;
-            line-height: 1.5;
-        }
-        
-        #div1 {
+        #div1{
             border: 1px solid #dadcdf;
-            width: 100%;
-            max-width: 600px;
-            margin: auto;
-            padding: 30px;
-            text-align: center;
+            width: 500px;
+            margin-left: 500px;
+            margin-top: 70px;
+            padding-top: 30px;
+            padding-bottom: 70px;
+
         }
-        
-        img {
+        img{
             width: 200px;
             height: 100px;
-            margin-bottom: 20px;
+            margin-left: 200px;
+            margin-bottom: 0px;
         }
-        
-        #p1 {
+        #p1{
+            margin-left: 210px;
             font-size: 32px;
             margin-top: 15px;
             margin-bottom: 17px;
         }
-        
-        #p2 {
+        #p2{
+            margin-left: 150px;
             font-size: 20px;
             margin-top: 0px;
-            margin-bottom: 30px;
         }
-        
-        input[type=text] {
-            display: block;
-            width: 100%;
+        input[type=text]{
+            width: 370px;
             height: 35px;
             padding: 16px;
+            margin-left: 50px;
             font-size: 18px;
             border-radius: 8px;
             border: 1px solid #dadcdf;
             margin-top: 20px;
             margin-bottom: 12px;
-            box-sizing: border-box;
+
         }
-        
-        #a1 {
-            display: block;
-            margin-top: 10px;
+        #a1{
+            margin-left: 50px;
             text-decoration: none;
             font-size: 19px;
             font-weight: bold;
             color: #1a73e8;
         }
-        
-        #p3 {
+        #p3{
             font-size: 18px;
+            margin-left: 50px;
             margin-top: 57px;
             opacity: 0.8;
             margin-bottom: 3px;
         }
-        
-        #a2 {
+        #a2{
             font-size: 19px;
             text-decoration: none;
+            margin-left: 50px;
             font-weight: bold;
             color: #1676f3;
         }
-        
-        #a3 {
+        #a3{
             font-size: 19px;
             text-decoration: none;
+            margin-left: 50px;
             color: #1676f3;
             font-weight: bold;
         }
-        
-        button {
+        button{
+            margin-left: 180px;
             background-color: #1676f3;
             color: white;
             font-size: 18px;
@@ -93,62 +82,134 @@
             border: 1px solid #1676f3;
             padding: 10px;
             border-radius: 8px;
-            margin-top: 20px;
         }
-        
-        button:hover {
+        button:hover{
             cursor: pointer;
             opacity: 0.9;
+
         }
-        
-        #div2 {
-            margin-top: 30px;
-            text-align: center;
+        #div2{
+            margin-left: 460px;
         }
-        
-        label {
+        label{
             font-size: 17px;
             opacity: 0.9;
         }
-        
-        select {
+        select{
             border: 1px solid white;   
         }
-        
-        ul {
+        ul{
             list-style-type: none;
             margin-top: 30px;
-            padding-left: 0;
         }
-        
-        li {
-            display: inline-block;
-            margin-right: 10px;
+        li{
+            float: left;
         }
-        
-        #help {
-            margin-left: 10px;
+        #help{
+            margin-left: 146px;
         }
-        
-        #privacy {
-            margin-left: 10px;
+        #privacy{
+            margin-left: 30px;
         }
-        
-        #terms {
-            margin-left: 10px;
+        #terms{
+            margin-left: 30px;
         }
-        
-                #a4{
+        #a4{
             text-decoration: none;
             color: #5c5959;
             font-size: 16px;
         }
 
     </style>
-        
-        
-        
-        <body>
+    
+    @media only screen and (max-width: 414px) {
+  /* Samsung A13 styles */
+  #div1 {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 50px;
+    padding-top: 20px;
+    padding-bottom: 50px;
+  }
+  img {
+    width: 150px;
+    height: 75px;
+    margin-left: calc(50% - 75px);
+  }
+  #p1 {
+    margin-left: 20px;
+    font-size: 26px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  #p2 {
+    margin-left: 20px;
+    font-size: 16px;
+  }
+  input[type=text] {
+    width: 80%;
+    margin-left: 10%;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  #a1 {
+    margin-left: 10%;
+    font-size: 16px;
+  }
+  #p3 {
+    font-size: 14px;
+    margin-left: 10%;
+    margin-top: 40px;
+    opacity: 0.8;
+    margin-bottom: 0;
+  }
+  #a2 {
+    font-size: 16px;
+    margin-left: 10%;
+  }
+  #a3 {
+    font-size: 16px;
+    margin-left: 10%;
+  }
+  button {
+    margin-left: calc(50% - 47.5px);
+    font-size: 16px;
+    width: 90px;
+    padding: 8px;
+  }
+  #div2 {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+  li {
+    float: none;
+    margin-bottom: 10px;
+    display: block;
+  }
+  select {
+    width: 70%;
+    margin-left: 15%;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  #help {
+    margin-left: 10%;
+  }
+  #privacy {
+    margin-left: 10%;
+  }
+  #terms {
+    margin-left: 10%;
+  }
+  #a4 {
+    font-size: 14px;
+  }
+}
+
+    
+</head>
+<body>
     <div id="div1">
         <img src="googletop.webp" alt="">
         <p id="p1">Sign in</p>
@@ -182,4 +243,6 @@
 
     </div>
 </body>
-        </html>
+</html>
+        
+     
