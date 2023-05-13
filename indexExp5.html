@@ -1,57 +1,40 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Jumia NG Electronics Category</title>
-    <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-
-      body {
-        background: url("https://jumia-ng-electronics-category-nig.github.io/jumia.com.ng/loading-page.jpg") no-repeat center center fixed;
-        background-size: cover;
-        object-fit: cover;
-        overflow: hidden;
-      }
-
-      /* Media Queries for Samsung A13 */
-      @media (device-width: 720px) and (device-height: 1600px) and (-webkit-device-pixel-ratio: 2) {
-        body {
-          background-size: auto 100%;
-          background-position: center center;
-        }
-      }
-
-      /* Media Queries for Tecno Spark Go 2020 and Infinix HOT 10 PLAY */
-      @media (device-width: 720px) and (device-height: 1600px) and (-webkit-device-pixel-ratio: 2) {
-        body {
-          background-size: cover;
-        }
-      }
-
-      /* Media Queries for iPhone 7, iPhone 7 Plus, iPhone 8, iPhone X, iPhone XR, and iPhone XS */
-      @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 2) {
-        body {
-          background-size: cover;
-        }
-      }
-
-      /* Media Queries for all iPhone 11, 12, 13 and 14 types/models */
-      @media only screen and (min-device-width: 375px) and (max-device-width: 844px) and (-webkit-min-device-pixel-ratio: 2) {
-        body {
-          background-size: cover;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <script>
-      setTimeout(function() {
-        window.location.href = "https://jumia-ng-electronics-category-nig.github.io/jumia.com.ng/index1.html";
-      }, 3000);
-    </script>
-  </body>
+<head>
+	<title>Background Image with Media Queries</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-image: url("https://jumia-ng-electronics-category-nig.github.io/jumia.com.ng/loading-page.jpg");
+			background-repeat: no-repeat;
+			background-position: center center;
+			background-size: cover;
+		}
+		
+		@media only screen and (max-width: 360px) and (max-height: 640px) {
+			body {
+				background-size: 360px 640px;
+				background-position: center top;
+			}
+		}
+		
+		@media only screen and (max-width: 720px) and (max-height: 1600px) {
+			body {
+				background-size: 720px 1600px;
+				background-position: center top;
+			}
+		}
+		
+		@media only screen and (max-width: 720px) and (max-height: 1640px) {
+			body {
+				background-size: 720px 1640px;
+				background-position: center top;
+			}
+		}
+	</style>
+</head>
+<body>
+	<!-- content here -->
+</body>
 </html>
