@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .profile-container {
+            max-width: 500px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .profile-picture {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            overflow: hidden;
+        }
+
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info p {
+            margin: 0;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .profile-info h2 {
+            color: #333;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .profile-info .special-services {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-picture">
+            <img src="gmail-logo.png" alt="Profile Picture">
+        </div>
+        <div class="profile-info">
+            <h2>Clara_Of_Lagos</h2>
+            <p>Ajah, Lagos</p>
+            <p>Service Rates: NGN15,000-25,000</p>
+            <div class="special-services">
+                <h3>Special Services</h3>
+                <p>Facials</p>
+                <p>Blowjob</p>
+                <p>Anal</p>
+                <p>Titty Fuck</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
