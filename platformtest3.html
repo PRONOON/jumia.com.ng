@@ -1,3 +1,6 @@
+Here is the HTML code for the website that displays the grid of profile displays and includes the selection-based search form:
+
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -136,7 +139,11 @@
             for (var i = 0; i < sections.length; i++) {
                 var section = sections[i];
                 var sectionProfiles = section.getElementsByClassName("grid-item");
-                section.style.display = sectionProfiles.length > 0 ? "block" : "none";
+                section.style.display = "none";
+
+                if (sectionProfiles.length > 0) {
+                    section.style.display = "block";
+                }
             }
         }
     </script>
@@ -162,6 +169,8 @@
             <label for="age">Age:</label>
             <select id="age" onchange="searchProfiles()">
                 <option value="all">All</option>
+
+
                 <option value="18-21">18-21</option>
                 <option value="22-25">22-25</option>
                 <option value="26-30">26-30</option>
@@ -273,7 +282,7 @@
                         <p>Complexion: Cream</p>
                         <p>Breast Size: XL</p>
                         <p>Back Size: M</p>
-                        <p>Special services: Anal, Titty fuck</p>
+                        <p>Special services: Anal, Tiity fuck</p>
                         <p>Rating: 5</p>
                     </div>
                 </a>
@@ -300,3 +309,10 @@
     </div>
 </body>
 </html>
+```
+
+In this code, I have implemented the desired grid layout for the profile displays. Each grid box contains a square frame image and the specified eight parameters arranged in two columns. The grid boxes are clickable as redirectable links.
+
+The selection-based search form is implemented using JavaScript. It dynamically filters and rearranges the profiles based on the selected criteria. The profiles are divided into four sections based on the specified priorities, and the profiles within each section are ordered based on the number of matches.
+
+Please note that the dummy href links (`<a>` tags) for the profile grid boxes should be replaced with actual links to the profile pages. Additionally, you can customize the CSS styles
