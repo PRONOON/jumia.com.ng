@@ -136,11 +136,7 @@
             for (var i = 0; i < sections.length; i++) {
                 var section = sections[i];
                 var sectionProfiles = section.getElementsByClassName("grid-item");
-                section.style.display = "none";
-
-                if (sectionProfiles.length > 0) {
-                    section.style.display = "block";
-                }
+                section.style.display = sectionProfiles.length > 0 ? "block" : "none";
             }
         }
     </script>
@@ -166,7 +162,6 @@
             <label for="age">Age:</label>
             <select id="age" onchange="searchProfiles()">
                 <option value="all">All</option>
-                <!-- Listing out all ages from 18 to 30 -->
                 <option value="18-21">18-21</option>
                 <option value="22-25">22-25</option>
                 <option value="26-30">26-30</option>
@@ -242,127 +237,66 @@
                         <p>Complexion: Cocoa</p>
                         <p>Breast Size: M</p>
                         <p>Back Size: XL</p>
-                        <p>Special services: Anal, Blow job</p>
+                        <p>Special services: Anal</p>
                         <p>Rating: 7</p>
                     </div>
                 </a>
             </div>
         </div>
-  <div class="grid-item">
-            <a href="profile2.html">
-                <img src="PTIMG.jpeg" alt="Profile Image">
-                <div class="parameters">
-                    <p>Username: Patricia4U</p>
-                    <p>Location: Anambra</p>
-                    <p>Age bracket: 22-25</p>
-                    <p>Complexion: Cocoa</p>
-                    <p>Breast Size: M</p>
-                    <p>Back Size: L</p>
-                    <p>Special services: Anal. Blow job</p>
-                    <p>Rating: 6</p>
-                </div>
-            </a>
+        <div class="section">
+            <h4>SECTION B</h4>
+            <div class="grid-item">
+                <a href="#">
+                    <img src="PTIMG.jpeg" alt="Profile Image">
+                    <div class="parameters">
+                        <p>Username: Patricia4U</p>
+                        <p>Location: Anambra</p>
+                        <p>Age bracket: 22-25</p>
+                        <p>Complexion: Cocoa</p>
+                        <p>Breast Size: M</p>
+                        <p>Back Size: L</p>
+                        <p>Special services: Anal, Blow job</p>
+                        <p>Rating: 6</p>
+                    </div>
+                </a>
+            </div>
         </div>
-
-  <div class="grid-item">
-            <a href="profile3.html">
-                <img src="PTIMG.jpeg" alt="Profile Image">
-                <div class="parameters">
-                    <p>Username: CindyNaija</p>
-                    <p>Location: Akure</p>
-                    <p>Age bracket: 26-30</p>
-                    <p>Complexion: Cream</p>
-                    <p>Breast Size: XL</p>
-                    <p>Back Size: M</p>
-                    <p>Special services: Anal. Blow job</p>
-                    <p>Rating: 5</p>
-                </div>
-            </a>
+        <div class="section">
+            <h4>SECTION C</h4>
+            <div class="grid-item">
+                <a href="#">
+                    <img src="PTIMG.jpeg" alt="Profile Image">
+                    <div class="parameters">
+                        <p>Username: CindyNaija</p>
+                        <p>Location: Akure</p>
+                        <p>Age bracket: 26-30</p>
+                        <p>Complexion: Cream</p>
+                        <p>Breast Size: XL</p>
+                        <p>Back Size: M</p>
+                        <p>Special services: Anal, Titty fuck</p>
+                        <p>Rating: 5</p>
+                    </div>
+                </a>
+            </div>
         </div>
-  <div class="grid-item">
-            <a href="profile4.html">
-                <img src="PTIMG.jpeg" alt="Profile Image">
-                <div class="parameters">
-                    <p>Username: ThatEdoBabe</p>
-                    <p>Location: Anambra</p>
-                    <p>Age bracket: 31+</p>
-                    <p>Complexion: Cocoa</p>
-                    <p>Breast Size: M</p>
-                    <p>Back Size: M</p>
-                    <p>Special services: Anal. Blow job</p>
-                    <p>Rating: 10</p>
-                </div>
-            </a>
+        <div class="section">
+            <h4>SECTION D</h4>
+            <div class="grid-item">
+                <a href="#">
+                    <img src="PTIMG.jpeg" alt="Profile Image">
+                    <div class="parameters">
+                        <p>Username: ThatEdoBabe</p>
+                        <p>Location: Anambra</p>
+                        <p>Age bracket: 31+</p>
+                        <p>Complexion: Cocoa</p>
+                        <p>Breast Size: M</p>
+                        <p>Back Size: M</p>
+                        <p>Special services: Anal, Blow job</p>
+                        <p>Rating: 10</p>
+                    </div>
+                </a>
+            </div>
         </div>
-
-
-
-  <div class="grid-item">
-            <a href="profile5.html">
-                <img src="PTIMG.jpeg" alt="Profile Image">
-                <div class="parameters">
-                    <p>Username: Damife4rmNaija</p>
-                    <p>Location: Ogun </p>
-                    <p>Age bracket: 22-25</p>
-                    <p>Complexion: Cocoa</p>
-                    <p>Breast Size: XL</p>
-                    <p>Back Size: L</p>
-                    <p>Special services: Anal. Blow job</p>
-                    <p>Rating: 6</p>
-                </div>
-            </a>
-        </div>
-
-  <div class="grid-item">
-            <a href="profile6.html">
-                <img src="PTIMG.jpeg" alt="Profile Image">
-                <div class="parameters">
-                    <p>Username: Bella</p>
-                    <p>Location: Osun</p>
-                    <p>Age bracket: 26-30</p>
-                    <p>Complexion: Cream</p>
-                    <p>Breast Size: XL</p>
-                    <p>Back Size: XL</p>
-                    <p>Special services: Anal. Blow job</p>
-                    <p>Rating: 5</p>
-                </div>
-            </a>
-        </div>
-        
-  <div class="grid-item">
-            <a href="profile7.html">
-                <img src="PTIMG.jpeg" alt="Profile Image">
-                <div class="parameters">
-                    <p>Username: Funke</p>
-                    <p>Location: Ogun</p>
-                    <p>Age bracket: 31+</p>
-                    <p>Complexion: Cocoa</p>
-                    <p>Breast Size: M</p>
-                    <p>Back Size: L</p>
-                    <p>Special services: Anal. Blow job</p>
-                    <p>Rating: 10</p>
-                </div>
-            </a>
-        </div>
-
-
-  <div class="grid-item">
-            <a href="profile8.html">
-                <img src="PTIMG.jpeg" alt="Profile Image">
-                <div class="parameters">
-                    <p>Username: DemGoTire</p>
-                    <p>Location: Abuja</p>
-                    <p>Age bracket: 22-25</p>
-                    <p>Complexion: Cocoa</p>
-                    <p>Breast Size: M</p>
-                    <p>Back Size: XL</p>
-                    <p>Special services: Anal. Blow job</p>
-                    <p>Rating: 10</p>
-                </div>
-            </a>
-        </div>
-
-        <!-- Add more grid items here -->
     </div>
 </body>
 </html>
