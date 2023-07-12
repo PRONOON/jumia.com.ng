@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Profile Search</title>
+    <title>Masseuse Profiles</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f2f2f2;
         }
 
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 50px;
+        }
+
         .search-form {
-            max-width: 500px;
-            margin: 50px auto;
-            background-color: #fff;
+            max-width: 800px;
+            margin: 0 auto;
             padding: 20px;
+            background-color: #fff;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
         }
@@ -31,127 +37,219 @@
             border-radius: 5px;
         }
 
-        .profile-container {
-            max-width: 500px;
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 20px;
             margin: 50px auto;
+            max-width: 800px;
+        }
+
+        .grid-item {
             background-color: #fff;
             padding: 20px;
+            text-align: center;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
         }
 
-        .profile-picture {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            overflow: hidden;
+        .grid-item a {
+            text-decoration: none;
+            color: #333;
         }
 
-        .profile-picture img {
+        .grid-item img {
             width: 100%;
-            height: 100%;
+            height: 200px;
             object-fit: cover;
-        }
-
-        .profile-info p {
-            margin: 0;
-            font-size: 16px;
+            border-radius: 5px;
             margin-bottom: 10px;
         }
 
-        .profile-info h2 {
-            color: #333;
-            font-size: 24px;
-            margin: 0;
+        .grid-item .parameters {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 10px;
+            text-align: left;
         }
 
-        .profile-info .special-services {
-            margin-top: 20px;
+        .grid-item .parameters p {
+            margin: 0;
+            font-size: 14px;
         }
     </style>
-    <script>
-        function searchProfiles() {
-            var location = document.getElementById("location").value;
-            var specialService = document.getElementById("special-service").value;
-            var profiles = document.getElementsByClassName("profile-container");
-
-            for (var i = 0; i < profiles.length; i++) {
-                var profile = profiles[i];
-
-                var locationMatch = location === "all" || profile.querySelector(".profile-info p:nth-child(2)").innerText.includes(location);
-                var specialServiceMatch = specialService === "all" || profile.querySelector(".profile-info .special-services").innerText.includes(specialService);
-
-                if (locationMatch && specialServiceMatch) {
-                    profile.style.display = "block";
-                } else {
-                    profile.style.display = "none";
-                }
-            }
-        }
-    </script>
 </head>
 <body>
+    <h1>Masseuse Profiles</h1>
+
     <div class="search-form">
         <label for="location">Location:</label>
         <select id="location" onchange="searchProfiles()">
             <option value="all">All</option>
-            <option value="Oyo">Oyo</option>
             <option value="Lagos">Lagos</option>
             <option value="Abuja">Abuja</option>
             <!-- Add more Nigerian states here -->
         </select>
 
-        <label for="special-service">Special Service:</label>
-        <select id="special-service" onchange="searchProfiles()">
+        <label for="age">Age:</label>
+        <select id="age" onchange="searchProfiles()">
             <option value="all">All</option>
-            <option value="Service 1">Service 1</option>
-            <option value="Service 2">Service 2</option>
-            <option value="Service 3">Service 3</option>
-            <!-- Add more special services here -->
+            <option value="18-21">18-21</option>
+            <option value="21-25">21-25</option>
+            <option value="26-31">26-31</option>
+            <option value="31+">31+</option>
+        </select>
+
+        <label for="complexion">Complexion:</label>
+        <select id="complexion" onchange="searchProfiles()">
+            <option value="all">All</option>
+            <option value="Cocoa">Cocoa</option>
+            <option value="Creamy Vanilla">Creamy Vanilla</option>
+        </select>
+
+        <label for="breast-size">Breast Size:</label>
+        <select id="breast-size" onchange="searchProfiles()">
+            <option value="all">All</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+        </select>
+
+        <label for="back-size">Back Size:</label>
+        <select id="back-size" onchange="searchProfiles()">
+            <option value="all">All</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+        </select>
+
+        <label for="special-services">Special Services:</label>
+        <select id="special-services" onchange="searchProfiles()">
+            <option value="all">All</option>
+            <option value="Anal">Anal</option>
+            <option value="Blowjob">Blowjob</option>
+            <option value="Titty Fuck">Titty Fuck</option>
+        </select>
+
+        <label for="rating">Rating:</label>
+        <select id="rating" onchange="searchProfiles()">
+            <option value="all">All</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
         </select>
     </div>
 
-    <div class="profile-container">
-        <div class="profile-picture">
-            <img src="dummy-profile1.jpg" alt="Profile Picture">
+    <div class="grid-container">
+        <div class="grid-item">
+            <a href="profile1.html">
+                <img src="PTIMG.jpeg" alt="Profile Image">
+                <div class="parameters">
+                    <p>Username: Clara_Of_Lagos</p>
+                    <p>Location: Lagos, Nigeria</p>
+                    <p>Age: 26</p>
+                    <p>Complexion: Fair skin</p>
+                    <p>Breast Size: XX</p>
+                    <p>Back Size: XX</p>
+                    <p>Special Services: Anal, Blow job</p>
+                    <p>Rating: 7.5</p>
+                </div>
+            </a>
         </div>
-        <div class="profile-info">
-            <h2>Username 1</h2>
-            <p>Oyo</p>
-            <p>Service Rates: $X per hour</p>
-            <div class="special-services">
-                <h3>Special Services</h3>
-                <p>Service 1</p>
-                <p>Service 2</p>
-                <p>Service 3</p>
-            </div>
-        </div>
-    </div>
 
-    <div class="profile-container">
-        <div class="profile-picture">
-            <img src="dummy-profile2.jpg" alt="Profile Picture">
+<div class="grid-container">
+        <div class="grid-item">
+            <a href="profile1.html">
+                <img src="PTIMG.jpeg" alt="Profile Image">
+                <div class="parameters">
+                    <p>Username: Clara_Of_Lagos</p>
+                    <p>Location: Lagos, Nigeria</p>
+                    <p>Age: 26</p>
+                    <p>Complexion: Fair skin</p>
+                    <p>Breast Size: XX</p>
+                    <p>Back Size: XX</p>
+                    <p>Special Services: Anal, Blow job</p>
+                    <p>Rating: 7.5</p>
+                </div>
+            </a>
         </div>
-        <div class="profile-info">
-            <h2>Username 2</h2>
-            <p>Lagos</p>
-            <p>Service Rates: $Y per hour</p>
-            <div class="special-services">
-                <h3>Special Services</h3>
-                <p>Service 1</p>
-                <p>Service 3</p>
-            </div>
-        </div>
-    </div>
 
-    <!-- Add more profile containers here -->
+ <div class="grid-container">
+        <div class="grid-item">
+            <a href="profile1.html">
+                <img src="PTIMG.jpeg" alt="Profile Image">
+                <div class="parameters">
+                    <p>Username: Clara_Of_Lagos</p>
+                    <p>Location: Lagos, Nigeria</p>
+                    <p>Age: 26</p>
+                    <p>Complexion: Fair skin</p>
+                    <p>Breast Size: XX</p>
+                    <p>Back Size: XX</p>
+                    <p>Special Services: Anal, Blow job</p>
+                    <p>Rating: 7.5</p>
+                </div>
+            </a>
+        </div>
+
+ <div class="grid-container">
+        <div class="grid-item">
+            <a href="profile1.html">
+                <img src="PTIMG.jpeg" alt="Profile Image">
+                <div class="parameters">
+                    <p>Username: Clara_Of_Lagos</p>
+                    <p>Location: Lagos, Nigeria</p>
+                    <p>Age: 26</p>
+                    <p>Complexion: Fair skin</p>
+                    <p>Breast Size: XX</p>
+                    <p>Back Size: XX</p>
+                    <p>Special Services: Anal, Blow job</p>
+                    <p>Rating: 7.5</p>
+                </div>
+            </a>
+        </div>
+        
+        <!-- Add more grid items here -->
+
+    </div>
 
     <script>
-        // Initially display all profiles
-        var profiles = document.getElementsByClassName("profile-container");
-        for (var i = 0; i < profiles.length; i++) {
-            profiles[i].style.display = "block";
+        function searchProfiles() {
+            var location = document.getElementById("location").value;
+            var age = document.getElementById("age").value;
+            var complexion = document.getElementById("complexion").value;
+            var breastSize = document.getElementById("breast-size").value;
+            var backSize = document.getElementById("back-size").value;
+            var specialServices = document.getElementById("special-services").value;
+            var rating = document.getElementById("rating").value;
+
+            var profiles = document.getElementsByClassName("grid-item");
+
+            for (var i = 0; i < profiles.length; i++) {
+                var profile = profiles[i];
+
+                var locationMatch = location === "all" || profile.querySelector(".parameters p:nth-child(2)").innerText.includes(location);
+                var ageMatch = age === "all" || profile.querySelector(".parameters p:nth-child(3)").innerText.includes(age);
+                var complexionMatch = complexion === "all" || profile.querySelector(".parameters p:nth-child(4)").innerText.includes(complexion);
+                var breastSizeMatch = breastSize === "all" || profile.querySelector(".parameters p:nth-child(5)").innerText.includes(breastSize);
+                var backSizeMatch = backSize === "all" || profile.querySelector(".parameters p:nth-child(6)").innerText.includes(backSize);
+                var specialServicesMatch = specialServices === "all" || profile.querySelector(".parameters p:nth-child(7)").innerText.includes(specialServices);
+                var ratingMatch = rating === "all" || profile.querySelector(".parameters p:nth-child(8)").innerText.includes(rating);
+
+                if (locationMatch && ageMatch && complexionMatch && breastSizeMatch && backSizeMatch && specialServicesMatch && ratingMatch) {
+                    profile.style.display = "block";
+                } else {
+                    profile.style.display = "none";
+                }
+            }
         }
     </script>
 </body>
