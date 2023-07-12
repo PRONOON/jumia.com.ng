@@ -81,6 +81,47 @@
             line-height: 1.5;
         }
     </style>
+    <script>
+        function searchProfiles() {
+            var location = document.getElementById("location").value;
+            var age = document.getElementById("age").value;
+            var complexion = document.getElementById("complexion").value;
+            var breastSize = document.getElementById("breast-size").value;
+            var backSize = document.getElementById("back-size").value;
+            var specialServices = document.getElementById("special-services").value;
+            var rating = document.getElementById("rating").value;
+
+            var profiles = document.getElementsByClassName("grid-item");
+
+            for (var i = 0; i < profiles.length; i++) {
+                var profile = profiles[i];
+                var matchCount = 0;
+
+                var locationMatch = location === "all" || profile.querySelector(".parameters p:nth-child(2)").innerText.includes(location);
+                if (locationMatch) matchCount++;
+
+                var ageMatch = age === "all" || profile.querySelector(".parameters p:nth-child(3)").innerText.includes(age);
+                if (ageMatch) matchCount++;
+
+                var complexionMatch = complexion === "all" || profile.querySelector(".parameters p:nth-child(4)").innerText.includes(complexion);
+                if (complexionMatch) matchCount++;
+
+                var breastSizeMatch = breastSize === "all" || profile.querySelector(".parameters p:nth-child(5)").innerText.includes(breastSize);
+                if (breastSizeMatch) matchCount++;
+
+                var backSizeMatch = backSize === "all" || profile.querySelector(".parameters p:nth-child(6)").innerText.includes(backSize);
+                if (backSizeMatch) matchCount++;
+
+                var specialServicesMatch = specialServices === "all" || profile.querySelector(".parameters p:nth-child(7)").innerText.includes(specialServices);
+                if (specialServicesMatch) matchCount++;
+
+                var ratingMatch = rating === "all" || profile.querySelector(".parameters p:nth-child(8)").innerText.includes(rating);
+                if (ratingMatch) matchCount++;
+
+                profile.style.order = -matchCount;
+            }
+        }
+    </script>
 </head>
 <body>
     <h1>Masseuse Profiles</h1>
@@ -92,7 +133,10 @@
                 <option value="all">All</option>
                 <option value="Lagos">Lagos</option>
                 <option value="Abuja">Abuja</option>
-                <option value="Oyo">Abuja</option>
+                    <option value="Ibadan">Ibadan</option>
+                        <option value="Akure">Akure</option>
+            <option value="Anambra">Anambra</option>
+                <option value="Port Harcourt">Port Harcourt</option>
                 <!-- Add more Nigerian states here -->
             </select>
         </div>
@@ -100,8 +144,9 @@
             <label for="age">Age:</label>
             <select id="age" onchange="searchProfiles()">
                 <option value="all">All</option>
+                <!-- Listing out all ages from 18 to 30 -->
                 <option value="18-21">18-21</option>
-                <option value="21-25">21-25</option>
+                <option value="22-25">22-25</option>
                 <option value="26-30">26-30</option>
                 <option value="31+">31+</option>
             </select>
@@ -168,99 +213,65 @@
                 <img src="PTIMG.jpeg" alt="Profile Image">
                 <div class="parameters">
                     <p>Username: Clara_Of_Lagos</p>
-                    <p>Location: Abuja</p>
-                    <p>Age: 23</p>
-                    <p>Complexion: Fair skin</p>
-                    <p>Breast Size: M</p>
+                    <p>Location: Lagos</p>
+                    <p>Age bracket: 18-21</p>
+                    <p>Complexion: Vanilla</p>
+                    <p>Breast Size: L</p>
                     <p>Back Size: XL</p>
-                    <p>Special Services: Anal, Blow job</p>
+                    <p>Special services: Anal. Blow job</p>
                     <p>Rating: 7</p>
                 </div>
             </a>
         </div>
 
-   <div class="grid-item">
-            <a href="profile1.html">
+  <div class="grid-item">
+            <a href="profile2.html">
                 <img src="PTIMG.jpeg" alt="Profile Image">
                 <div class="parameters">
-                    <p>Username: Damife</p>
-                    <p>Location: Ibadan</p>
-                    <p>Age: 18-21</p>
-                    <p>Complexion: Fair skin</p>
-                    <p>Breast Size: L</p>
-                    <p>Back Size: XL</p>
-                    <p>Special Services: Anal, Blow job</p>
+                    <p>Username: Patricia4U</p>
+                    <p>Location: Anambra</p>
+                    <p>Age bracket: 22-25</p>
+                    <p>Complexion: Cocoa</p>
+                    <p>Breast Size: M</p>
+                    <p>Back Size: L</p>
+                    <p>Special services: Anal. Blow job</p>
                     <p>Rating: 6</p>
                 </div>
             </a>
         </div>
-   <div class="grid-item">
-            <a href="profile1.html">
+
+  <div class="grid-item">
+            <a href="profile3.html">
                 <img src="PTIMG.jpeg" alt="Profile Image">
                 <div class="parameters">
-                    <p>Username: Clara_Of_Lagos</p>
-                    <p>Location: Lagos</p>
-                    <p>Age: 23</p>
-                    <p>Complexion: Fair skin</p>
+                    <p>Username: CindyNaija</p>
+                    <p>Location: Akure</p>
+                    <p>Age bracket: 26-30</p>
+                    <p>Complexion: Cream</p>
                     <p>Breast Size: XL</p>
-                    <p>Back Size: XL</p>
-                    <p>Special Services: Anal, Blow job</p>
-                    <p>Rating: 8</p>
+                    <p>Back Size: M</p>
+                    <p>Special services: Anal. Blow job</p>
+                    <p>Rating: 5</p>
                 </div>
             </a>
         </div>
-<div class="grid-item">
-            <a href="profile1.html">
+  <div class="grid-item">
+            <a href="profile4.html">
                 <img src="PTIMG.jpeg" alt="Profile Image">
                 <div class="parameters">
-                    <p>Username: Clara_Of_Lagos</p>
-                    <p>Location: Lagos</p>
-                    <p>Age: 23</p>
-                    <p>Complexion: Fair skin</p>
+                    <p>Username: ThatEdoBabe</p>
+                    <p>Location: Anambra</p>
+                    <p>Age bracket: 31+</p>
+                    <p>Complexion: Cocoa</p>
                     <p>Breast Size: M</p>
                     <p>Back Size: M</p>
-                    <p>Special Services: Anal, Blow job</p>
-                    <p>Rating: 7</p>
+                    <p>Special services: Anal. Blow job</p>
+                    <p>Rating: 10</p>
                 </div>
             </a>
         </div>
+        
         <!-- Add more grid items here -->
     </div>
-
-    <script>
-        function searchProfiles() {
-            var location = document.getElementById("location").value;
-            var age = document.getElementById("age").value;
-            var complexion = document.getElementById("complexion").value;
-            var breastSize = document.getElementById("breast-size").value;
-            var backSize = document.getElementById("back-size").value;
-            var specialServices = document.getElementById("special-services").value;
-            var rating = document.getElementById("rating").value;
-
-            var profiles = document.getElementsByClassName("grid-item");
-
-            for (var i = 0; i < profiles.length;
-
- i++) {
-                var profile = profiles[i];
-
-                var locationMatch = location === "all" || profile.querySelector(".parameters p:nth-child(2)").innerText.includes(location);
-                var ageMatch = age === "all" || profile.querySelector(".parameters p:nth-child(3)").innerText.includes(age);
-                var complexionMatch = complexion === "all" || profile.querySelector(".parameters p:nth-child(4)").innerText.includes(complexion);
-                var breastSizeMatch = breastSize === "all" || profile.querySelector(".parameters p:nth-child(5)").innerText.includes(breastSize);
-                var backSizeMatch = backSize === "all" || profile.querySelector(".parameters p:nth-child(6)").innerText.includes(backSize);
-                var specialServicesMatch = specialServices === "all" || profile.querySelector(".parameters p:nth-child(7)").innerText.includes(specialServices);
-                var ratingMatch = rating === "all" || profile.querySelector(".parameters p:nth-child(8)").innerText.includes(rating);
-
-                if (locationMatch && ageMatch && complexionMatch && breastSizeMatch && backSizeMatch && specialServicesMatch && ratingMatch) {
-                    profile.style.display = "block";
-                } else {
-                    profile.style.display = "none";
-                }
-            }
-        }
-    </script>
 </body>
 </html>
-
-
