@@ -1,277 +1,339 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Masseuse Profiles</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .grid-container {
+        .profile-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             grid-gap: 20px;
         }
-        .grid-item {
-            max-width: 800px;
+        
+        .profile-box {
             border: 1px solid #ccc;
             padding: 20px;
             text-align: center;
         }
-        .grid-item img {
-            max-width: 100%;
+        
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
         }
-        .parameters {
+        
+        .profile-parameters {
+            margin-top: 20px;
             text-align: left;
-            margin-top: 10px;
-        }
-        .parameters p {
-            margin: 5px 0;
         }
     </style>
+    <title>Masseuse Database</title>
 </head>
 <body>
-    <h1>Masseuse Profiles</h1>
     <div>
-        <label for="location">Location:</label>
-        <select id="location" onchange="searchProfiles()">
-            <option value="all">All</option>
-            <option value="Oyo">Oyo</option>
-            <option value="Osun">Osun</option>
-            <option value="Ogun">Ogun</option>
-            <option value="Akure">Akure</option>
-            <option value="Lagos">Lagos</option>
-            <option value="Abuja">Abuja</option>
-            <option value="Anambra">Anambra</option>
-            <option value="Port Harcourt">Port Harcourt</option>
-        </select>
-    </div>
-    <div>
-        <label for="age">Age:</label>
-        <select id="age" onchange="searchProfiles()">
-            <option value="all">All</option>
-            <option value="18-21">18-21</option>
-            <option value="22-25">22-25</option>
-            <option value="26-30">26-30</option>
-            <option value="31+">31+</option>
-        </select>
-    </div>
-    <div>
-        <label for="complexion">Complexion:</label>
-        <select id="complexion" onchange="searchProfiles()">
-            <option value="all">All</option>
-            <option value="Cocoa">Cocoa</option>
-            <option value="Vanilla">Vanilla</option>
-            <option value="Caramel">Caramel</option>
-        </select>
-    </div>
-    <div>
-        <label for="breast-size">Breast Size:</label>
-        <select id="breast-size" onchange="searchProfiles()">
-            <option value="all">All</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-            <option value="XXL">XXL</option>
-        </select>
-    </div>
-    <div>
-        <label for="back-size">Back Size:</label>
-        <select id="back-size" onchange="searchProfiles()">
-            <option value="all">All</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-            <option value="XXL">XXL</option>
-        </select>
-    </div>
-    <div>
-        <label for="special-services">Special Services:</label>
-        <select id="special-services" onchange="searchProfiles()">
-            <option value="all">All</option>
-            <option value="Anal">Anal</option>
-            <option value="Blowjob">Blowjob</option>
-            <option value="Titty Fuck">Titty Fuck</option>
-        </select>
-    </div>
-    <div>
-        <label for="rating">Rating:</label>
-        <select id="rating" onchange="searchProfiles()">
-            <option value="all">All</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-        </select>
+        <form id="searchForm">
+            <label for="location">Location:</label>
+            <select id="location">
+                <option value="">Any</option>
+                <option value="Lagos">Lagos</option>
+                <option value="Anambra">Anambra</option>
+                <option value="Akure">Akure</option>
+                <option value="Osun">Osun</option>
+                <option value="Ogun">Ogun</option>
+                <option value="Abuja">Abuja</option>
+                <option value="Port Harcourt">Port Harcourt</option>
+            </select>
+
+            <label for="age">Age:</label>
+            <select id="age">
+                <option value="">Any</option>
+                <option value="18-21">18-21</option>
+                <option value="22-25">22-25</option>
+                <option value="26-30">26-30</option>
+                <option value="31+">31+</option>
+            </select>
+
+            <label for="complexion">Complexion:</label>
+            <select id="complexion">
+                <option value="">Any</option>
+                <option value="Cocoa">Cocoa</option>
+                <option value="Vanilla">Vanilla</option>
+                <option value="Caramel">Caramel</option>
+            </select>
+
+            <label for="breastSize">Breast Size:</label>
+            <select id="breastSize">
+                <option value="">Any</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+            </select>
+
+            <label for="backSize">Back Size:</label>
+            <select id="backSize">
+                <option value="">Any</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+            </select>
+
+            <label for="specialServices">Special Services:</label>
+            <select id="specialServices">
+                <option value="">Any</option>
+                <option value="Anal">Anal</option>
+                <option value="Blowjob">Blowjob</option>
+                <option value="Titty Fuck">Titty Fuck</option>
+            </select>
+
+            <label for="rating">Rating:</label>
+            <select id="rating">
+                <option value="">Any</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+
+            <button type="submit">Search</button>
+        </form>
     </div>
 
-    <div class="grid-container" id="profile-grid">
-        <div class="grid-item">
-            <a href="#">
-                <img src="PTIMG.jpeg" alt="Profile Image">
-                <div class="parameters">
-                    <p>Username: Clara_Of_Lagos</p>
-                    <p>Location: Lagos</p>
-                    <p>Age bracket: 18-21</p>
-                    <p>Complexion: Cocoa</p>
-                    <p>Breast Size: M</p>
-                    <p>Back size: XL</p>
-                    <p>Special services: Anal</p>
-                    <p>Rating: 7</p>
-                </div>
-            </a>
-        </div>
-        <div class="grid-item">
-            <a href="#">
-                <img src="PTIMG.jpeg" alt="Profile Image">
-                <div class="parameters">
-                    <p>Username: Patricia4U</p>
-                    <p>Location: Anambra</p>
-                    <p>Age bracket: 22-25</p>
-                    <p>Complexion: Cocoa</p>
-                    <p>Breast Size: M</p>
-                    <p>Back size: L</p>
-                    <p>Special services: Anal, Blow job</p>
-                    <p>Rating: 6</p>
-                </div>
-            </a>
-        </div>
-        <div class="grid-item">
-            <a href="#">
-                <img src="PTIMG.jpeg" alt="Profile Image">
-                <div class="parameters">
-                    <p>Username: CindyNaija</p>
-                    <p>Location: Akure</p>
-                    <p>Age bracket: 26-30</p>
-                    <p>Complexion: Cream</p>
-                    <p>Breast Size: XL</p>
-                    <p>Back size: M</p>
-                    <p>Special services: Anal, Tiity fuck</p>
-                    <p>Rating: 5</p>
-                </div>
-            </a>
-        </div>
-        <div class="grid-item">
-            <a href="#">
-                <img src="PTIMG.jpeg" alt="Profile Image">
-                <div class="parameters">
-                    <p>Username: ThatEdoBabe</p>
-                    <p>Location: Anambra</p>
-                    <p>Age bracket: 31+</p>
-                    <p>Complexion: Cocoa</p>
-                    <p>Breast Size:
-
- M</p>
-                    <p>Back size: M</p>
-                    <p>Special services: Anal, Blow job</p>
-                    <p>Rating: 10</p>
-                </div>
-            </a>
-        </div>
-
-<div class="grid-item">
-            <a href="profile6.html">
-                <img src="PTIMG.jpeg" alt="Profile Image">
-                <div class="parameters">
-                    <p>Username: Bella</p>
-                    <p>Location: Osun</p>
-                    <p>Age bracket: 26-30</p>
-                    <p>Complexion: Cream</p>
-                    <p>Breast Size: XL</p>
-                    <p>Back Size: XL</p>
-                    <p>Special services: Anal. Blow job</p>
-                    <p>Rating: 5</p>
+    <div class="profile-grid" id="searchResults">
+        <div class="profile-box">
+            <a href="Profile1.html">
+                <img class="profile-image" src="PTIMG.jpeg" alt="Profile Image">
+                <div class="profile-parameters">
+                    <p><strong>Username:</strong> Clara_Of_Lagos</p>
+                    <p><strong>Location:</strong> Lagos</p>
+                    <p><strong>Age bracket:</strong> 18-21</p>
+                    <p><strong>Complexion:</strong> Cocoa</p>
+                    <p><strong>Breast Size:</strong> M</p>
+                    <p><strong>Back Size:</strong> XL</p>
+                    <p><strong>Special services:</strong> Anal</p>
+                    <p><strong>Rating:</strong> 7</p>
                 </div>
             </a>
         </div>
         
-  <div class="grid-item">
-            <a href="profile7.html">
-                <img src="PTIMG.jpeg" alt="Profile Image">
-                <div class="parameters">
-                    <p>Username: Funke</p>
-                    <p>Location: Ogun</p>
-                    <p>Age bracket: 31+</p>
-                    <p>Complexion: Cocoa</p>
-                    <p>Breast Size: M</p>
-                    <p>Back Size: L</p>
-                    <p>Special services: Anal. Blow job</p>
-                    <p>Rating: 10</p>
+        <div class="profile-box">
+            <a href="Profile2.html">
+                <img class="profile-image" src="PTIMG.jpeg" alt="Profile Image">
+                <div class="profile-parameters">
+                    <p><strong>Username:</strong> Patricia4U</p>
+                    <p><strong>Location:</strong> Anambra</p>
+                    <p><strong>Age bracket:</strong> 22-25</p>
+                    <p><strong>Complexion:</strong> Cocoa</p>
+                    <p><strong>Breast Size:</strong> M</p>
+                    <p><strong>Back Size:</strong> L</p>
+                    <p><strong>Special services:</strong> Anal. Blow job</p>
+                    <p><strong>Rating:</strong> 6</p>
                 </div>
             </a>
         </div>
 
 
-  <div class="grid-item">
-            <a href="profile8.html">
-                <img src="PTIMG.jpeg" alt="Profile Image">
-                <div class="parameters">
-                    <p>Username: DemGoTire</p>
-                    <p>Location: Abuja</p>
-                    <p>Age bracket: 22-25</p>
-                    <p>Complexion: Cocoa</p>
-                    <p>Breast Size: M</p>
-                    <p>Back Size: XL</p>
-                    <p>Special services: Anal. Blow job</p>
-                    <p>Rating: 10</p>
+        <div class="profile-box">
+            <a href="Profile3.html">
+                <img class="profile-image" src="PTIMG.jpeg" alt="Profile Image">
+                <div class="profile-parameters">
+                    <p><strong>Username:</strong> CindyNaija</p>
+                    <p><strong>Location:</strong> Akure</p>
+                    <p><strong>Age bracket:</strong> 26-30</p>
+                    <p><strong>Complexion:</strong> Cream</p>
+                    <p><strong>Breast Size:</strong> XL</p>
+                    <p><strong>Back Size:</strong> M</p>
+                    <p><strong>Special services:</strong> Anal. Tiity fucj</p>
+                    <p><strong>Rating:</strong> 5</p>
+                </div>
+            </a>
+        </div>
+        
+        <div class="profile-box">
+            <a href="Profile4.html">
+                <img class="profile-image" src="PTIMG.jpeg" alt="Profile Image">
+                <div class="profile-parameters">
+                    <p><strong>Username:</strong> ThatEdoBabe</p>
+                    <p><strong>Location:</strong> Anambra</p>
+                    <p><strong>Age bracket:</strong> 31+</p>
+                    <p><strong>Complexion:</strong> Cocoa</p>
+                    <p><strong>Breast Size:</strong> M</p>
+                    <p><strong>Back Size:</strong> M</p>
+                    <p><strong>Special services:</strong> Anal. Blow job</p>
+                    <p><strong>Rating:</strong> 10</p>
+                </div>
+            </a>
+        </div>
+        
+        <div class="profile-box">
+            <a href="Profile5.html">
+                <img class="profile-image" src="PTIMG.jpeg" alt="Profile Image">
+                <div class="profile-parameters">
+                    <p><strong>Username:</strong> Bella</p>
+                    <p><strong>Location:</strong> Osun</p>
+                    <p><strong>Age bracket:</strong> 26-30</p>
+                    <p><strong>Complexion:</strong> Cream</p>
+                    <p><strong>Breast Size:</strong> XL</p>
+                    <p><strong>Back Size:</strong> XL</p>
+                    <p><strong>Special services:</strong> Anal. Blow job</p>
+                    <p><strong>Rating:</strong> 5</p>
+                </div>
+            </a>
+        </div>
+        
+        <div class="profile-box">
+            <a href="Profile6.html">
+                <img class="profile-image" src="PTIMG.jpeg" alt="Profile Image">
+                <div class="profile-parameters">
+                    <p><strong>Username:</strong> Funke</p>
+                    <p><strong>Location:</strong> Ogun</p>
+                    <p><strong>Age bracket:</strong> 31+</p>
+                    <p><strong>Complexion:</strong> Cocoa</p>
+                    <p><strong>Breast Size:</strong> M</p>
+                    <p><strong>Back Size:</strong> L</p>
+                    <p><strong>Special services:</strong> Anal. Blow job</p>
+                    <p><strong>Rating:</strong> 10</p>
+                </div>
+            </a>
+        </div>
+        
+        <div class="profile-box">
+            <a href="Profile7.html">
+                <img class="profile-image" src="PTIMG.jpeg" alt="Profile Image">
+                <div class="profile-parameters">
+                    <p><strong>Username:</strong> DemGoTire</p>
+                    <p><strong>Location:</strong> Abuja</p>
+                    <p><strong>Age bracket:</strong> 22-25</p>
+                    <p><strong>Complexion:</strong> Cocoa</p>
+                    <p><strong>Breast Size:</strong> M</p>
+                    <p><strong>Back Size:</strong> XL</p>
+                    <p><strong>Special services:</strong> Anal. Blow job</p>
+                    <p><strong>Rating:</strong> 10</p>
+                </div>
+            </a>
+        </div>
+        
+        <div class="profile-box">
+            <a href="Profile8.html">
+                <img class="profile-image" src="PTIMG.jpeg" alt="Profile Image">
+                <div class="profile-parameters">
+                    <p><strong>Username:</strong> Damife4rmNaija</p>
+                    <p><strong>Location:</strong> Ogun</p>
+                    <p><strong>Age bracket:</strong> 22-25</p>
+                    <p><strong>Complexion:</strong> Cocoa</p>
+                    <p><strong>Breast Size:</strong> XL</p>
+                    <p><strong>Back Size:</strong> L</p>
+                    <p><strong>Special services:</strong> Anal. Blow job</p>
+                    <p><strong>Rating:</strong> 6</p>
+                </div>
+            </a>
+        </div>
+        
+        <div class="profile-box">
+            <a href="Profile9.html">
+                <img class="profile-image" src="PTIMG.jpeg" alt="Profile Image">
+                <div class="profile-parameters">
+                    <p><strong>Username:</strong> Seunfunmi</p>
+                    <p><strong>Location:</strong> Akure</p>
+                    <p><strong>Age bracket:</strong> 31+</p>
+                    <p><strong>Complexion:</strong> Vanilla</p>
+                    <p><strong>Breast Size:</strong> X</p>
+                    <p><strong>Back Size:</strong> XL</p>
+                    <p><strong>Special services:</strong> Blowjob</p>
+                    <p><strong>Rating:</strong> 6</p>
+                </div>
+            </a>
+        </div>
+        
+        <div class="profile-box">
+            <a href="Profile10.html">
+                <img class="profile-image" src="PTIMG.jpeg" alt="Profile Image">
+                <div class="profile-parameters">
+                    <p><strong>Username:</strong> BeauT</p>
+                    <p><strong>Location:</strong> Lagos</p>
+                    <p><strong>Age bracket:</strong> 18-21</p>
+                    <p><strong>Complexion:</strong> Caramel</p>
+                    <p><strong>Breast Size:</strong> XXL</p>
+                    <p><strong>Back Size:</strong> L</p>
+                    <p><strong>Special services:</strong> Anal. Blow job</p>
+                    <p><strong>Rating:</strong> 4</p>
                 </div>
             </a>
         </div>
 
 
 
+        <!-- Include the remaining profiles here -->
+        
     </div>
 
     <script>
-        function searchProfiles() {
-            var location = document.getElementById("location").value;
-            var age = document.getElementById("age").value;
-            var complexion = document.getElementById("complexion").value;
-            var breastSize = document.getElementById("breast-size").value;
-            var backSize = document.getElementById("back-size").value;
-            var specialServices = document.getElementById("special-services").value;
-            var rating = document.getElementById("rating").value;
-
-            var profiles = document.getElementById("profile-grid").getElementsByClassName("grid-item");
-            var searchResults = [];
-
-            for (var i = 0; i < profiles.length; i++) {
-                var profile = profiles[i];
-                var parameters = profile.getElementsByClassName("parameters")[0];
-                var profileLocation = parameters.getElementsByTagName("p")[1].textContent.split(": ")[1];
-                var profileAge = parameters.getElementsByTagName("p")[2].textContent.split(": ")[1];
-                var profileComplexion = parameters.getElementsByTagName("p")[3].textContent.split(": ")[1];
-                var profileBreastSize = parameters.getElementsByTagName("p")[4].textContent.split(": ")[1];
-                var profileBackSize = parameters.getElementsByTagName("p")[5].textContent.split(": ")[1];
-                var profileSpecialServices = parameters.getElementsByTagName("p")[6].textContent.split(": ")[1];
-                var profileRating = parameters.getElementsByTagName("p")[7].textContent.split(": ")[1];
-
-                if ((location === "all" || profileLocation.includes(location)) &&
-                    (age === "all" || profileAge === age) &&
-                    (complexion === "all" || profileComplexion === complexion) &&
-                    (breastSize === "all" || profileBreastSize === breastSize) &&
-                    (backSize === "all" || profileBackSize === backSize) &&
-                    (specialServices === "all" || profileSpecialServices.includes(specialServices)) &&
-                    (rating === "all" || profileRating === rating)) {
-                    searchResults.push(profile);
+        const searchForm = document.getElementById('searchForm');
+        const searchResults = document.getElementById('searchResults');
+        
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const location = document.getElementById('location').value;
+            const age = document.getElementById('age').value;
+            const complexion = document.getElementById('complexion').value;
+            const breastSize = document.getElementById('breastSize').value;
+            const backSize = document.getElementById('backSize').value;
+            const specialServices = document.getElementById('specialServices').value;
+            const rating = document.getElementById('rating').value;
+            
+            const profiles = Array.from(searchResults.children);
+            
+            profiles.sort(function(a, b) {
+                const aLocation = a.querySelector('.profile-parameters p:nth-child(2)').innerText.replace('Location: ', '');
+                const bLocation = b.querySelector('.profile-parameters p:nth-child(2)').innerText.replace('Location: ', '');
+                
+                if (aLocation === location && bLocation !== location) {
+                    return -1;
+                } else if (aLocation !== location && bLocation === location) {
+                    return 1;
+                } else {
+                    const aMatches = calculateMatches(a);
+                    const bMatches = calculateMatches(b);
+                    
+                    if (aMatches > bMatches) {
+                        return -1;
+                    } else if (aMatches < bMatches) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+            });
+            
+            for (const profile of profiles) {
+                searchResults.appendChild(profile);
+            }
+        });
+        
+        function calculateMatches(profile) {
+            const profileParameters = profile.querySelectorAll('.profile-parameters p');
+            let matches = 0;
+            
+            for (const parameter of profileParameters) {
+                const value = parameter.innerText.split(': ')[1];
+                const id = parameter.getAttribute('id');
+                
+                if (id !== 'location' && id !== 'rating' && value !== '' && document.getElementById(id).value === value) {
+                    matches++;
                 }
             }
-
-            var profileGrid = document.getElementById("profile-grid");
-            profileGrid.innerHTML = "";
-
-            for (var j = 0; j < searchResults.length; j++) {
-                profileGrid.appendChild(searchResults[j]);
-            }
+            
+            return matches;
         }
-
-        searchProfiles();
     </script>
 </body>
 </html>
