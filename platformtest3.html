@@ -1,251 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Masseuse Database</title>
+  <title>Profile Search</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
-
     .search-container {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-gap: 10px;
-      margin-bottom: 20px;
+      max-width: 800px;
+      margin: 0 auto;
     }
-
-    .search-container select,
-    .search-container button {
+    
+    .search-item {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .search-item select, .search-item button {
       width: 100%;
       padding: 10px;
-      font-size: 16px;
-    }
-
-    .profile-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 800px));
-      grid-gap: 20px;
-    }
-
-    .profile-box {
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: center;
-    }
-
-    .profile-box img {
-      max-width: 100%;
-      height: auto;
     }
   </style>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var searchForm = document.getElementById('search-form');
-      var searchResults = document.getElementById('search-results');
-
-      searchForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        // Get the selected values
-        var location = document.getElementById('location').value;
-        var age = document.getElementById('age').value;
-        var complexion = document.getElementById('complexion').value;
-        var breastSize = document.getElementById('breast-size').value;
-        var backSize = document.getElementById('back-size').value;
-        var specialServices = document.getElementById('special-services').value;
-        var rating = document.getElementById('rating').value;
-
-        // Filter the profiles based on the selected values
-        var profiles = searchProfiles(location, age, complexion, breastSize, backSize, specialServices, rating);
-
-        // Update the search results
-        displaySearchResults(profiles);
-      });
-
-      // Function to filter profiles based on selected values
-      function searchProfiles(location, age, complexion, breastSize, backSize, specialServices, rating) {
-        // Filter profiles based on the selected values
-        var profiles = [
-          { username: 'Clara_Of_Lagos', location: 'Lagos', age: '18-21', complexion: 'Cocoa', breastSize: 'M', backSize: 'XL', specialServices: 'Anal', rating: 7 },
-          { username: 'Patricia4U', location: 'Anambra', age: '22-25', complexion: 'Cocoa', breastSize: 'M', backSize: 'L', specialServices: 'Anal, Blow job', rating: 6 },
-          { username: 'CindyNaija', location: 'Akure', age: '26-30', complexion: 'Cream', breastSize: 'XL', backSize: 'M', specialServices: 'Anal, Titty fuck', rating: 5 },
-          { username: 'ThatEdoBabe', location: 'Anambra', age: '31+', complexion: 'Cocoa', breastSize: 'M', backSize: 'M', specialServices: 'Anal, Blow job', rating: 10 },
-          { username: 'Bella', location: 'Osun', age: '26-30', complexion: 'Cream', breastSize: 'XL', backSize: 'XL', specialServices: 'Anal, Blow job', rating: 5 },
-          { username: 'Funke', location: 'Ogun', age: '31+', complexion: 'Cocoa', breastSize: 'M', backSize: 'L', specialServices: 'Anal, Blow job', rating: 10 },
-          { username: 'DemGoTire', location: 'Abuja', age: '22-25', complexion: 'Cocoa', breastSize: 'M', backSize: 'XL', specialServices: 'Anal, Blow job', rating: 10 },
-          { username: 'Damife4rmNaija', location: 'Ogun', age: '22-25', complexion: 'Cocoa', breastSize: 'XL', backSize: 'L', specialServices: 'Anal, Blow job', rating: 6 },
-          { username: 'Seunfunmi', location: 'Akure', age: '31+', complexion: 'Vanilla', breastSize: 'X', backSize: 'XL', specialServices: 'Blowjob', rating: 6 },
-          { username: 'BeauT', location: 'Lagos', age: '18-21', complexion: 'Caramel', breastSize: 'XXL', backSize: 'L', specialServices: 'Anal, Blow job', rating: 4 }
-        ];
-
-        var filteredProfiles = profiles.filter(function(profile) {
-          return (
-            (location === 'All' || profile.location.includes(location)) &&
-            (age === '31+' ? profile.age.includes('+') : profile.age === age) &&
-            (complexion === 'All' || profile.complexion === complexion) &&
-            (breastSize === 'All' || profile.breastSize === breastSize) &&
-            (backSize === 'All' || profile.backSize === backSize) &&
-            (specialServices === 'All' || profile.specialServices.includes(specialServices)) &&
-            (rating === 'All' || profile.rating.toString() === rating)
-          );
-        });
-
-        // Sort profiles by matching criteria count
-        filteredProfiles.sort(function(a, b) {
-          var aCount = countMatchingCriteria(location, a.location) + countMatchingCriteria(age, a.age) + countMatchingCriteria(complexion, a.complexion) +
-            countMatchingCriteria(breastSize, a.breastSize) + countMatchingCriteria(backSize, a.backSize) +
-            countMatchingCriteria(specialServices, a.specialServices) + countMatchingCriteria(rating, a.rating.toString());
-
-          var bCount = countMatchingCriteria(location, b.location) + countMatchingCriteria(age, b.age) + countMatchingCriteria(complexion, b.complexion) +
-            countMatchingCriteria(breastSize, b.breastSize) + countMatchingCriteria(backSize, b.backSize) +
-            countMatchingCriteria(specialServices, b.specialServices) + countMatchingCriteria(rating, b.rating.toString());
-
-          return bCount - aCount;
-        });
-
-        return filteredProfiles;
-      }
-
-      // Function to count the number of matching criteria
-      function countMatchingCriteria(selectedValue, profileValue) {
-        return selectedValue === profileValue ? 1 : 0;
-      }
-
-      // Function to display search results
-      function displaySearchResults(profiles) {
-        searchResults.innerHTML = '';
-
-        if (profiles.length === 0) {
-          searchResults.innerHTML = '<p>No matching profiles found.</p>';
-          return;
-        }
-
-        profiles.forEach(function(profile) {
-          var profileBox = document.createElement('div');
-// Function to display search results
-function displaySearchResults(profiles) {
-  searchResults.innerHTML = '';
-
-  if (profiles.length === 0) {
-    searchResults.innerHTML = '<p>No matching profiles found.</p>';
-    return;
-  }
-
-  profiles.forEach(function(profile) {
-    if (profile.username === 'Patricia4U') {
-      var profileBox = document.createElement('div');
-      profileBox.classList.add('profile-box');
-
-      var profileImage = document.createElement('img');
-      profileImage.src = 'PTIMG.jpeg';
-      profileImage.alt = 'Profile Image';
-      profileBox.appendChild(profileImage);
-
-      var profileDetails = document.createElement('div');
-
-      var username = document.createElement('p');
-      username.textContent = 'Username: ' + profile.username;
-      profileDetails.appendChild(username);
-
-      var location = document.createElement('p');
-      location.textContent = 'Location: ' + profile.location;
-      profileDetails.appendChild(location);
-
-      var age = document.createElement('p');
-      age.textContent = 'Age bracket: ' + profile.age;
-      profileDetails.appendChild(age);
-
-      var complexion = document.createElement('p');
-      complexion.textContent = 'Complexion: ' + profile.complexion;
-      profileDetails.appendChild(complexion);
-
-      var breastSize = document.createElement('p');
-      breastSize.textContent = 'Breast Size: ' + profile.breastSize;
-      profileDetails.appendChild(breastSize);
-
-      var backSize = document.createElement('p');
-      backSize.textContent = 'Back Size: ' + profile.backSize;
-      profileDetails.appendChild(backSize);
-
-      var specialServices = document.createElement('p');
-      specialServices.textContent = 'Special services: ' + profile.specialServices;
-      profileDetails.appendChild(specialServices);
-
-      var rating = document.createElement('p');
-      rating.textContent = 'Rating: ' + profile.rating;
-      profileDetails.appendChild(rating);
-
-      profileBox.appendChild(profileDetails);
-
-      var profileLink = document.createElement('a');
-      profileLink.href = 'Profile1.html'; // Replace with actual profile link
-      profileLink.appendChild(profileBox);
-
-      searchResults.appendChild(profileLink);
-    }
-  });
-}
-
-          profileBox.classList.add('profile-box');
-
-          var profileImage = document.createElement('img');
-          profileImage.src = 'PTIMG.jpeg';
-          profileImage.alt = 'Profile Image';
-          profileBox.appendChild(profileImage);
-
-          var profileDetails = document.createElement('div');
-
-          var username = document.createElement('p');
-          username.textContent = 'Username: ' + profile.username;
-          profileDetails.appendChild(username);
-
-          var location = document.createElement('p');
-          location.textContent = 'Location: ' + profile.location;
-          profileDetails.appendChild(location);
-
-          var age = document.createElement('p');
-          age.textContent = 'Age: ' + profile.age;
-          profileDetails.appendChild(age);
-
-          var complexion = document.createElement('p');
-          complexion.textContent = 'Complexion: ' + profile.complexion;
-          profileDetails.appendChild(complexion);
-
-          var breastSize = document.createElement('p');
-          breastSize.textContent = 'Breast Size: ' + profile.breastSize;
-          profileDetails.appendChild(breastSize);
-
-          var backSize = document.createElement('p');
-          backSize.textContent = 'Back Size: ' + profile.backSize;
-          profileDetails.appendChild(backSize);
-
-          var specialServices = document.createElement('p');
-          specialServices.textContent = 'Special services: ' + profile.specialServices;
-          profileDetails.appendChild(specialServices);
-
-          var rating = document.createElement('p');
-          rating.textContent = 'Rating: ' + profile.rating;
-          profileDetails.appendChild(rating);
-
-          profileBox.appendChild(profileDetails);
-
-          var profileLink = document.createElement('a');
-          profileLink.href = 'Profile1.html'; // Replace with actual profile link
-          profileLink.appendChild(profileBox);
-
-          searchResults.appendChild(profileLink);
-        });
-      }
-    });
-  </script>
 </head>
 <body>
   <div class="search-container">
-    <form id="search-form">
+    <div class="search-item">
+      <label for="location">Location:</label>
       <select id="location">
-        <option value="All">Location (All)</option>
+        <option value="">Select Location</option>
         <option value="Oyo">Oyo</option>
         <option value="Osun">Osun</option>
         <option value="Ogun">Ogun</option>
@@ -255,55 +37,129 @@ function displaySearchResults(profiles) {
         <option value="Anambra">Anambra</option>
         <option value="Port Harcourt">Port Harcourt</option>
       </select>
+    </div>
+    <div class="search-item">
+      <label for="age">Age:</label>
       <select id="age">
-        <option value="All">Age (All)</option>
-        <option value="18-21">18-21</option>
-        <option value="22-25">22-25</option>
-        <option value="26-30">26-30</option>
-        <option value="31+">31+</option>
+        <option value="">Select Age</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <!-- Add remaining age options up to 30 -->
+        <option value="31">31+</option>
       </select>
-      <select id="complexion">
-        <option value="All">Complexion (All)</option>
-        <option value="Cocoa">Cocoa</option>
-        <option value="Vanilla">Vanilla</option>
-        <option value="Caramel">Caramel</option>
-      </select>
-      <select id="breast-size">
-        <option value="All">Breast Size (All)</option>
-        <option value="M">M</option>
-        <option value="L">L</option>
-        <option value="XL">XL</option>
-        <option value="XXL">XXL</option>
-      </select>
-      <select id="back-size">
-        <option value="All">Back Size (All)</option>
-        <option value="M">M</option>
-        <option value="L">L</option>
-        <option value="XL">XL</option>
-        <option value="XXL">XXL</option>
-      </select>
-      <select id="special-services">
-        <option value="All">Special Services (All)</option>
-        <option value="Anal">Anal</option>
-        <option value="Blowjob">Blowjob</option>
-        <option value="Titty fuck">Titty fuck</option>
-      </select>
-      <select id="rating">
-        <option value="All">Rating (All)</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-      </select>
-      <button type="submit">SEARCH</button>
-    </form>
+    </div>
+    <!-- Add remaining search item divs for Complexion, Breast Size, Back Size, Special Services, Rating -->
+    <div class="search-item">
+      <button id="search-button">Search</button>
+    </div>
+
+<div class="grid-container">
+  <div class="profile-box">
+    <a href="profile1.html">
+      <img src="PTIMG.jpeg" alt="Profile Image">
+      <p>Username: Clara_Of_Lagos</p>
+      <p>Location: Lagos</p>
+      <p>Age bracket: 18-21</p>
+      <p>Complexion: Cocoa</p>
+      <p>Breast Size: M</p>
+      <p>Back Size: XL</p>
+      <p>Special services: Anal</p>
+      <p>Rating: 7</p>
+    </a>
   </div>
-  <div id="search-results" class="profile-container"></div>
+  <!-- Repeat the profile-box divs for other profiles -->
+</div>
+
+    
+  </div>
+  
+  <!-- Add profile grid database below the search system -->
+  
+  <script src="script.js">// Wait for the DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function () {
+  // Get reference to the search button
+  var searchButton = document.getElementById('search-button');
+
+  // Add click event listener to the search button
+  searchButton.addEventListener('click', function () {
+    // Get the selected values of the search parameters
+    var location = document.getElementById('location').value;
+    var age = document.getElementById('age').value;
+    var complexion = document.getElementById('complexion').value;
+    var breastSize = document.getElementById('breast-size').value;
+    var backSize = document.getElementById('back-size').value;
+    var specialServices = document.getElementById('special-services').value;
+    var rating = document.getElementById('rating').value;
+
+    // Get reference to the profile database grid container
+    var gridContainer = document.querySelector('.grid-container');
+
+    // Get all profile boxes in the grid container
+    var profileBoxes = gridContainer.querySelectorAll('.profile-box');
+
+    // Create an array to store the matching profiles
+    var matchingProfiles = [];
+
+    // Loop through each profile box
+    profileBoxes.forEach(function (profileBox) {
+      // Get the profile information
+      var profileLocation = profileBox.querySelector('p:nth-of-type(2)').textContent;
+      var profileAge = profileBox.querySelector('p:nth-of-type(3)').textContent;
+      var profileComplexion = profileBox.querySelector('p:nth-of-type(4)').textContent;
+      var profileBreastSize = profileBox.querySelector('p:nth-of-type(5)').textContent;
+      var profileBackSize = profileBox.querySelector('p:nth-of-type(6)').textContent;
+      var profileSpecialServices = profileBox.querySelector('p:nth-of-type(7)').textContent;
+      var profileRating = profileBox.querySelector('p:nth-of-type(8)').textContent;
+
+      // Count the number of matches for each profile
+      var matchCount = 0;
+
+      if (profileLocation === location) {
+        matchCount++;
+      }
+
+      if (profileAge === age) {
+        matchCount++;
+      }
+
+      if (profileComplexion === complexion) {
+        matchCount++;
+      }
+
+      if (profileBreastSize === breastSize) {
+        matchCount++;
+      }
+
+      if (profileBackSize === backSize) {
+        matchCount++;
+      }
+
+      if (profileSpecialServices === specialServices) {
+        matchCount++;
+      }
+
+      if (profileRating === rating) {
+        matchCount++;
+      }
+
+      // Store the profile and its match count in the array
+      matchingProfiles.push({ profileBox: profileBox, matchCount: matchCount });
+    });
+
+    // Sort the matching profiles based on match count in descending order
+    matchingProfiles.sort(function (a, b) {
+      return b.matchCount - a.matchCount;
+    });
+
+    // Clear the grid container
+    gridContainer.innerHTML = '';
+
+    // Display the matching profiles in the grid container
+    matchingProfiles.forEach(function (matchingProfile) {
+      gridContainer.appendChild(matchingProfile.profileBox);
+    });
+  });
+});
+</script>
 </body>
 </html>
