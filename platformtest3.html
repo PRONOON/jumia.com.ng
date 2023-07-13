@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Profile Search</title>
+  <title>Masseuse Database</title>
   <style>
     .search-container {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-gap: 10px;
       max-width: 800px;
-      margin: 0 auto;
+      margin: 20px auto;
     }
     
     .search-item {
@@ -19,6 +19,31 @@
     .search-item select, .search-item button {
       width: 100%;
       padding: 10px;
+    }
+    
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-gap: 10px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+    
+    .profile-box {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    
+    .profile-box img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      object-position: center;
+    }
+    
+    .profile-box p {
+      margin: 5px;
     }
   </style>
 </head>
@@ -48,32 +73,127 @@
         <option value="31">31+</option>
       </select>
     </div>
-    <!-- Add remaining search item divs for Complexion, Breast Size, Back Size, Special Services, Rating -->
+    <div class="search-item">
+      <label for="complexion">Complexion:</label>
+      <select id="complexion">
+        <option value="">Select Complexion</option>
+        <option value="Cocoa">Cocoa</option>
+        <option value="Vanilla">Vanilla</option>
+        <option value="Caramel">Caramel</option>
+      </select>
+    </div>
+    <div class="search-item">
+      <label for="breast-size">Breast Size:</label>
+      <select id="breast-size">
+        <option value="">Select Breast Size</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+        <option value="XXL">XXL</option>
+      </select>
+    </div>
+    <div class="search-item">
+      <label for="back-size">Back Size:</label>
+      <select id="back-size">
+        <option value="">Select Back Size</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+        <option value="XXL">XXL</option>
+      </select>
+    </div>
+    <div class="search-item">
+      <label for="special-services">Special Services:</label>
+      <select id="special-services">
+        <option value="">Select Special Services</option>
+        <option value="Anal">Anal</option>
+        <option value="Blowjob">Blowjob</option>
+        <option value="Titty Fuck">Titty Fuck</option>
+      </select>
+    </div>
+    <div class="search-item">
+      <label for="rating">Rating:</label>
+      <select id="rating">
+        <option value="">Select Rating</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <!-- Add remaining rating options up to 10 -->
+        <option value="10">10</option>
+      </select>
+    </div>
     <div class="search-item">
       <button id="search-button">Search</button>
     </div>
-
-<div class="grid-container">
-  <div class="profile-box">
-    <a href="profile1.html">
-      <img src="PTIMG.jpeg" alt="Profile Image">
-      <p>Username: Clara_Of_Lagos</p>
-      <p>Location: Lagos</p>
-      <p>Age bracket: 18-21</p>
-      <p>Complexion: Cocoa</p>
-      <p>Breast Size: M</p>
-      <p>Back Size: XL</p>
-      <p>Special services: Anal</p>
-      <p>Rating: 7</p>
-    </a>
-  </div>
-  <!-- Repeat the profile-box divs for other profiles -->
-</div>
-
-    
   </div>
   
-  <!-- Add profile grid database below the search system -->
+  <div class="grid-container">
+    <div class="profile-box">
+      <a href="profile1.html">
+        <img src="PTIMG.jpeg" alt="Profile Image">
+        <p>Username: Clara_Of_Lagos</p>
+        <p>Location: Lagos</p>
+        <p>Age bracket: 18-21</p>
+        <p>Complexion: Cocoa</p>
+        <p>Breast Size: M</p>
+        <p>Back Size: XL</p>
+        <p>Special services: Anal</p>
+        <p>Rating: 7</p>
+      </a>
+    </div>
+    <div class="profile-box">
+      <a href="profile2.html">
+        <img src="PTIMG.jpeg" alt="Profile Image">
+        <p>Username: Patricia4U</p>
+        <p>Location: Anambra</p>
+        <p>Age bracket: 22-25</p>
+        <p>Complexion: Cocoa</p>
+        <p>Breast Size: M</p>
+        <p>Back Size: L</p>
+        <p>Special services: Anal. Blow job</p>
+        <p>Rating: 6</p>
+      </a>
+    </div>
+    <div class="profile-box">
+      <a href="profile3.html">
+        <img src="PTIMG.jpeg" alt="Profile Image">
+        <p>Username: CindyNaija</p>
+        <p>Location: Akure</p>
+        <p>Age bracket: 26-30</p>
+        <p>Complexion: Cream</p>
+        <p>Breast Size: XL</p>
+        <p>Back Size: M</p>
+        <p>Special services: Anal. Titty fuck</p>
+        <p>Rating: 5</p>
+      </a>
+    </div>
+    <div class="profile-box">
+      <a href="profile4.html">
+        <img src="PTIMG.jpeg" alt="Profile Image">
+        <p>Username: ThatEdoBabe</p>
+        <p>Location: Anambra</p>
+        <p>Age bracket: 31+</p>
+        <p>Complexion: Cocoa</p>
+        <p>Breast Size: M</p>
+        <p>Back Size: M</p>
+        <p>Special services: Anal. Blow job</p>
+        <p>Rating: 10</p>
+      </a>
+    </div>
+    <div class="profile-box">
+      <a href="profile5.html">
+        <img src="PTIMG.jpeg" alt="Profile Image">
+        <p>Username: Bella</p>
+        <p>Location: Osun</p>
+        <p>Age bracket: 26-30</p>
+        <p>Complexion: Cream</p>
+        <p>Breast Size: XL</p>
+        <p>Back Size: XL</p>
+        <p>Special services: Anal. Blow job</p>
+        <p>Rating: 5</p>
+      </a>
+    </div>
+    <!-- Repeat the profile-box divs for more profiles -->
+  </div>
   
   <script src="script.js">// Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function () {
@@ -104,46 +224,47 @@ document.addEventListener('DOMContentLoaded', function () {
     profileBoxes.forEach(function (profileBox) {
       // Get the profile information
       var profileLocation = profileBox.querySelector('p:nth-of-type(2)').textContent;
-      var profileAge = profileBox.querySelector('p:nth-of-type(3)').textContent;
-      var profileComplexion = profileBox.querySelector('p:nth-of-type(4)').textContent;
-      var profileBreastSize = profileBox.querySelector('p:nth-of-type(5)').textContent;
-      var profileBackSize = profileBox.querySelector('p:nth-of-type(6)').textContent;
-      var profileSpecialServices = profileBox.querySelector('p:nth-of-type(7)').textContent;
-      var profileRating = profileBox.querySelector('p:nth-of-type(8)').textContent;
 
-      // Count the number of matches for each profile
-      var matchCount = 0;
+      // Check if the profile matches the location parameter
+      if (profileLocation.includes(location)) {
+        // Get the remaining profile information
+        var profileAge = profileBox.querySelector('p:nth-of-type(3)').textContent;
+        var profileComplexion = profileBox.querySelector('p:nth-of-type(4)').textContent;
+        var profileBreastSize = profileBox.querySelector('p:nth-of-type(5)').textContent;
+        var profileBackSize = profileBox.querySelector('p:nth-of-type(6)').textContent;
+        var profileSpecialServices = profileBox.querySelector('p:nth-of-type(7)').textContent;
+        var profileRating = profileBox.querySelector('p:nth-of-type(8)').textContent;
 
-      if (profileLocation === location) {
-        matchCount++;
+        // Count the number of matches for each profile
+        var matchCount = 0;
+
+        if (profileAge === age) {
+          matchCount++;
+        }
+
+        if (profileComplexion === complexion) {
+          matchCount++;
+        }
+
+        if (profileBreastSize === breastSize) {
+          matchCount++;
+        }
+
+        if (profileBackSize === backSize) {
+          matchCount++;
+        }
+
+        if (profileSpecialServices === specialServices) {
+          matchCount++;
+        }
+
+        if (profileRating === rating) {
+          matchCount++;
+        }
+
+        // Store the profile and its match count in the array
+        matchingProfiles.push({ profileBox: profileBox, matchCount: matchCount });
       }
-
-      if (profileAge === age) {
-        matchCount++;
-      }
-
-      if (profileComplexion === complexion) {
-        matchCount++;
-      }
-
-      if (profileBreastSize === breastSize) {
-        matchCount++;
-      }
-
-      if (profileBackSize === backSize) {
-        matchCount++;
-      }
-
-      if (profileSpecialServices === specialServices) {
-        matchCount++;
-      }
-
-      if (profileRating === rating) {
-        matchCount++;
-      }
-
-      // Store the profile and its match count in the array
-      matchingProfiles.push({ profileBox: profileBox, matchCount: matchCount });
     });
 
     // Sort the matching profiles based on match count in descending order
