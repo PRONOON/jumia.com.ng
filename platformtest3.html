@@ -361,7 +361,15 @@ const ratingSelect = document.getElementById('rating');
 const gridItems = document.querySelectorAll('.grid-item');
 
 // Function to filter and display profiles based on the selected options
+    // Function to filter and display profiles based on the selected options
 function searchProfiles() {
+  // Hide all grid items
+  gridItems.forEach((item) => {
+    item.style.display = 'none';
+  });
+
+
+
   const selectedLocation = locationSelect.value;
   const selectedAge = ageSelect.value;
   const selectedComplexion = complexionSelect.value;
