@@ -350,129 +350,70 @@
     </div>
 <script>
 
-// Get references to the HTML elements
-const locationSelect = document.getElementById('location');
-const ageSelect = document.getElementById('age');
-const complexionSelect = document.getElementById('complexion');
-const breastSizeSelect = document.getElementById('breast-size');
-const backSizeSelect = document.getElementById('back-size');
-const specialServicesSelect = document.getElementById('special-services');
-const ratingSelect = document.getElementById('rating');
-const gridItems = document.querySelectorAll('.grid-item');
-
-// Function to filter and display profiles based on the selected options
-    // Function to filter and display profiles based on the selected options
 function searchProfiles() {
-  // Hide all grid items
-  gridItems.forEach((item) => {
-    item.style.display = 'none';
-  });
+  var selectedLocation = document.getElementById("location").value;
+  var selectedAge = document.getElementById("age").value;
+  var selectedComplexion = document.getElementById("complexion").value;
+  var selectedBreastSize = document.getElementById("breast-size").value;
+  var selectedBackSize = document.getElementById("back-size").value;
+  var selectedServices = document.getElementById("special-services").value;
+  var selectedRating = document.getElementById("rating").value;
 
+  var gridItems = Array.from(document.getElementsByClassName("grid-item"));
 
+  // Loop through all grid items and calculate the number of matches
+  gridItems.forEach(function (gridItem) {
+    var location = gridItem.querySelector(".parameters p:nth-child(2)").textContent;
+    var age = gridItem.querySelector(".parameters p:nth-child(3)").textContent;
+    var complexion = gridItem.querySelector(".parameters p:nth-child(4)").textContent;
+    var breastSize = gridItem.querySelector(".parameters p:nth-child(5)").textContent;
+    var backSize = gridItem.querySelector(".parameters p:nth-child(6)").textContent;
+    var services = gridItem.querySelector(".parameters p:nth-child(7)").textContent;
+    var rating = gridItem.querySelector(".parameters p:nth-child(8)").textContent;
 
-  const selectedLocation = locationSelect.value;
-  const selectedAge = ageSelect.value;
-  const selectedComplexion = complexionSelect.value;
-  const selectedBreastSize = breastSizeSelect.value;
-  const selectedBackSize = backSizeSelect.value;
-  const selectedSpecialServices = specialServicesSelect.value;
-  const selectedRating = ratingSelect.value;
+    var matches = 0;
 
-  // Loop through all grid items to filter and display the appropriate profiles
-  for (let i = 0; i < gridItems.length; i++) {
-    const gridItem = gridItems[i];
-    const parameters = gridItem.querySelectorAll('.parameters p');
-
-    let matchCount = 0; // Count of matches for each profile
-
-    // Check if the profile matches the selected location
-    const location = parameters[1].textContent.split(':')[1].trim();
-    if (selectedLocation !== 'all' && location !== selectedLocation) {
-      gridItem.style.display = 'none';
-      continue;
-    } else {
-      matchCount++;
+    // Check if the selected parameter is "All" and consider it a match
+    if (selectedLocation === "all" || location === selectedLocation) {
+      matches++;
+    }
+    if (selectedAge === "all" || selectedAge === age) {
+      matches++;
+    }
+    if (selectedComplexion === "all" || selectedComplexion === complexion) {
+      matches++;
+    }
+    if (selectedBreastSize === "all" || selectedBreastSize === breastSize) {
+      matches++;
+    }
+    if (selectedBackSize === "all" || selectedBackSize === backSize) {
+      matches++;
+    }
+    if (selectedServices === "all" || services.includes(selectedServices)) {
+      matches++;
+    }
+    if (selectedRating === "all" || selectedRating === rating) {
+      matches++;
     }
 
-    // Check if the profile matches any of the remaining selected parameters
-    const age = parameters[2].textContent.split(':')[1].trim();
-    const complexion = parameters[3].textContent.split(':')[1].trim();
-    const breastSize = parameters[4].textContent.split(':')[1].trim();
-    const backSize = parameters[5].textContent.split(':')[1].trim();
-    const specialServices = parameters[6].textContent.split(':')[1].trim();
-    const rating = parameters[7].textContent.split(':')[1].trim();
-
-    if (
-      selectedAge !== 'all' &&
-      age !== selectedAge &&
-      selectedComplexion !== 'all' &&
-      complexion !== selectedComplexion &&
-      selectedBreastSize !== 'all' &&
-      breastSize !== selectedBreastSize &&
-      selectedBackSize !== 'all' &&
-      backSize !== selectedBackSize &&
-      selectedSpecialServices !== 'all' &&
-      specialServices !== selectedSpecialServices &&
-      selectedRating !== 'all' &&
-      rating !== selectedRating
-    ) {
-      gridItem.style.display = 'none';
-      continue;
-    } else {
-      if (selectedAge !== 'all' && age === selectedAge) {
-        matchCount++;
-      }
-      if (selectedComplexion !== 'all' && complexion === selectedComplexion) {
-        matchCount++;
-      }
-      if (selectedBreastSize !== 'all' && breastSize === selectedBreastSize) {
-        matchCount++;
-      }
-      if (selectedBackSize !== 'all' && backSize === selectedBackSize) {
-        matchCount++;
-      }
-      if (
-        selectedSpecialServices !== 'all' &&
-        specialServices === selectedSpecialServices
-      ) {
-        matchCount++;
-      }
-      if (selectedRating !== 'all' && rating === selectedRating) {
-        matchCount++;
-      }
-
-      // Display the grid item if it matches at least one parameter
-      if (matchCount > 0) {
-        gridItem.style.display = '';
-      } else {
-        gridItem.style.display = 'none';
-      }
-    }
-  }
-
-  // Sort the grid items based on the match count
-  const sortedGridItems = Array.from(gridItems);
-  sortedGridItems.sort((a, b) => {
-    const aMatchCount = a.style.display === 'none' ? 0 : 1;
-    const bMatchCount = b.style.display === 'none' ? 0 : 1;
-    return bMatchCount - aMatchCount;
+    gridItem.dataset.matches = matches;
   });
 
-  // Reorder the grid items in the DOM
-  const gridContainer = document.querySelector('.grid-container');
-  sortedGridItems.forEach((item) => {
-    gridContainer.appendChild(item);
+  // Sort the grid items based on the number of matches
+  gridItems.sort(function (a, b) {
+    var matchesA = parseInt(a.dataset.matches);
+    var matchesB = parseInt(b.dataset.matches);
+
+    return matchesB - matchesA;
+  });
+
+  // Reorder the grid items based on the sorted order
+  var gridContainer = document.querySelector(".grid-container");
+  gridItems.forEach(function (gridItem) {
+    gridContainer.appendChild(gridItem);
   });
 }
 
-// Attach the searchProfiles function to the onchange event of the select elements
-locationSelect.onchange = searchProfiles;
-ageSelect.onchange = searchProfiles;
-complexionSelect.onchange = searchProfiles;
-breastSizeSelect.onchange = searchProfiles;
-backSizeSelect.onchange = searchProfiles;
-specialServicesSelect.onchange = searchProfiles;
-ratingSelect.onchange = searchProfiles;
 
 </script>
     
