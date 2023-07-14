@@ -231,37 +231,82 @@
     </div>
 
     <script>
-        function searchProfiles() {
-            var location = document.getElementById("location").value;
-            var age = document.getElementById("age").value;
-            var complexion = document.getElementById("complexion").value;
-            var breastSize = document.getElementById("breast-size").value;
-            var backSize = document.getElementById("back-size").value;
-            var specialServices = document.getElementById("special-services").value;
-            var rating = document.getElementById("rating").value;
+        // Function to execute the search and filter profiles
+function searchProfiles() {
+  // Get the selected values from the search form
+  var location = document.getElementById("location").value;
+  var age = document.getElementById("age").value;
+  var complexion = document.getElementById("complexion").value;
+  var breastSize = document.getElementById("breast-size").value;
+  var backSize = document.getElementById("back-size").value;
+  var specialServices = document.getElementById("special-services").value;
+  var rating = document.getElementById("rating").value;
 
-            var profiles = document.getElementsByClassName("grid-item");
+  // Get all the profile grid items
+  var gridItems = document.getElementsByClassName("grid-item");
 
-            for (var i = 0; i < profiles.length;
+  // Loop through the profile grid items and apply the search and filter logic
+  for (var i = 0; i < gridItems.length; i++) {
+    var profile = gridItems[i];
+    var parameters = profile.getElementsByClassName("parameters")[0];
 
- i++) {
-                var profile = profiles[i];
+    // Get the parameter values for the current profile
+    var profileLocation = parameters.getElementsByTagName("p")[1].textContent.split(":")[1].trim();
+    var profileAge = parameters.getElementsByTagName("p")[2].textContent.split(":")[1].trim();
+    var profileComplexion = parameters.getElementsByTagName("p")[3].textContent.split(":")[1].trim();
+    var profileBreastSize = parameters.getElementsByTagName("p")[4].textContent.split(":")[1].trim();
+    var profileBackSize = parameters.getElementsByTagName("p")[5].textContent.split(":")[1].trim();
+    var profileSpecialServices = parameters.getElementsByTagName("p")[6].textContent.split(":")[1].trim();
+    var profileRating = parseInt(parameters.getElementsByTagName("p")[7].textContent.split(":")[1].trim());
 
-                var locationMatch = location === "all" || profile.querySelector(".parameters p:nth-child(2)").innerText.includes(location);
-                var ageMatch = age === "all" || profile.querySelector(".parameters p:nth-child(3)").innerText.includes(age);
-                var complexionMatch = complexion === "all" || profile.querySelector(".parameters p:nth-child(4)").innerText.includes(complexion);
-                var breastSizeMatch = breastSize === "all" || profile.querySelector(".parameters p:nth-child(5)").innerText.includes(breastSize);
-                var backSizeMatch = backSize === "all" || profile.querySelector(".parameters p:nth-child(6)").innerText.includes(backSize);
-                var specialServicesMatch = specialServices === "all" || profile.querySelector(".parameters p:nth-child(7)").innerText.includes(specialServices);
-                var ratingMatch = rating === "all" || profile.querySelector(".parameters p:nth-child(8)").innerText.includes(rating);
+    // Check if the profile matches the location
+    if (location !== "all" && profileLocation !== location) {
+      profile.style.display = "none";
+      continue;
+    }
 
-                if (locationMatch && ageMatch && complexionMatch && breastSizeMatch && backSizeMatch && specialServicesMatch && ratingMatch) {
-                    profile.style.display = "block";
-                } else {
-                    profile.style.display = "none";
-                }
-            }
-        }
+    // Check if the profile matches at least one of the remaining parameters
+    if (
+      (age !== "all" && profileAge !== age) ||
+      (complexion !== "all" && profileComplexion !== complexion) ||
+      (breastSize !== "all" && profileBreastSize !== breastSize) ||
+      (backSize !== "all" && profileBackSize !== backSize) ||
+      (specialServices !== "all" && !profileSpecialServices.includes(specialServices)) ||
+      (rating !== "all" && profileRating < parseInt(rating))
+    ) {
+      profile.style.display = "none";
+    } else {
+      profile.style.display = "block";
+    }
+  }
+
+  // Reorder the displayed profiles based on the number of matches
+  var gridContainer = document.getElementsByClassName("grid-container")[0];
+  var displayedProfiles = Array.from(gridContainer.getElementsByClassName("grid-item")).filter(function (profile) {
+    return profile.style.display !== "none";
+  });
+  displayedProfiles.sort(function (profile1, profile2) {
+    var profile1Matches = countMatches(profile1);
+    var profile2Matches = countMatches(profile2);
+    return profile2Matches - profile1Matches;
+  });
+  displayedProfiles.forEach(function (profile) {
+    gridContainer.appendChild(profile);
+  });
+}
+
+// Function to count the number of matches for a profile
+function countMatches(profile) {
+  var parameters = profile.getElementsByClassName("parameters")[0];
+  var matches = 0;
+
+  if (parameters.getElementsByTagName("p")[2].textContent.split(":")[1].trim() !== "31+") {
+    matches++;
+  }
+  matches += parameters.getElementsByTagName("p")[3].textContent.split(":")[1].trim() !== "Cocoa" ? 1 : 0;
+
+  return matches;
+}
     </script>
 </body>
 </html>
