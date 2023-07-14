@@ -117,7 +117,7 @@
             <select id="complexion" onchange="searchProfiles()">
                 <option value="all">All</option>
                 <option value="Cocoa">Cocoa</option>
-                <option value="Creamy">Creamy</option>
+                <option value="Caramel">Caramel</option>
                 <option value="Vanilla">Vanilla</option>
             </select>
         </div>
@@ -177,7 +177,7 @@
                     <p>Username: Clara_Of_Lagos</p>
                     <p>Location: Abuja</p>
                     <p>Age: 23</p>
-                    <p>Complexion: Fair skin</p>
+                    <p>Complexion: Caramel</p>
                     <p>Breast Size: M</p>
                     <p>Back Size: XL</p>
                     <p>Special Services: Anal, Blow job</p>
@@ -348,85 +348,99 @@
         
         <!-- Add more grid items here -->
     </div>
+<script>
 
-    <script>
-        // Function to execute the search and filter profiles
+Hhhhh// Get references to the HTML elements
+const locationSelect = document.getElementById("location");
+const ageSelect = document.getElementById("age");
+const complexionSelect = document.getElementById("complexion");
+const breastSizeSelect = document.getElementById("breast-size");
+const backSizeSelect = document.getElementById("back-size");
+const specialServicesSelect = document.getElementById("special-services");
+const ratingSelect = document.getElementById("rating");
+const gridItems = document.querySelectorAll(".grid-item");
+
+// Function to handle the search event
 function searchProfiles() {
-  // Get the selected values from the search form
-  var location = document.getElementById("location").value;
-  var age = document.getElementById("age").value;
-  var complexion = document.getElementById("complexion").value;
-  var breastSize = document.getElementById("breast-size").value;
-  var backSize = document.getElementById("back-size").value;
-  var specialServices = document.getElementById("special-services").value;
-  var rating = document.getElementById("rating").value;
+  // Get the selected values from each dropdown
+  const selectedLocation = locationSelect.value;
+  const selectedAge = ageSelect.value;
+  const selectedComplexion = complexionSelect.value;
+  const selectedBreastSize = breastSizeSelect.value;
+  const selectedBackSize = backSizeSelect.value;
+  const selectedSpecialServices = specialServicesSelect.value;
+  const selectedRating = ratingSelect.value;
 
-  // Get all the profile grid items
-  var gridItems = document.getElementsByClassName("grid-item");
+  // Iterate over each grid item and apply the filters
+  gridItems.forEach((item) => {
+    const location = item.querySelector(".parameters > p:nth-child(2)").textContent.split(":")[1].trim();
+    const age = item.querySelector(".parameters > p:nth-child(3)").textContent.split(":")[1].trim();
+    const complexion = item.querySelector(".parameters > p:nth-child(4)").textContent.split(":")[1].trim();
+    const breastSize = item.querySelector(".parameters > p:nth-child(5)").textContent.split(":")[1].trim();
+    const backSize = item.querySelector(".parameters > p:nth-child(6)").textContent.split(":")[1].trim();
+    const specialServices = item.querySelector(".parameters > p:nth-child(7)").textContent.split(":")[1].trim();
+    const rating = item.querySelector(".parameters > p:nth-child(8)").textContent.split(":")[1].trim();
 
-  // Loop through the profile grid items and apply the search and filter logic
-  for (var i = 0; i < gridItems.length; i++) {
-    var profile = gridItems[i];
-    var parameters = profile.getElementsByClassName("parameters")[0];
+    // Initialize the match count to 0
+    let matchCount = 0;
 
-    // Get the parameter values for the current profile
-    var profileLocation = parameters.getElementsByTagName("p")[1].textContent.split(":")[1].trim();
-    var profileAge = parameters.getElementsByTagName("p")[2].textContent.split(":")[1].trim();
-    var profileComplexion = parameters.getElementsByTagName("p")[3].textContent.split(":")[1].trim();
-    var profileBreastSize = parameters.getElementsByTagName("p")[4].textContent.split(":")[1].trim();
-    var profileBackSize = parameters.getElementsByTagName("p")[5].textContent.split(":")[1].trim();
-    var profileSpecialServices = parameters.getElementsByTagName("p")[6].textContent.split(":")[1].trim();
-    var profileRating = parseInt(parameters.getElementsByTagName("p")[7].textContent.split(":")[1].trim());
-
-    // Check if the profile matches the location
-    if (location !== "all" && profileLocation !== location) {
-      profile.style.display = "none";
-      continue;
-    }
-
-    // Check if the profile matches at least one of the remaining parameters
-    if (
-      (age !== "all" && profileAge !== age) ||
-      (complexion !== "all" && profileComplexion !== complexion) ||
-      (breastSize !== "all" && profileBreastSize !== breastSize) ||
-      (backSize !== "all" && profileBackSize !== backSize) ||
-      (specialServices !== "all" && !profileSpecialServices.includes(specialServices)) ||
-      (rating !== "all" && profileRating < parseInt(rating))
-    ) {
-      profile.style.display = "none";
+    // Check if the location matches the selected location
+    if (selectedLocation === "all" || selectedLocation === location) {
+      matchCount++;
     } else {
-      profile.style.display = "block";
+      item.style.display = "none"; // Hide the grid item if the location doesn't match
+      return; // Skip to the next iteration
     }
-  }
 
-  // Reorder the displayed profiles based on the number of matches
-  var gridContainer = document.getElementsByClassName("grid-container")[0];
-  var displayedProfiles = Array.from(gridContainer.getElementsByClassName("grid-item")).filter(function (profile) {
-    return profile.style.display !== "none";
+    // Check if any of the remaining parameters match
+    if (
+      selectedAge === "all" ||
+      selectedAge === age ||
+      selectedComplexion === "all" ||
+      selectedComplexion === complexion ||
+      selectedBreastSize === "all" ||
+      selectedBreastSize === breastSize ||
+      selectedBackSize === "all" ||
+      selectedBackSize === backSize ||
+      selectedSpecialServices === "all" ||
+      selectedSpecialServices === specialServices ||
+      selectedRating === "all" ||
+      selectedRating === rating
+    ) {
+      matchCount++;
+    }
+
+    // Set the data attribute for sorting
+    item.setAttribute("data-match-count", matchCount);
   });
-  displayedProfiles.sort(function (profile1, profile2) {
-    var profile1Matches = countMatches(profile1);
-    var profile2Matches = countMatches(profile2);
-    return profile2Matches - profile1Matches;
+
+  // Sort the grid items based on the match count in descending order
+  const sortedItems = Array.from(gridItems).sort((a, b) => {
+    const matchCountA = parseInt(a.getAttribute("data-match-count"));
+    const matchCountB = parseInt(b.getAttribute("data-match-count"));
+    return matchCountB - matchCountA;
   });
-  displayedProfiles.forEach(function (profile) {
-    gridContainer.appendChild(profile);
+
+  // Reorder the grid items in the DOM
+  const gridContainer = document.querySelector(".grid-container");
+  sortedItems.forEach((item) => {
+    gridContainer.appendChild(item);
   });
 }
 
-// Function to count the number of matches for a profile
-function countMatches(profile) {
-  var parameters = profile.getElementsByClassName("parameters")[0];
-  var matches = 0;
+// Attach the searchProfiles function to the onchange event of each dropdown
+locationSelect.onchange = searchProfiles;
+ageSelect.onchange = searchProfiles;
+complexionSelect.onchange = searchProfiles;
+breastSizeSelect.onchange = searchProfiles;
+backSizeSelect.onchange = searchProfiles;
+specialServicesSelect.onchange = searchProfiles;
+ratingSelect.onchange = searchProfiles;
 
-  if (parameters.getElementsByTagName("p")[2].textContent.split(":")[1].trim() !== "31+") {
-    matches++;
-  }
-  matches += parameters.getElementsByTagName("p")[3].textContent.split(":")[1].trim() !== "Cocoa" ? 1 : 0;
-
-  return matches;
-}
-    </script>
+// Initial search when the page loads
+searchProfiles();
+</script>
+    
 </body>
 </html>
 
