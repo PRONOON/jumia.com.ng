@@ -171,31 +171,67 @@
             
             // Filter profiles based on search criteria
             const filteredProfiles = profiles.filter(function(profile) {
-                return (profile.location === location || location === '') &&
-                    (profile.age === age || age === '') &&
-                    (profile.complexion === complexion || complexion === '') &&
-                    (profile.breastSize === breastSize || breastSize === '') &&
-                    (profile.backSize === backSize || backSize === '') &&
-                    (profile.specialServices === specialServices || specialServices === '') &&
-                    (profile.rating === rating || rating === '');
+                return (profile.location === location || location === '' || location === 'Any') &&
+                    (profile.age === age || age === '' || age === 'Any') &&
+                    (profile.complexion === complexion || complexion === '' || complexion === 'Any') &&
+                    (profile.breastSize === breastSize || breastSize === '' || breastSize === 'Any') &&
+                    (profile.backSize === backSize || backSize === '' || backSize === 'Any') &&
+                    (profile.specialServices === specialServices || specialServices === '' || specialServices === 'Any') &&
+                    (profile.rating === rating || rating === '' || rating === 'Any');
             });
             
-            // Sort profiles based on location priority
+            // Sort profiles based on location priority and match count
             const sortedProfiles = filteredProfiles.sort(function(a, b) {
-                if (a.location === location && b.location !== location) {
+                const aMatchCount = getMatchCount(a, location, age, complexion, breastSize, backSize, specialServices, rating);
+                const bMatchCount = getMatchCount(b, location, age, complexion, breastSize, backSize, specialServices, rating);
+                
+                if (aMatchCount > bMatchCount) {
                     return -1;
-                } else if (a.location !== location && b.location === location) {
+                } else if (aMatchCount < bMatchCount) {
                     return 1;
                 } else {
-                    return
-
- 0;
+                    return 0;
                 }
             });
             
             // Display search results
             displaySearchResults(sortedProfiles);
         });
+        
+        // Function to count the number of matches for a profile
+        function getMatchCount(profile, location, age, complexion, breastSize, backSize, specialServices, rating) {
+            let matchCount = 0;
+            
+            if (profile.location === location && location !== '') {
+                matchCount++;
+            }
+            
+            if (profile.age === age && age !== '') {
+                matchCount++;
+            }
+            
+            if (profile.complexion === complexion && complexion !== '') {
+                matchCount++;
+            }
+            
+            if (profile.breastSize === breastSize && breastSize !== '') {
+                matchCount++;
+            }
+            
+            if (profile.backSize === backSize && backSize !== '') {
+                matchCount++;
+            }
+            
+            if (profile.specialServices === specialServices && specialServices !== '') {
+                matchCount++;
+            }
+            
+            if (profile.rating === rating && rating !== '') {
+                matchCount++;
+            }
+            
+            return matchCount;
+        }
         
         // Function to display search results
         function displaySearchResults(profiles) {
@@ -359,8 +395,6 @@
                 complexion: 'Vanilla',
                 breastSize: 'X',
                 backSize: 'XL',
-
-
                 specialServices: 'Blowjob',
                 rating: '6',
                 profileLink: 'Profile9.html'
