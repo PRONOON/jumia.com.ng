@@ -1,157 +1,132 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Profile Page</title>
-  <style>
-    /* Add your CSS styling here */
-    body {
-      font-family: Arial, sans-serif;
-    }
-    .profile-picture {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      overflow: hidden;
-    }
-    .username {
-      font-size: 24px;
-      font-weight: bold;
-    }
-    .bio-video {
-      margin-top: 10px;
-      display: flex;
-      align-items: center;
-    }
-    .thumbnail {
-      width: 100px;
-      height: 100px;
-      border: 1px solid #ccc;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
-    .video-play-button {
-      font-size: 24px;
-    }
-    .information {
-      margin-top: 20px;
-    }
-    .service-heading {
-      font-weight: bold;
-    }
-    .make-offer-button {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #007BFF;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .form-container {
-      display: none;
-      margin-top: 20px;
-    }
-    .form-heading {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-    .submit-button {
-      display: block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #007BFF;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .profile-picture {
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+        }
+        .video-thumbnail {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        .form-container {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-  <!-- Profile Picture -->
-  <div class="profile-picture">
-    <img src="PTIMG.jpeg" alt="Profile Picture">
-  </div>
-
-  <!-- Username -->
-  <div class="username">Funke</div>
-
-  <!-- Bio Video -->
-  <div class="bio-video">
-    <div class="thumbnail">
-      <span class="video-play-button">&#9658;</span>
+    <!-- Profile Picture -->
+    <img class="profile-picture" src="PTIMG.jpeg" alt="Profile Picture">
+    <!-- Username -->
+    <h1>Funke</h1>
+    
+    <!-- Video Thumbnail -->
+    <div onclick="playVideo()">
+        <img class="video-thumbnail" src="thumbnail.jpg" alt="See Bio Video">
+        <img src="play_button.png" alt="Play Video">
     </div>
-    <span>See Bio Video</span>
-  </div>
+    <video id="video" style="display:none" controls>
+        <!-- Dummy Video Source (Replace with actual video file) -->
+        <source src="dummy_video.mp4" type="video/mp4">
+    </video>
 
-  <!-- Information -->
-  <div class="information">
-    <div class="service-heading">Username:</div>
-    <div>Funke</div>
-    <div class="service-heading">Location:</div>
-    <div>Ogun</div>
-    <div class="service-heading">Age bracket:</div>
-    <div>31+</div>
-    <div class="service-heading">Complexion:</div>
-    <div>Cocoa</div>
-    <div class="service-heading">Breast Size:</div>
-    <div>M</div>
-    <div class="service-heading">Back Size:</div>
-    <div>L</div>
-    <div class="service-heading">Special services:</div>
-    <div>Anal, Blow job</div>
-    <div class="service-heading">Rating:</div>
-    <div>10</div>
-    <div class="service-heading">Service Rates:</div>
-    <div>7k-15k</div>
-    <div class="service-heading">Special service:</div>
-    <div>+15% of original fee.</div>
-    <div class="service-heading">NOTE:</div>
-    <div>Fees are nonnegotiable.</div>
-  </div>
+    <!-- Personal Information -->
+    <p>Location: Ogun</p>
+    <p>Age bracket: 31+</p>
+    <p>Complexion: Cocoa</p>
+    <p>Breast Size: M</p>
+    <p>Back Size: L</p>
+    <p>Special services: Anal, Blow job</p>
+    <p>Rating: 10</p>
+    <p>Service Rates: 7k-15k</p>
+    <p>Special service: +15% of original fee.</p>
+    <p>NOTE: Fees are non-negotiable.</p>
 
-  <!-- MAKE OFFER button -->
-  <button class="make-offer-button" onclick="showForm()">MAKE OFFER</button>
+    <!-- Make Offer Button -->
+    <button onclick="toggleForm()">MAKE OFFER</button>
 
-  <!-- Offer Form -->
-  <div class="form-container" id="offerForm">
-    <div class="form-heading">Make an Offer</div>
-    <form action="https://api.whatsapp.com/send" method="GET">
-      <input type="hidden" name="phone" value="+2349093966284">
-      <div class="form-heading">Location:</div>
-      <select name="location">
-        <option value="Abuja">Abuja</option>
-        <option value="Anambra">Anambra</option>
-        <option value="Akure">Akure</option>
-        <option value="Ibadan">Ibadan</option>
-        <option value="Lagos">Lagos</option>
-      </select>
-      <div class="form-heading">Time & Day:</div>
-      <input type="text" name="time_day" placeholder="3pm, 12th May">
-      <div class="form-heading">Special Services:</div>
-      <select name="special_services">
-        <option value="Anal">Anal</option>
-        <option value="Titty Fuck">Titty Fuck</option>
-        <!-- Add more options if needed -->
-      </select>
-      <div class="form-heading">Duration:</div>
-      <select name="duration">
-        <option value="Day">Day</option>
-        <option value="Overnight">Overnight</option>
-      </select>
-      <button type="submit" class="submit-button">Submit</button>
-    </form>
-  </div>
+    <!-- Form Container -->
+    <div class="form-container" id="formContainer">
+        <form id="offerForm" onsubmit="submitForm(event)">
+            <!-- Location Selection -->
+            <label for="location">Location:</label>
+            <select id="location" required>
+                <option value="">Select Location</option>
+                <option value="Abuja">Abuja</option>
+                <option value="Anambra">Anambra</option>
+                <option value="Akure">Akure</option>
+                <option value="Ibadan">Ibadan</option>
+                <option value="Lagos">Lagos</option>
+            </select><br><br>
 
-  <script>
-    // JavaScript to toggle the form visibility
-    function showForm() {
-      var form = document.getElementById("offerForm");
-      form.style.display = "block";
-    }
-  </script>
+            <!-- Time & Day Input -->
+            <label for="timeDay">Time &amp; Day (e.g., 3pm, 12th May):</label>
+            <input type="text" id="timeDay" required><br><br>
+
+            <!-- Special Services Selection -->
+            <label for="specialServices">Special Services:</label>
+            <select id="specialServices" required>
+                <option value="">Select Special Service</option>
+                <option value="Anal">Anal</option>
+                <option value="Titty Fuck">Titty Fuck</option>
+            </select><br><br>
+
+            <!-- Duration Selection -->
+            <label for="duration">Duration:</label>
+            <select id="duration" required>
+                <option value="">Select Duration</option>
+                <option value="Day">Day</option>
+                <option value="Overnight">Overnight</option>
+            </select><br><br>
+
+            <!-- Submit Button -->
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        function playVideo() {
+            var video = document.getElementById('video');
+            video.style.display = 'block';
+            video.play();
+        }
+
+        function toggleForm() {
+            var formContainer = document.getElementById('formContainer');
+            formContainer.style.display = (formContainer.style.display === 'none') ? 'block' : 'none';
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+
+            var location = document.getElementById('location').value;
+            var timeDay = document.getElementById('timeDay').value;
+            var specialServices = document.getElementById('specialServices').value;
+            var duration = document.getElementById('duration').value;
+
+            var formData = {
+                location: location,
+                timeDay: timeDay,
+                specialServices: specialServices,
+                duration: duration,
+            };
+
+            // Replace the link with your WhatsApp number
+            var url = 'https://api.whatsapp.com/send/?phone=+2349093966284&text=' + encodeURIComponent(JSON.stringify(formData));
+            window.open(url, '_blank');
+        }
+    </script>
 </body>
 </html>
