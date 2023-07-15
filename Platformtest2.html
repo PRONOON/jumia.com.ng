@@ -23,8 +23,6 @@
         }
         .form-container {
             display: none;
-        }
-        .form-info {
             text-align: left;
         }
     </style>
@@ -34,7 +32,7 @@
     <img class="profile-picture" src="PTIMG.jpeg" alt="Profile Picture">
     <!-- Username -->
     <h1>Funke</h1>
-
+    
     <!-- Video Thumbnail -->
     <div onclick="playVideo()">
         <img class="video-thumbnail" src="thumbnail.jpg" alt="See Bio Video">
@@ -46,18 +44,16 @@
     </video>
 
     <!-- Personal Information -->
-    <div class="form-info">
-        <p><strong>Location:</strong> Ogun</p>
-        <p><strong>Age bracket:</strong> 31+</p>
-        <p><strong>Complexion:</strong> Cocoa</p>
-        <p><strong>Breast Size:</strong> M</p>
-        <p><strong>Back Size:</strong> L</p>
-        <p><strong>Special services:</strong> Anal, Blow job</p>
-        <p><strong>Rating:</strong> 10</p>
-        <p><strong>Service Rates:</strong> 7k-15k</p>
-        <p><strong>Special service:</strong> +15% of original fee.</p>
-        <p><strong>NOTE:</strong> Fees are non-negotiable.</p>
-    </div>
+    <p>Location: Ogun</p>
+    <p>Age bracket: 31+</p>
+    <p>Complexion: Cocoa</p>
+    <p>Breast Size: M</p>
+    <p>Back Size: L</p>
+    <p>Special services: Anal, Blowjob</p>
+    <p>Rating: 10</p>
+    <p>Service Rates: 7k-15k</p>
+    <p>Special service: +15% of the original fee.</p>
+    <p>NOTE: Fees are non-negotiable.</p>
 
     <!-- Make Offer Button -->
     <button onclick="toggleForm()">MAKE OFFER</button>
@@ -66,7 +62,7 @@
     <div class="form-container" id="formContainer">
         <form id="offerForm" onsubmit="submitForm(event)">
             <!-- Location Selection -->
-            <label for="location">LOCATION:</label>
+            <label for="location">Location:</label>
             <select id="location" required>
                 <option value="">Select Location</option>
                 <option value="Abuja">Abuja</option>
@@ -76,12 +72,16 @@
                 <option value="Lagos">Lagos</option>
             </select><br><br>
 
-            <!-- Time & Date Input -->
-            <label for="timeDate">TIME &amp; DATE:</label>
-            <input type="text" id="timeDate" placeholder="e.g., 3pm, 12th May" required><br><br>
+            <!-- Time Selection -->
+            <label for="time">Time:</label>
+            <input type="time" id="time" required><br><br>
+
+            <!-- Date Selection -->
+            <label for="date">Date:</label>
+            <input type="date" id="date" required><br><br>
 
             <!-- Special Services Selection -->
-            <label for="specialServices">SPECIAL SERVICES:</label>
+            <label for="specialServices">Special Services:</label>
             <select id="specialServices" required>
                 <option value="">Select Special Service</option>
                 <option value="Anal">Anal</option>
@@ -90,7 +90,7 @@
             </select><br><br>
 
             <!-- Duration Selection -->
-            <label for="duration">DURATION:</label>
+            <label for="duration">Duration:</label>
             <select id="duration" required>
                 <option value="">Select Duration</option>
                 <option value="Day">Day</option>
@@ -114,30 +114,46 @@
             formContainer.style.display = (formContainer.style.display === 'none') ? 'block' : 'none';
         }
 
+        function formatTimeTo12HrFormat(time) {
+            // Convert the time to 12-hour format with AM/PM
+            var [hours, minutes] = time.split(":");
+            var period = parseInt(hours) >= 12 ? "PM" : "AM";
+            hours = (hours % 12) || 12;
+            return `${hours}:${minutes} ${period}`;
+        }
+
         function submitForm(event) {
             event.preventDefault();
 
             var location = document.getElementById('location').value;
-            var timeDate = document.getElementById('timeDate').value;
+            var time = document.getElementById('time').value;
+            var date = document.getElementById('date').value;
             var specialServices = document.getElementById('specialServices').value;
             var duration = document.getElementById('duration').value;
 
+            // Format time to 12-hour format with AM/PM
+            time = formatTimeTo12HrFormat(time);
+
             var formData = {
                 location: location,
-                timeDate: timeDate,
+                time: time,
+                date: date,
                 specialServices: specialServices,
                 duration: duration,
             };
 
-            var message =
-                `LOCATION- ${formData.location}\n` +
-                `TIME & DATE- ${formData.timeDate}\n` +
-                `SPECIAL SERVICES- ${formData.specialServices}\n` +
-                `DURATION- ${formData.duration}`;
+            // Create the message to be sent to WhatsApp
+            var message = "LOCATION- " + location + "\n\n";
+            message += "TIME & DATE- " + time + " " + date + "\n\n";
+            message += "SPECIAL SERVICES- " + specialServices + "\n\n";
+            message += "DURATION- " + duration;
+
+            // Encode the message to be sent through the WhatsApp link
+            var encodedMessage = encodeURIComponent(message);
 
             // Replace the link with your WhatsApp number
-            var url = 'https://api.whatsapp.com/send/?phone=+2349093966284&text=' + encodeURIComponent(message);
-            window.open(url, '_blank');
+            var url = "https://api.whatsapp.com/send/?phone=+2349093966284&text=" + encodedMessage;
+            window.open(url, "_blank");
         }
     </script>
 </body>
