@@ -13,67 +13,57 @@
             border: 1px solid #ccc;
             padding: 10px;
             margin: 10px;
+            width: 300px;
         }
     </style>
 </head>
 <body>
     <h1>Offer Boxes</h1>
 
-    <div id="offerBoxesContainer"></div>
+    <div id="offerBoxContainer"></div>
 
     <script>
-        // Fetch the data from localStorage and display it in the offer boxes
-        function fetchAndDisplayData() {
-            var offerBoxesContainer = document.getElementById("offerBoxesContainer");
-            offerBoxesContainer.innerHTML = ""; // Clear existing data
+        // Function to add a new offer box
+        function addOfferBox(data) {
+            var container = document.getElementById('offerBoxContainer');
+            var box = document.createElement('div');
+            box.classList.add('offer-box');
+            box.textContent = data;
+            container.appendChild(box);
+        }
 
-            for (var i = 0; i < localStorage.length; i++) {
-                var key = localStorage.key(i);
-                if (key.startsWith("offer_")) {
-                    var formData = JSON.parse(localStorage.getItem(key));
-                    var offerBoxContent = formatFormData(formData);
-                    var offerBoxHTML = `<div class="offer-box">${offerBoxContent}<button class="accept-offer-btn">Accept Offer</button></div>`;
-                    offerBoxesContainer.innerHTML += offerBoxHTML;
-                }
+        // Function to load offer data from Local Storage and display it in offer boxes
+        function loadOfferData() {
+            var data = localStorage.getItem('formData');
+            if (data) {
+                var formData = JSON.parse(data);
+
+                // Format the data in the desired format
+                var message = "LOCATION- " + formData.location + "\n\n";
+                message += "TIME & DATE- " + formData.time + " " + formData.date + "\n\n";
+                message += "SPECIAL SERVICES- " + formData.specialServices + "\n\n";
+                message += "DURATION- " + formData.duration;
+
+                addOfferBox(message);
             }
         }
 
-        function formatFormData(formData) {
-            // Format the form data into the desired format with line breaks
-            var content = "LOCATION- " + formData.location + "\n\n";
-            content += "TIME & DATE- " + formData.time + " " + formData.date + "\n\n";
-            content += "SPECIAL SERVICES- " + formData.specialServices + "\n\n";
-            content += "DURATION- " + formData.duration + "\n\n";
-            content += "PASSWORD- *****\n\n";
-            content += "PHONE NUMBER- " + formData.phone + "\n\n";
-            return content;
-        }
-
-        // Trigger the data fetching when the page loads
-        window.onload = function() {
-            fetchAndDisplayData();
-        };
-
-        // Make the data downloadable as a JSON file
-        function downloadData() {
-            var offerData = [];
-
-            for (var i = 0; i < localStorage.length; i++) {
-                var key = localStorage.key(i);
-                if (key.startsWith("offer_")) {
-                    var formData = JSON.parse(localStorage.getItem(key));
-                    offerData.push(formData);
-                }
+        // Function to allow third-party devices to download offer data
+        function downloadOfferData() {
+            var data = localStorage.getItem('formData');
+            if (data) {
+                var blob = new Blob([data], { type: 'application/json' });
+                var url = URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.href = url;
+                a.download = 'offer_data.json';
+                a.click();
+                URL.revokeObjectURL(url);
             }
-
-            var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(offerData));
-            var downloadAnchor = document.createElement("a");
-            downloadAnchor.setAttribute("href", dataStr);
-            downloadAnchor.setAttribute("download", "offer_data.json");
-            downloadAnchor.click();
         }
+
+        // Load offer data on page load
+        loadOfferData();
     </script>
-    <br>
-    <button onclick="downloadData()">Download Offers</button>
 </body>
 </html>
