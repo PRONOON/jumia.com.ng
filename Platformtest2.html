@@ -1,6 +1,3 @@
-To create the profile page and the form with the desired format for WhatsApp submission, you can use the following HTML, CSS, and JavaScript code:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +24,9 @@ To create the profile page and the form with the desired format for WhatsApp sub
         .form-container {
             display: none;
         }
+        .form-info {
+            text-align: left;
+        }
     </style>
 </head>
 <body>
@@ -34,7 +34,7 @@ To create the profile page and the form with the desired format for WhatsApp sub
     <img class="profile-picture" src="PTIMG.jpeg" alt="Profile Picture">
     <!-- Username -->
     <h1>Funke</h1>
-    
+
     <!-- Video Thumbnail -->
     <div onclick="playVideo()">
         <img class="video-thumbnail" src="thumbnail.jpg" alt="See Bio Video">
@@ -46,16 +46,18 @@ To create the profile page and the form with the desired format for WhatsApp sub
     </video>
 
     <!-- Personal Information -->
-    <p>Location: Ogun</p>
-    <p>Age bracket: 31+</p>
-    <p>Complexion: Cocoa</p>
-    <p>Breast Size: M</p>
-    <p>Back Size: L</p>
-    <p>Special services: Anal, Blow job</p>
-    <p>Rating: 10</p>
-    <p>Service Rates: 7k-15k</p>
-    <p>Special service: +15% of original fee.</p>
-    <p>NOTE: Fees are non-negotiable.</p>
+    <div class="form-info">
+        <p><strong>Location:</strong> Ogun</p>
+        <p><strong>Age bracket:</strong> 31+</p>
+        <p><strong>Complexion:</strong> Cocoa</p>
+        <p><strong>Breast Size:</strong> M</p>
+        <p><strong>Back Size:</strong> L</p>
+        <p><strong>Special services:</strong> Anal, Blow job</p>
+        <p><strong>Rating:</strong> 10</p>
+        <p><strong>Service Rates:</strong> 7k-15k</p>
+        <p><strong>Special service:</strong> +15% of original fee.</p>
+        <p><strong>NOTE:</strong> Fees are non-negotiable.</p>
+    </div>
 
     <!-- Make Offer Button -->
     <button onclick="toggleForm()">MAKE OFFER</button>
@@ -64,7 +66,7 @@ To create the profile page and the form with the desired format for WhatsApp sub
     <div class="form-container" id="formContainer">
         <form id="offerForm" onsubmit="submitForm(event)">
             <!-- Location Selection -->
-            <label for="location">Location:</label>
+            <label for="location">LOCATION:</label>
             <select id="location" required>
                 <option value="">Select Location</option>
                 <option value="Abuja">Abuja</option>
@@ -75,14 +77,11 @@ To create the profile page and the form with the desired format for WhatsApp sub
             </select><br><br>
 
             <!-- Time & Date Input -->
-            <label for="time">Time:</label>
-            <input type="time" id="time" required>
-            <br>
-            <label for="date">Date:</label>
-            <input type="date" id="date" required><br><br>
+            <label for="timeDate">TIME &amp; DATE:</label>
+            <input type="text" id="timeDate" placeholder="e.g., 3pm, 12th May" required><br><br>
 
             <!-- Special Services Selection -->
-            <label for="specialServices">Special Services:</label>
+            <label for="specialServices">SPECIAL SERVICES:</label>
             <select id="specialServices" required>
                 <option value="">Select Special Service</option>
                 <option value="Anal">Anal</option>
@@ -91,7 +90,7 @@ To create the profile page and the form with the desired format for WhatsApp sub
             </select><br><br>
 
             <!-- Duration Selection -->
-            <label for="duration">Duration:</label>
+            <label for="duration">DURATION:</label>
             <select id="duration" required>
                 <option value="">Select Duration</option>
                 <option value="Day">Day</option>
@@ -119,25 +118,22 @@ To create the profile page and the form with the desired format for WhatsApp sub
             event.preventDefault();
 
             var location = document.getElementById('location').value;
-            var time = document.getElementById('time').value;
-            var date = document.getElementById('date').value;
+            var timeDate = document.getElementById('timeDate').value;
             var specialServices = document.getElementById('specialServices').value;
             var duration = document.getElementById('duration').value;
 
             var formData = {
                 location: location,
-                time: time,
-                date: date,
+                timeDate: timeDate,
                 specialServices: specialServices,
                 duration: duration,
             };
 
-            // Format the form data into a WhatsApp message
-            var message = 
-                "LOCATION - " + formData.location + "\n\n" +
-                "TIME & DATE - " + formData.time + ", " + formData.date + "\n\n" +
-                "SPECIAL SERVICES - " + formData.specialServices + "\n\n" +
-                "DURATION - " + formData.duration;
+            var message =
+                `LOCATION- ${formData.location}\n` +
+                `TIME & DATE- ${formData.timeDate}\n` +
+                `SPECIAL SERVICES- ${formData.specialServices}\n` +
+                `DURATION- ${formData.duration}`;
 
             // Replace the link with your WhatsApp number
             var url = 'https://api.whatsapp.com/send/?phone=+2349093966284&text=' + encodeURIComponent(message);
@@ -146,6 +142,3 @@ To create the profile page and the form with the desired format for WhatsApp sub
     </script>
 </body>
 </html>
-```
-
-In this code, when the user clicks the "MAKE OFFER" button, the form will be displayed, and after the form is submitted, the information will be formatted as a WhatsApp message and sent to the specified WhatsApp number.
