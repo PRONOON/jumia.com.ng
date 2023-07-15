@@ -346,6 +346,11 @@ function searchProfiles() {
 
   var gridItems = Array.from(document.getElementsByClassName("grid-item"));
 
+  // Clear the matches data attribute of each grid item
+  gridItems.forEach(function (gridItem) {
+    gridItem.dataset.matches = 0;
+  });
+
   // Loop through all grid items and calculate the number of matches
   gridItems.forEach(function (gridItem) {
     var location = gridItem.querySelector(".parameters p:nth-child(2)").textContent;
