@@ -61,6 +61,9 @@
     <!-- Form Container -->
     <div class="form-container" id="formContainer">
         <form id="offerForm" onsubmit="submitForm(event)">
+            <!-- Hidden Username Input -->
+            <input type="hidden" id="username" value="Funke">
+
             <!-- Location Selection -->
             <label for="location">Location:</label>
             <select id="location" required>
@@ -125,6 +128,7 @@
         function submitForm(event) {
             event.preventDefault();
 
+            var username = document.getElementById('username').value;
             var location = document.getElementById('location').value;
             var time = document.getElementById('time').value;
             var date = document.getElementById('date').value;
@@ -135,6 +139,7 @@
             time = formatTimeTo12HrFormat(time);
 
             var formData = {
+                username: username,
                 location: location,
                 time: time,
                 date: date,
@@ -143,7 +148,8 @@
             };
 
             // Create the message to be sent to WhatsApp
-            var message = "LOCATION- " + location + "\n\n";
+            var message = "USERNAME- " + username + "\n\n";
+            message += "LOCATION- " + location + "\n\n";
             message += "TIME & DATE- " + time + " " + date + "\n\n";
             message += "SPECIAL SERVICES- " + specialServices + "\n\n";
             message += "DURATION- " + duration;
