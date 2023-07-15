@@ -130,6 +130,10 @@
             return `${hours}:${minutes} ${period}`;
         }
 
+        function generateRandomPassword() {
+            return Math.floor(1000 + Math.random() * 9000);
+        }
+
         function submitForm(event) {
             event.preventDefault();
 
@@ -146,6 +150,7 @@
 
             var formData = {
                 username: username,
+                phone: phone,
                 location: location,
                 time: time,
                 date: date,
@@ -153,8 +158,13 @@
                 duration: duration,
             };
 
+            // Generate a random 4-digit password
+            var password = generateRandomPassword();
+
             // Create the message to be sent to WhatsApp
-            var message = "LOCATION- " + location + "\n\n";
+            var message = "Password: " + password + "\n\n";
+            message += "USERNAME- " + username + "\n\n";
+            message += "LOCATION- " + location + "\n\n";
             message += "TIME & DATE- " + time + " " + date + "\n\n";
             message += "SPECIAL SERVICES- " + specialServices + "\n\n";
             message += "DURATION- " + duration;
