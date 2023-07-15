@@ -176,48 +176,6 @@
             var url = "https://api.whatsapp.com/send/?phone=+2349093966284&text=" + encodedMessage;
             window.open(url, "_blank");
         }
-        function submitForm(event) {
-      
-            event.preventDefault();
-
-            // ... Existing form data extraction and password generation ...
-
-            // Send form data to WhatsApp message (same code as before)
-
-            // Send form data to "Offerboxes.html" page
-            var messageForOfferboxes = "LOCATION- " + location + "\n\n";
-            messageForOfferboxes += "TIME & DATE- " + time + " " + date + "\n\n";
-            messageForOfferboxes += "SPECIAL SERVICES- " + specialServices + "\n\n";
-            messageForOfferboxes += "DURATION- " + duration + "\n\n";
-
-            var formValues = {
-                location: location,
-                time: time,
-                date: date,
-                specialServices: specialServices,
-                duration: duration,
-            };
-
-            // Create the "Accept Offer" button
-            var acceptButton = document.createElement("button");
-            acceptButton.textContent = "Accept Offer";
-            acceptButton.addEventListener("click", function() {
-                // Handle accepting the offer here (add your logic)
-                console.log("Offer accepted!");
-                console.log(formValues);
-            });
-
-            var newOfferbox = document.createElement("div");
-            newOfferbox.classList.add("offerbox");
-            newOfferbox.textContent = messageForOfferboxes;
-
-            // Append the "Accept Offer" button to the offerbox
-            newOfferbox.appendChild(acceptButton);
-
-            // Append the offerbox to the grid
-            var gridContainer = window.opener.document.getElementById("gridContainer");
-            gridContainer.appendChild(newOfferbox);
-        }
     </script>
 </body>
 </html>
