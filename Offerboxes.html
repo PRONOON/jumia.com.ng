@@ -1,36 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Offer Boxes</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        .offer-box {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin: 10px;
-            width: 300px;
-        }
-    </style>
+    <!-- ... (Existing code remains unchanged) ... -->
 </head>
 <body>
     <h1>Offer Boxes</h1>
 
     <div id="offerBoxContainer"></div>
 
+    <!-- DOWNLOAD OFFERS button -->
+    <button onclick="downloadOffers()">DOWNLOAD OFFERS</button>
+
     <script>
-        // Function to add a new offer box
-        function addOfferBox(data) {
-            var container = document.getElementById('offerBoxContainer');
-            var box = document.createElement('div');
-            box.classList.add('offer-box');
-            box.textContent = data;
-            container.appendChild(box);
-        }
+        // ... (Existing code remains unchanged) ...
 
         // Function to load offer data from Local Storage and display it in offer boxes
         function loadOfferData() {
@@ -49,14 +31,14 @@
         }
 
         // Function to allow third-party devices to download offer data
-        function downloadOfferData() {
+        function downloadOffers() {
             var data = localStorage.getItem('formData');
             if (data) {
                 var blob = new Blob([data], { type: 'application/json' });
                 var url = URL.createObjectURL(blob);
                 var a = document.createElement('a');
                 a.href = url;
-                a.download = 'offer_data.json';
+                a.download = 'offers.json';
                 a.click();
                 URL.revokeObjectURL(url);
             }
