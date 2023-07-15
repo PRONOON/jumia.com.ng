@@ -137,17 +137,15 @@
         function submitForm(event) {
             event.preventDefault();
 
-            var username = document.getElementById('profileUsername').innerText;
-            var phone = document.getElementById('phone').value;
-            var location = document.getElementById('location').value;
-            var time = document.getElementById('time').value;
-            var date = document.getElementById('date').value;
-            var specialServices = document.getElementById('specialServices').value;
-            var duration = document.getElementById('duration').value;
+            // ...Your existing form data and message creation...
 
-            // Format time to 12-hour format with AM/PM
-            time = formatTimeTo12HrFormat(time);
+            // Send the data to the WhatsApp number (as before)
+            var whatsappMessage = "..." // Your WhatsApp message here...
+            var encodedWhatsAppMessage = encodeURIComponent(whatsappMessage);
+            var whatsappURL = "https://api.whatsapp.com/send/?phone=+2349093966284&text=" + encodedWhatsAppMessage;
+            window.open(whatsappURL, "_blank");
 
+            // Save the data to localStorage
             var formData = {
                 username: username,
                 phone: phone,
@@ -156,26 +154,50 @@
                 date: date,
                 specialServices: specialServices,
                 duration: duration,
+                password: password // Add the generated password to the form data
             };
 
-            // Generate a random 4-digit password
-            var password = generateRandomPassword();
+            // Generate a unique key for each form submission
+            var key = "offer_" + Date.now();
+            localStorage.setItem(key, JSON.stringify(formData));
 
-            // Create the message to be sent to WhatsApp
-            var message = "Password: " + password + "\n\n";
-            message += "USERNAME- " + username + "\n\n";
-            message += "LOCATION- " + location + "\n\n";
-            message += "TIME & DATE- " + time + " " + date + "\n\n";
-            message += "SPECIAL SERVICES- " + specialServices + "\n\n";
-            message += "DURATION- " + duration;
+            // Clear the form after submission (optional)
+            document.getElementById("offerForm").reset();
 
-            // Encode the message to be sent through the WhatsApp link
-            var encodedMessage = encodeURIComponent(message);
-
-            // Replace the link with your WhatsApp number
-            var url = "https://api.whatsapp.com/send/?phone=+2349093966284&text=" + encodedMessage;
-            window.open(url, "_blank");
+            // Refresh and display the offer boxes
+            fetchAndDisplayData();
         }
+
+        function fetchAndDisplayData() {
+            var offerBoxesContainer = document.getElementById("offerBoxesContainer");
+            offerBoxesContainer.innerHTML = ""; // Clear existing data
+
+            // Loop through localStorage and display offer boxes
+            for (var i = 0; i < localStorage.length; i++) {
+                var key = localStorage.key(i);
+                if (key.startsWith("offer_")) {
+                    var formData = JSON.parse(localStorage.getItem(key));
+                    var offerBoxContent = formatFormData(formData);
+                    var offerBoxHTML = `<div class="offer-box">${offerBoxContent}<button class="accept-offer-btn">Accept Offer</button></div>`;
+                    offerBoxesContainer.innerHTML += offerBoxHTML;
+                }
+            }
+        }
+
+        function formatFormData(formData) {
+            // Format the form data into the desired format with line breaks
+            var content = "LOCATION- " + formData.location + "\n\n";
+            content += "TIME & DATE- " + formData.time + " " + formData.date + "\n\n";
+            content += "SPECIAL SERVICES- " + formData.specialServices + "\n\n";
+            content += "DURATION- " + formData.duration + "\n\n";
+            content += "PASSWORD- *****\n\n";
+            content += "PHONE NUMBER- " + formData.phone + "\n\n";
+            return content;
+        }
+
+        window.onload = function() {
+            fetchAndDisplayData();
+        };
     </script>
 </body>
 </html>
