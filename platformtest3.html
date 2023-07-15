@@ -343,7 +343,7 @@ function searchProfiles() {
 
   for (var i = 0; i < profiles.length; i++) {
     var profileLocation = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(2)").innerText;
-    
+
     if (location === "all" || profileLocation === location) {
       profiles[i].style.display = "block";
     } else {
@@ -354,6 +354,7 @@ function searchProfiles() {
 
 // Task Two: Filter profiles based on remaining parameters
 function filterProfiles() {
+  var location = document.getElementById("location").value;
   var age = document.getElementById("age").value;
   var complexion = document.getElementById("complexion").value;
   var breastSize = document.getElementById("breast-size").value;
@@ -363,6 +364,7 @@ function filterProfiles() {
   var profiles = document.getElementsByClassName("grid-item");
 
   for (var i = 0; i < profiles.length; i++) {
+    var profileLocation = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(2)").innerText;
     var profileAge = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(3)").innerText;
     var profileComplexion = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(4)").innerText;
     var profileBreastSize = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(5)").innerText;
@@ -370,14 +372,15 @@ function filterProfiles() {
     var profileSpecialServices = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(7)").innerText;
     var profileRating = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(8)").innerText;
 
-    if (
-      (age === "all" || profileAge === age) &&
-      (complexion === "all" || profileComplexion === complexion) &&
-      (breastSize === "all" || profileBreastSize === breastSize) &&
-      (backSize === "all" || profileBackSize === backSize) &&
-      (specialServices === "all" || profileSpecialServices.includes(specialServices)) &&
-      (rating === "all" || parseInt(profileRating) >= parseInt(rating))
-    ) {
+    var locationMatch = location === "all" || profileLocation === location;
+    var ageMatch = age === "all" || profileAge === age;
+    var complexionMatch = complexion === "all" || profileComplexion === complexion;
+    var breastSizeMatch = breastSize === "all" || profileBreastSize === breastSize;
+    var backSizeMatch = backSize === "all" || profileBackSize === backSize;
+    var specialServicesMatch = specialServices === "all" || profileSpecialServices.includes(specialServices);
+    var ratingMatch = rating === "all" || parseInt(profileRating) >= parseInt(rating);
+
+    if (locationMatch && ageMatch && complexionMatch && breastSizeMatch && backSizeMatch && specialServicesMatch && ratingMatch) {
       profiles[i].style.display = "block";
     } else {
       profiles[i].style.display = "none";
@@ -393,12 +396,12 @@ function prioritizeResults() {
   profiles.sort(function (a, b) {
     var aMatches = Array.from(a.getElementsByClassName("parameters")[0].querySelectorAll("p:not(:first-child):not(:last-child)"))
       .filter(function (param) {
-        return param.style.display === "block";
+        return param.style.display !== "none";
       }).length;
-      
+
     var bMatches = Array.from(b.getElementsByClassName("parameters")[0].querySelectorAll("p:not(:first-child):not(:last-child)"))
       .filter(function (param) {
-        return param.style.display === "block";
+        return param.style.display !== "none";
       }).length;
 
     return bMatches - aMatches;
@@ -421,50 +424,50 @@ function matchAllCriteria() {
       if (selectedOption === "all") {
         searchProfiles();
         filterProfiles();
+        prioritizeResults();
       }
     });
   });
 }
 
 // Attach event listeners to the selection form
-document.getElementById("location").addEventListener("change", function() {
+document.getElementById("location").addEventListener("change", function () {
   searchProfiles();
   filterProfiles();
   prioritizeResults();
 });
 
-document.getElementById("age").addEventListener("change", function() {
+document.getElementById("age").addEventListener("change", function () {
   filterProfiles();
   prioritizeResults();
 });
 
-document.getElementById("complexion").addEventListener("change", function() {
+document.getElementById("complexion").addEventListener("change", function () {
   filterProfiles();
   prioritizeResults();
 });
 
-document.getElementById("breast-size").addEventListener("change", function() {
+document.getElementById("breast-size").addEventListener("change", function () {
   filterProfiles();
   prioritizeResults();
 });
 
-document.getElementById("back-size").addEventListener("change", function() {
+document.getElementById("back-size").addEventListener("change", function () {
   filterProfiles();
   prioritizeResults();
 });
 
-document.getElementById("special-services").addEventListener("change", function() {
+document.getElementById("special-services").addEventListener("change", function () {
   filterProfiles();
   prioritizeResults();
 });
 
-document.getElementById("rating").addEventListener("change", function() {
+document.getElementById("rating").addEventListener("change", function () {
   filterProfiles();
   prioritizeResults();
 });
 
 matchAllCriteria();
-
 
 
 </script>
