@@ -173,6 +173,17 @@
             var formDataJSON = JSON.stringify(formData);
             localStorage.setItem('formData', formDataJSON);
 
+            // Save raw form data as a JSON file
+            var blob = new Blob([formDataJSON], { type: 'application/json' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'form_data.json';
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            a.click();
+            URL.revokeObjectURL(url);
+
             // Send the WhatsApp message
             sendWhatsAppMessage(message);
         }
