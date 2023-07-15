@@ -2,202 +2,155 @@
 <html>
 <head>
   <title>Profile Page</title>
-
-    <style>
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  margin: 0;
-  padding: 0;
-}
-
-.profile {
-  max-width: 400px;
-  margin: 30px auto;
-  padding: 20px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-}
-
-.profile-picture img {
-  display: block;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  margin: 0 auto;
-}
-
-.username {
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-  margin: 10px 0;
-}
-
-.video {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px 0;
-}
-
-.video img {
-  width: 200px;
-  height: 120px;
-  border-radius: 5px;
-}
-
-.play-button {
-  display: block;
-  margin-top: 10px;
-  background-color: #007bff;
-  color: #ffffff;
-  padding: 8px 20px;
-  border-radius: 20px;
-  text-align: center;
-  text-decoration: none;
-}
-
-.information {
-  margin: 10px 0;
-  text-align: center;
-}
-
-.information li {
-  list-style-type: none;
-}
-
-.make-offer {
-  text-align: center;
-}
-
-.make-offer button {
-  background-color: #4CAF50;
-  color: #ffffff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.form-popup {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.form-popup form {
-  background-color: #ffffff;
-  margin: 10% auto;
-  padding: 20px;
-  max-width: 300px;
-  border-radius: 5px;
-}
-
-.form-popup label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.form-popup select,
-.form-popup input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.form-popup input[type="submit"],
-.form-popup button {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  color: #ffffff;
-  cursor: pointer;
-}
-
-.form-popup input[type="submit"] {
-  background-color: #4CAF50;
-}
-
-.form-popup button {
-  background-color: #f44336;
-}
-
-        
-    </style>
+  <style>
+    /* Add your CSS styling here */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .profile-picture {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    .username {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .bio-video {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+    }
+    .thumbnail {
+      width: 100px;
+      height: 100px;
+      border: 1px solid #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    .video-play-button {
+      font-size: 24px;
+    }
+    .information {
+      margin-top: 20px;
+    }
+    .service-heading {
+      font-weight: bold;
+    }
+    .make-offer-button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .form-container {
+      display: none;
+      margin-top: 20px;
+    }
+    .form-heading {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .submit-button {
+      display: block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <div class="profile">
-    <div class="profile-picture">
-      <img src="PTIMG.jpeg" alt="Profile Picture">
-    </div>
-    <div class="username">Funke</div>
-    <div class="video">
-      <img src="thumbnail.jpg" alt="See Bio Video">
-      <a href="#" class="play-button">PLAY</a>
-      <!-- Replace 'thumbnail.jpg' with the actual thumbnail image for the video -->
-    </div>
-    <div class="information">
-      <ul>
-        <li><strong>Location:</strong> Ogun</li>
-        <li><strong>Age bracket:</strong> 31+</li>
-        <li><strong>Complexion:</strong> Cocoa</li>
-        <li><strong>Breast Size:</strong> M</li>
-        <li><strong>Back Size:</strong> L</li>
-        <li><strong>Special services:</strong> Anal, Blow job</li>
-        <li><strong>Rating:</strong> 10</li>
-        <li><strong>Service Rates:</strong> 7k-15k</li>
-        <li><strong>Special service:</strong> +15% of original fee.</li>
-        <li><strong>NOTE:</strong> Fees are nonnegotiable.</li>
-      </ul>
-    </div>
-    <div class="make-offer">
-      <button onclick="openForm()">MAKE OFFER</button>
-    </div>
+  <!-- Profile Picture -->
+  <div class="profile-picture">
+    <img src="PTIMG.jpeg" alt="Profile Picture">
   </div>
 
-  <div class="form-popup" id="offerForm">
-    <form action="https://api.whatsapp.com/send" method="GET" target="_blank">
-      <input type="hidden" name="phone" value="wa.me/+2349093966284">
-      <label for="location">Location:</label>
-      <select name="text">
+  <!-- Username -->
+  <div class="username">Funke</div>
+
+  <!-- Bio Video -->
+  <div class="bio-video">
+    <div class="thumbnail">
+      <span class="video-play-button">&#9658;</span>
+    </div>
+    <span>See Bio Video</span>
+  </div>
+
+  <!-- Information -->
+  <div class="information">
+    <div class="service-heading">Username:</div>
+    <div>Funke</div>
+    <div class="service-heading">Location:</div>
+    <div>Ogun</div>
+    <div class="service-heading">Age bracket:</div>
+    <div>31+</div>
+    <div class="service-heading">Complexion:</div>
+    <div>Cocoa</div>
+    <div class="service-heading">Breast Size:</div>
+    <div>M</div>
+    <div class="service-heading">Back Size:</div>
+    <div>L</div>
+    <div class="service-heading">Special services:</div>
+    <div>Anal, Blow job</div>
+    <div class="service-heading">Rating:</div>
+    <div>10</div>
+    <div class="service-heading">Service Rates:</div>
+    <div>7k-15k</div>
+    <div class="service-heading">Special service:</div>
+    <div>+15% of original fee.</div>
+    <div class="service-heading">NOTE:</div>
+    <div>Fees are nonnegotiable.</div>
+  </div>
+
+  <!-- MAKE OFFER button -->
+  <button class="make-offer-button" onclick="showForm()">MAKE OFFER</button>
+
+  <!-- Offer Form -->
+  <div class="form-container" id="offerForm">
+    <div class="form-heading">Make an Offer</div>
+    <form action="https://api.whatsapp.com/send" method="GET">
+      <input type="hidden" name="phone" value="+2349093966284">
+      <div class="form-heading">Location:</div>
+      <select name="location">
         <option value="Abuja">Abuja</option>
         <option value="Anambra">Anambra</option>
         <option value="Akure">Akure</option>
         <option value="Ibadan">Ibadan</option>
         <option value="Lagos">Lagos</option>
       </select>
-      <br>
-      <label for="time-day">Time & Day:</label>
-      <input type="text" name="text">
-      <br>
-      <label for="special-services">Special Services:</label>
-      <input type="text" name="text">
-      <br>
-      <label for="duration">Duration:</label>
-      <input type="text" name="text">
-      <br>
-      <input type="submit" value="Submit">
-      <button type="button" onclick="closeForm()">Close</button>
+      <div class="form-heading">Time & Day:</div>
+      <input type="text" name="time_day" placeholder="3pm, 12th May">
+      <div class="form-heading">Special Services:</div>
+      <select name="special_services">
+        <option value="Anal">Anal</option>
+        <option value="Titty Fuck">Titty Fuck</option>
+        <!-- Add more options if needed -->
+      </select>
+      <div class="form-heading">Duration:</div>
+      <select name="duration">
+        <option value="Day">Day</option>
+        <option value="Overnight">Overnight</option>
+      </select>
+      <button type="submit" class="submit-button">Submit</button>
     </form>
   </div>
 
   <script>
-    function openForm() {
-      document.getElementById("offerForm").style.display = "block";
-    }
-
-    function closeForm() {
-      document.getElementById("offerForm").style.display = "none";
+    // JavaScript to toggle the form visibility
+    function showForm() {
+      var form = document.getElementById("offerForm");
+      form.style.display = "block";
     }
   </script>
 </body>
