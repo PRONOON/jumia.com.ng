@@ -339,11 +339,11 @@
 function searchProfiles() {
   var location = document.getElementById("location").value;
   var profiles = document.getElementsByClassName("grid-item");
-  
+
   for (var i = 0; i < profiles.length; i++) {
     var profile = profiles[i];
     var profileLocation = profile.getElementsByClassName("parameters")[0].getElementsByTagName("p")[1].textContent.split(": ")[1];
-    
+
     if (location === "all" || profileLocation === location) {
       profile.style.display = "block";
     } else {
@@ -371,7 +371,7 @@ function filterProfiles() {
         var profileValue = profile.getElementsByClassName("parameters")[0].getElementsByTagName("p");
         for (var k = 0; k < profileValue.length; k++) {
           var profileParam = profileValue[k].textContent.toLowerCase();
-          if (profileParam.includes(parameter) && profileParam.includes(value)) {
+          if (profileParam.includes(parameter.toLowerCase()) && profileParam.includes(value.toLowerCase())) {
             matches++;
             break;
           }
@@ -424,6 +424,10 @@ function setAllCriteria() {
           dropdown.value = "all";
         }
       }
+      
+      searchProfiles();
+      filterProfiles();
+      prioritizeResults();
     });
   }
 }
