@@ -31,7 +31,7 @@
     <!-- Profile Picture -->
     <img class="profile-picture" src="PTIMG.jpeg" alt="Profile Picture">
     <!-- Username -->
-    <h1>Funke</h1>
+    <h1 id="username">Funke</h1>
     
     <!-- Video Thumbnail -->
     <div onclick="playVideo()">
@@ -61,8 +61,13 @@
     <!-- Form Container -->
     <div class="form-container" id="formContainer">
         <form id="offerForm" onsubmit="submitForm(event)">
-            <!-- Hidden Username Input -->
-            <input type="hidden" id="username" value="Funke">
+            <!-- Username (Default and uneditable) -->
+            <label for="username">Username:</label>
+            <input type="text" id="username" value="Funke" readonly><br><br>
+
+            <!-- Phone Number Input -->
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" placeholder="Enter your phone number" required><br><br>
 
             <!-- Location Selection -->
             <label for="location">Location:</label>
@@ -129,6 +134,7 @@
             event.preventDefault();
 
             var username = document.getElementById('username').value;
+            var phone = document.getElementById('phone').value;
             var location = document.getElementById('location').value;
             var time = document.getElementById('time').value;
             var date = document.getElementById('date').value;
@@ -148,8 +154,7 @@
             };
 
             // Create the message to be sent to WhatsApp
-            var message = "USERNAME- " + username + "\n\n";
-            message += "LOCATION- " + location + "\n\n";
+            var message = "LOCATION- " + location + "\n\n";
             message += "TIME & DATE- " + time + " " + date + "\n\n";
             message += "SPECIAL SERVICES- " + specialServices + "\n\n";
             message += "DURATION- " + duration;
