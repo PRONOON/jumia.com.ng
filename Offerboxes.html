@@ -44,8 +44,39 @@
             }
         }
 
+        // Function to load offer data from Local Storage and display it in offer boxes
+        function loadOfferData() {
+            var data = localStorage.getItem('formData');
+            if (data) {
+                var formData = JSON.parse(data);
+
+                // Format the data in the desired format
+                var message = "LOCATION- " + formData.location + "\n\n";
+                message += "TIME & DATE- " + formData.time + " " + formData.date + "\n\n";
+                message += "SPECIAL SERVICES- " + formData.specialServices + "\n\n";
+                message += "DURATION- " + formData.duration;
+
+                addOfferBox(message);
+            }
+        }
+
+        // Function to allow third-party devices to download offer data
+        function downloadOffers() {
+            var data = localStorage.getItem('formData');
+            if (data) {
+                var blob = new Blob([data], { type: 'application/json' });
+                var url = URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.href = url;
+                a.download = 'offers.json';
+                a.click();
+                URL.revokeObjectURL(url);
+            }
+        }
+
         // Load offer data on page load
         loadOfferData();
+        
     </script>
 </body>
 </html>
