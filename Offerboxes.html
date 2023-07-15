@@ -12,7 +12,9 @@
     <button onclick="downloadOffers()">DOWNLOAD OFFERS</button>
 
     <script>
-                    // Function to load offer data from Local Storage and display it in offer boxes
+        // ... (Existing code remains unchanged) ...
+
+        // Function to load offer data from Local Storage and display it in offer boxes
         function loadOfferData() {
             var data = localStorage.getItem('formData');
             if (data) {
@@ -24,7 +26,19 @@
                 message += "SPECIAL SERVICES- " + formData.specialServices + "\n\n";
                 message += "DURATION- " + formData.duration;
 
-                addOfferBox(message);
+                return message;
+            }
+            return null;
+        }
+
+        // Function to render offer data in the grid of text boxes
+        function renderOfferData(message) {
+            if (message) {
+                var container = document.getElementById('offerBoxContainer');
+                var box = document.createElement('div');
+                box.classList.add('offer-box');
+                box.textContent = message;
+                container.appendChild(box);
             }
         }
 
@@ -42,11 +56,11 @@
             }
         }
 
-        // Load offer data when the page is fully loaded
+        // Load offer data on page load and after downloading the JSON file
         document.addEventListener("DOMContentLoaded", function () {
-            loadOfferData();
+            var offerData = loadOfferData();
+            renderOfferData(offerData);
         });
-        
         
     </script>
 </body>
