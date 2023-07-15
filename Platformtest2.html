@@ -31,7 +31,7 @@
     <!-- Profile Picture -->
     <img class="profile-picture" src="PTIMG.jpeg" alt="Profile Picture">
     <!-- Username -->
-    <h1 id="username">Funke</h1>
+    <h1 id="profileUsername">Funke</h1>
     
     <!-- Video Thumbnail -->
     <div onclick="playVideo()">
@@ -137,7 +137,7 @@
         function submitForm(event) {
             event.preventDefault();
 
-            var username = document.getElementById('username').value;
+            var username = document.getElementById('profileUsername').innerText;
             var phone = document.getElementById('phone').value;
             var location = document.getElementById('location').value;
             var time = document.getElementById('time').value;
