@@ -7,8 +7,9 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            text-align: center;
         }
-        .offerbox {
+        .offer-box {
             border: 1px solid #ccc;
             padding: 10px;
             margin: 10px;
@@ -17,8 +18,62 @@
 </head>
 <body>
     <h1>Offer Boxes</h1>
-    <div id="gridContainer">
-        <!-- Offer boxes will be dynamically added here -->
-    </div>
+
+    <div id="offerBoxesContainer"></div>
+
+    <script>
+        // Fetch the data from localStorage and display it in the offer boxes
+        function fetchAndDisplayData() {
+            var offerBoxesContainer = document.getElementById("offerBoxesContainer");
+            offerBoxesContainer.innerHTML = ""; // Clear existing data
+
+            for (var i = 0; i < localStorage.length; i++) {
+                var key = localStorage.key(i);
+                if (key.startsWith("offer_")) {
+                    var formData = JSON.parse(localStorage.getItem(key));
+                    var offerBoxContent = formatFormData(formData);
+                    var offerBoxHTML = `<div class="offer-box">${offerBoxContent}<button class="accept-offer-btn">Accept Offer</button></div>`;
+                    offerBoxesContainer.innerHTML += offerBoxHTML;
+                }
+            }
+        }
+
+        function formatFormData(formData) {
+            // Format the form data into the desired format with line breaks
+            var content = "LOCATION- " + formData.location + "\n\n";
+            content += "TIME & DATE- " + formData.time + " " + formData.date + "\n\n";
+            content += "SPECIAL SERVICES- " + formData.specialServices + "\n\n";
+            content += "DURATION- " + formData.duration + "\n\n";
+            content += "PASSWORD- *****\n\n";
+            content += "PHONE NUMBER- " + formData.phone + "\n\n";
+            return content;
+        }
+
+        // Trigger the data fetching when the page loads
+        window.onload = function() {
+            fetchAndDisplayData();
+        };
+
+        // Make the data downloadable as a JSON file
+        function downloadData() {
+            var offerData = [];
+
+            for (var i = 0; i < localStorage.length; i++) {
+                var key = localStorage.key(i);
+                if (key.startsWith("offer_")) {
+                    var formData = JSON.parse(localStorage.getItem(key));
+                    offerData.push(formData);
+                }
+            }
+
+            var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(offerData));
+            var downloadAnchor = document.createElement("a");
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", "offer_data.json");
+            downloadAnchor.click();
+        }
+    </script>
+    <br>
+    <button onclick="downloadData()">Download Offers</button>
 </body>
 </html>
