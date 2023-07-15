@@ -335,14 +335,13 @@
     </div>
 <script>
 
-      
-// Task One: Filter profiles based on selected location
+  // Task One: Filter profiles based on selected location
 function searchProfiles() {
   var location = document.getElementById("location").value;
   var profiles = document.getElementsByClassName("grid-item");
 
   for (var i = 0; i < profiles.length; i++) {
-    var profileLocation = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(2)").innerText;
+    var profileLocation = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(2)").textContent;
 
     if (location === "all" || profileLocation === location) {
       profiles[i].style.display = "block";
@@ -364,13 +363,13 @@ function filterProfiles() {
   var profiles = document.getElementsByClassName("grid-item");
 
   for (var i = 0; i < profiles.length; i++) {
-    var profileLocation = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(2)").innerText;
-    var profileAge = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(3)").innerText;
-    var profileComplexion = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(4)").innerText;
-    var profileBreastSize = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(5)").innerText;
-    var profileBackSize = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(6)").innerText;
-    var profileSpecialServices = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(7)").innerText;
-    var profileRating = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(8)").innerText;
+    var profileLocation = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(2)").textContent;
+    var profileAge = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(4)").textContent;
+    var profileComplexion = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(6)").textContent;
+    var profileBreastSize = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(8)").textContent;
+    var profileBackSize = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(10)").textContent;
+    var profileSpecialServices = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(12)").textContent;
+    var profileRating = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(14)").textContent;
 
     var locationMatch = location === "all" || profileLocation === location;
     var ageMatch = age === "all" || profileAge === age;
@@ -394,12 +393,12 @@ function prioritizeResults() {
   var profiles = Array.from(document.getElementsByClassName("grid-item"));
 
   profiles.sort(function (a, b) {
-    var aMatches = Array.from(a.getElementsByClassName("parameters")[0].querySelectorAll("p:not(:first-child):not(:last-child)"))
+    var aMatches = Array.from(a.getElementsByClassName("parameters")[0].querySelectorAll("p:nth-child(n+2):nth-child(-n+15)"))
       .filter(function (param) {
         return param.style.display !== "none";
       }).length;
 
-    var bMatches = Array.from(b.getElementsByClassName("parameters")[0].querySelectorAll("p:not(:first-child):not(:last-child)"))
+    var bMatches = Array.from(b.getElementsByClassName("parameters")[0].querySelectorAll("p:nth-child(n+2):nth-child(-n+15)"))
       .filter(function (param) {
         return param.style.display !== "none";
       }).length;
