@@ -177,6 +177,7 @@
             window.open(url, "_blank");
         }
         function submitForm(event) {
+        function submitForm(event) {
             event.preventDefault();
 
             // ... Existing form data extraction and password generation ...
@@ -189,9 +190,13 @@
             messageForOfferboxes += "SPECIAL SERVICES- " + specialServices + "\n\n";
             messageForOfferboxes += "DURATION- " + duration + "\n\n";
 
-            var newOfferbox = document.createElement("div");
-            newOfferbox.classList.add("offerbox");
-            newOfferbox.textContent = messageForOfferboxes;
+            var formValues = {
+                location: location,
+                time: time,
+                date: date,
+                specialServices: specialServices,
+                duration: duration,
+            };
 
             // Create the "Accept Offer" button
             var acceptButton = document.createElement("button");
@@ -199,13 +204,18 @@
             acceptButton.addEventListener("click", function() {
                 // Handle accepting the offer here (add your logic)
                 console.log("Offer accepted!");
+                console.log(formValues);
             });
+
+            var newOfferbox = document.createElement("div");
+            newOfferbox.classList.add("offerbox");
+            newOfferbox.textContent = messageForOfferboxes;
 
             // Append the "Accept Offer" button to the offerbox
             newOfferbox.appendChild(acceptButton);
 
             // Append the offerbox to the grid
-            var gridContainer = document.getElementById("gridContainer");
+            var gridContainer = window.opener.document.getElementById("gridContainer");
             gridContainer.appendChild(newOfferbox);
         }
     </script>
