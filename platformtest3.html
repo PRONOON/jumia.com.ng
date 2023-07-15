@@ -335,138 +335,121 @@
     </div>
 <script>
 
-  // Task One: Filter profiles based on selected location
+// Task One: Filter profiles based on the selected location
 function searchProfiles() {
   var location = document.getElementById("location").value;
   var profiles = document.getElementsByClassName("grid-item");
-
+  
   for (var i = 0; i < profiles.length; i++) {
-    var profileLocation = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(2)").textContent;
-
+    var profile = profiles[i];
+    var profileLocation = profile.getElementsByClassName("parameters")[0].getElementsByTagName("p")[1].textContent.split(": ")[1];
+    
     if (location === "all" || profileLocation === location) {
-      profiles[i].style.display = "block";
+      profile.style.display = "block";
     } else {
-      profiles[i].style.display = "none";
+      profile.style.display = "none";
     }
   }
 }
 
-// Task Two: Filter profiles based on remaining parameters
+// Task Two: Filter profiles based on remaining parameters, allowing multiple matches
 function filterProfiles() {
-  var location = document.getElementById("location").value;
-  var age = document.getElementById("age").value;
-  var complexion = document.getElementById("complexion").value;
-  var breastSize = document.getElementById("breast-size").value;
-  var backSize = document.getElementById("back-size").value;
-  var specialServices = document.getElementById("special-services").value;
-  var rating = document.getElementById("rating").value;
+  var parameters = ["age", "complexion", "breast-size", "back-size", "special-services", "rating"];
   var profiles = document.getElementsByClassName("grid-item");
 
   for (var i = 0; i < profiles.length; i++) {
-    var profileLocation = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(2)").textContent;
-    var profileAge = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(4)").textContent;
-    var profileComplexion = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(6)").textContent;
-    var profileBreastSize = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(8)").textContent;
-    var profileBackSize = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(10)").textContent;
-    var profileSpecialServices = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(12)").textContent;
-    var profileRating = profiles[i].getElementsByClassName("parameters")[0].querySelector("p:nth-child(14)").textContent;
+    var profile = profiles[i];
+    var matches = 0;
 
-    var locationMatch = location === "all" || profileLocation === location;
-    var ageMatch = age === "all" || profileAge === age;
-    var complexionMatch = complexion === "all" || profileComplexion === complexion;
-    var breastSizeMatch = breastSize === "all" || profileBreastSize === breastSize;
-    var backSizeMatch = backSize === "all" || profileBackSize === backSize;
-    var specialServicesMatch = specialServices === "all" || profileSpecialServices.includes(specialServices);
-    var ratingMatch = rating === "all" || parseInt(profileRating) >= parseInt(rating);
+    for (var j = 0; j < parameters.length; j++) {
+      var parameter = parameters[j];
+      var value = document.getElementById(parameter).value;
 
-    if (locationMatch && ageMatch && complexionMatch && breastSizeMatch && backSizeMatch && specialServicesMatch && ratingMatch) {
-      profiles[i].style.display = "block";
+      if (value === "all") {
+        matches++;
+      } else {
+        var profileValue = profile.getElementsByClassName("parameters")[0].getElementsByTagName("p");
+        for (var k = 0; k < profileValue.length; k++) {
+          var profileParam = profileValue[k].textContent.toLowerCase();
+          if (profileParam.includes(parameter) && profileParam.includes(value)) {
+            matches++;
+            break;
+          }
+        }
+      }
+    }
+
+    if (matches > 0) {
+      profile.style.display = "block";
+      profile.dataset.matches = matches;
     } else {
-      profiles[i].style.display = "none";
+      profile.style.display = "none";
+      profile.removeAttribute("data-matches");
     }
   }
 }
 
 // Task Three: Prioritize results with more matches
 function prioritizeResults() {
-  var profilesContainer = document.querySelector(".grid-container");
-  var profiles = Array.from(document.getElementsByClassName("grid-item"));
+  var gridContainer = document.getElementsByClassName("grid-container")[0];
+  var profiles = Array.from(gridContainer.getElementsByClassName("grid-item"));
 
-  profiles.sort(function (a, b) {
-    var aMatches = Array.from(a.getElementsByClassName("parameters")[0].querySelectorAll("p:nth-child(n+2):nth-child(-n+15)"))
-      .filter(function (param) {
-        return param.style.display !== "none";
-      }).length;
+  profiles.sort(function(a, b) {
+    var matchesA = parseInt(a.dataset.matches || 0);
+    var matchesB = parseInt(b.dataset.matches || 0);
 
-    var bMatches = Array.from(b.getElementsByClassName("parameters")[0].querySelectorAll("p:nth-child(n+2):nth-child(-n+15)"))
-      .filter(function (param) {
-        return param.style.display !== "none";
-      }).length;
-
-    return bMatches - aMatches;
+    return matchesB - matchesA;
   });
 
-  profiles.forEach(function (profile) {
-    profilesContainer.appendChild(profile);
-  });
+  for (var i = 0; i < profiles.length; i++) {
+    gridContainer.appendChild(profiles[i]);
+  }
 }
 
-// Task Four: Recognize "All" as a match for all profiles
-function matchAllCriteria() {
-  var criteriaSelects = document.querySelectorAll("select:not(#location)");
+// Task Four: Make "All" option recognize all profiles
+function setAllCriteria() {
+  var parameters = ["location", "age", "complexion", "breast-size", "back-size", "special-services", "rating"];
 
-  criteriaSelects.forEach(function (select) {
-    select.addEventListener("change", function () {
-      var selectedOption = this.value;
-      var selectId = this.id;
+  for (var i = 0; i < parameters.length; i++) {
+    var parameter = parameters[i];
+    var select = document.getElementById(parameter);
 
-      if (selectedOption === "all") {
-        searchProfiles();
-        filterProfiles();
-        prioritizeResults();
+    select.addEventListener("change", function() {
+      var option = this.options[this.selectedIndex].value;
+
+      if (option === "all") {
+        for (var j = 0; j < parameters.length; j++) {
+          var param = parameters[j];
+          var dropdown = document.getElementById(param);
+          dropdown.value = "all";
+        }
       }
     });
-  });
+  }
 }
 
-// Attach event listeners to the selection form
-document.getElementById("location").addEventListener("change", function () {
+// Task Five: Refresh database results on parameter change
+function refreshResults() {
+  var selects = document.getElementsByTagName("select");
+
+  for (var i = 0; i < selects.length; i++) {
+    var select = selects[i];
+    select.addEventListener("change", function() {
+      searchProfiles();
+      filterProfiles();
+      prioritizeResults();
+    });
+  }
+}
+
+// Initialize the functions when the page loads
+window.onload = function() {
   searchProfiles();
   filterProfiles();
   prioritizeResults();
-});
-
-document.getElementById("age").addEventListener("change", function () {
-  filterProfiles();
-  prioritizeResults();
-});
-
-document.getElementById("complexion").addEventListener("change", function () {
-  filterProfiles();
-  prioritizeResults();
-});
-
-document.getElementById("breast-size").addEventListener("change", function () {
-  filterProfiles();
-  prioritizeResults();
-});
-
-document.getElementById("back-size").addEventListener("change", function () {
-  filterProfiles();
-  prioritizeResults();
-});
-
-document.getElementById("special-services").addEventListener("change", function () {
-  filterProfiles();
-  prioritizeResults();
-});
-
-document.getElementById("rating").addEventListener("change", function () {
-  filterProfiles();
-  prioritizeResults();
-});
-
-matchAllCriteria();
+  setAllCriteria();
+  refreshResults();
+};
 
 
 </script>
