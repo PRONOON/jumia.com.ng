@@ -1,3 +1,6 @@
+Absolutely! Let's enhance the CSS for the profile page to make it more visually appealing and user-friendly. We'll add some styles to the elements to improve the overall presentation. Here's the updated CSS:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,21 +11,104 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
+            background-color: #f5f5f5;
+            margin: 0;
         }
+
+        h1 {
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+
         .profile-picture {
             border-radius: 50%;
             width: 200px;
             height: 200px;
             object-fit: cover;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
+
+        .video-container {
+            margin-top: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+
         .video-thumbnail {
             width: 200px;
             height: 150px;
             object-fit: cover;
-            cursor: pointer;
         }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 30px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .play-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
         .form-container {
             display: none;
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-container label {
+            font-weight: bold;
+        }
+
+        .form-container select,
+        .form-container input[type="time"],
+        .form-container input[type="date"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .form-container select {
+            height: 35px;
+        }
+
+        .form-container input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .personal-info {
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            line-height: 1.6;
         }
     </style>
 </head>
@@ -31,11 +117,11 @@
     <img class="profile-picture" src="PTIMG.jpeg" alt="Profile Picture">
     <!-- Username -->
     <h1>Funke</h1>
-    
-    <!-- Video Thumbnail -->
-    <div onclick="playVideo()">
+
+    <!-- Video Container -->
+    <div class="video-container" onclick="playVideo()">
         <img class="video-thumbnail" src="thumbnail.jpg" alt="See Bio Video">
-        <img src="play_button.png" alt="Play Video">
+        <div class="play-button">&#9658;</div>
     </div>
     <video id="video" style="display:none" controls>
         <!-- Dummy Video Source (Replace with actual video file) -->
@@ -43,16 +129,18 @@
     </video>
 
     <!-- Personal Information -->
-    <p>Location: Ogun</p>
-    <p>Age bracket: 31+</p>
-    <p>Complexion: Cocoa</p>
-    <p>Breast Size: M</p>
-    <p>Back Size: L</p>
-    <p>Special services: Anal, Blow job</p>
-    <p>Rating: 10</p>
-    <p>Service Rates: 7k-15k</p>
-    <p>Special service: +15% of original fee.</p>
-    <p>NOTE: Fees are non-negotiable.</p>
+    <div class="personal-info">
+        <p><strong>Location:</strong> Ogun</p>
+        <p><strong>Age bracket:</strong> 31+</p>
+        <p><strong>Complexion:</strong> Cocoa</p>
+        <p><strong>Breast Size:</strong> M</p>
+        <p><strong>Back Size:</strong> L</p>
+        <p><strong>Special services:</strong> Anal, Blow job</p>
+        <p><strong>Rating:</strong> 10</p>
+        <p><strong>Service Rates:</strong> 7k-15k</p>
+        <p><strong>Special service:</strong> +15% of original fee.</p>
+        <p><strong>NOTE:</strong> Fees are non-negotiable.</p>
+    </div>
 
     <!-- Make Offer Button -->
     <button onclick="toggleForm()">MAKE OFFER</button>
@@ -69,12 +157,12 @@
                 <option value="Akure">Akure</option>
                 <option value="Ibadan">Ibadan</option>
                 <option value="Lagos">Lagos</option>
-            </select><br><br>
+            </select><br>
 
             <!-- Time & Date Input -->
             <label for="time">TIME & DATE:</label><br>
             Time: <input type="time" id="time" required> <br>
-            Date: <input type="date" id="date" required> <br><br>
+            Date: <input type="date" id="date" required> <br>
 
             <!-- Special Services Selection -->
             <label for="specialServices">SPECIAL SERVICES:</label>
@@ -83,7 +171,7 @@
                 <option value="Anal">Anal</option>
                 <option value="Blowjib">Blowjib</option>
                 <option value="Titty Fuck">Titty Fuck</option>
-            </select><br><br>
+            </select><br>
 
             <!-- Duration Selection -->
             <label for="duration">DURATION:</label>
@@ -91,7 +179,7 @@
                 <option value="">Select Duration</option>
                 <option value="Day">Day</option>
                 <option value="Overnight">Overnight</option>
-            </select><br><br>
+            </select><br>
 
             <!-- Submit Button -->
             <input type="submit" value="Submit">
@@ -107,7 +195,9 @@
 
         function toggleForm() {
             var formContainer = document.getElementById('formContainer');
-            formContainer.style.display = (formContainer.style.display === 'none') ? 'block' : 'none';
+            formContainer.style.display = (formContainer.style.display === 'none') ? 'block' : '
+
+none';
         }
 
         function submitForm(event) {
@@ -141,3 +231,6 @@ DURATION - (${data.duration})`;
     </script>
 </body>
 </html>
+```
+
+These CSS styles will enhance the visual appearance of the profile page, making it more attractive and user-friendly. Feel free to further customize the CSS as per your design preferences.
