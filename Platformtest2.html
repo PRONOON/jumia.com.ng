@@ -1,3 +1,6 @@
+To create the profile page with the specified structure and functionality, you can use HTML, CSS, and JavaScript. Below is the code for the profile page:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +64,7 @@
     <div class="form-container" id="formContainer">
         <form id="offerForm" onsubmit="submitForm(event)">
             <!-- Location Selection -->
-            <label for="location">Location:</label>
+            <label for="location">LOCATION:</label>
             <select id="location" required>
                 <option value="">Select Location</option>
                 <option value="Abuja">Abuja</option>
@@ -71,20 +74,22 @@
                 <option value="Lagos">Lagos</option>
             </select><br><br>
 
-            <!-- Time & Day Input -->
-            <label for="timeDay">Time &amp; Day (e.g., 3pm, 12th May):</label>
-            <input type="text" id="timeDay" required><br><br>
+            <!-- Time & Date Input -->
+            <label for="time">TIME & DATE:</label><br>
+            Time: <input type="time" id="time" required> <br>
+            Date: <input type="date" id="date" required> <br><br>
 
             <!-- Special Services Selection -->
-            <label for="specialServices">Special Services:</label>
+            <label for="specialServices">SPECIAL SERVICES:</label>
             <select id="specialServices" required>
                 <option value="">Select Special Service</option>
                 <option value="Anal">Anal</option>
+                <option value="Blowjib">Blowjib</option>
                 <option value="Titty Fuck">Titty Fuck</option>
             </select><br><br>
 
             <!-- Duration Selection -->
-            <label for="duration">Duration:</label>
+            <label for="duration">DURATION:</label>
             <select id="duration" required>
                 <option value="">Select Duration</option>
                 <option value="Day">Day</option>
@@ -112,21 +117,33 @@
             event.preventDefault();
 
             var location = document.getElementById('location').value;
-            var timeDay = document.getElementById('timeDay').value;
+            var time = document.getElementById('time').value;
+            var date = document.getElementById('date').value;
             var specialServices = document.getElementById('specialServices').value;
             var duration = document.getElementById('duration').value;
 
             var formData = {
                 location: location,
-                timeDay: timeDay,
+                time: time,
+                date: date,
                 specialServices: specialServices,
                 duration: duration,
             };
 
             // Replace the link with your WhatsApp number
-            var url = 'https://api.whatsapp.com/send/?phone=+2349093966284&text=' + encodeURIComponent(JSON.stringify(formData));
+            var url = 'https://api.whatsapp.com/send/?phone=+2349093966284&text=' + encodeURIComponent(formatMessage(formData));
             window.open(url, '_blank');
+        }
+
+        function formatMessage(data) {
+            return `LOCATION - (${data.location})%0D%0A
+TIME & DATE - (${data.time}, ${data.date})%0D%0A
+SPECIAL SERVICES - (${data.specialServices})%0D%0A
+DURATION - (${data.duration})`;
         }
     </script>
 </body>
 </html>
+```
+
+Please make sure to replace the image paths, video source, and WhatsApp number with the actual ones you want to use. The `formatMessage` function is used to format the form data into the required format before sending it to WhatsApp. When the "MAKE OFFER" button is clicked, the form data will be sent to the provided WhatsApp number in the specified format.
