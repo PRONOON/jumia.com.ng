@@ -1,70 +1,204 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Profile Page</title>
+  <title>Profile Page</title>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-        }
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
 
-        .profile-container {
-            max-width: 500px;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-        }
+.profile {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
 
-        .profile-picture {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            overflow: hidden;
-        }
+.profile-picture img {
+  display: block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 0 auto;
+}
 
-        .profile-picture img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+.username {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px 0;
+}
 
-        .profile-info p {
-            margin: 0;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
+.video {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
 
-        .profile-info h2 {
-            color: #333;
-            font-size: 24px;
-            margin: 0;
-        }
+.video img {
+  width: 200px;
+  height: 120px;
+  border-radius: 5px;
+}
 
-        .profile-info .special-services {
-            margin-top: 20px;
-        }
+.play-button {
+  display: block;
+  margin-top: 10px;
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 8px 20px;
+  border-radius: 20px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.information {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.information li {
+  list-style-type: none;
+}
+
+.make-offer {
+  text-align: center;
+}
+
+.make-offer button {
+  background-color: #4CAF50;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.form-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.form-popup form {
+  background-color: #ffffff;
+  margin: 10% auto;
+  padding: 20px;
+  max-width: 300px;
+  border-radius: 5px;
+}
+
+.form-popup label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-popup select,
+.form-popup input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-popup input[type="submit"],
+.form-popup button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.form-popup input[type="submit"] {
+  background-color: #4CAF50;
+}
+
+.form-popup button {
+  background-color: #f44336;
+}
+
+        
     </style>
 </head>
 <body>
-    <div class="profile-container">
-        <div class="profile-picture">
-            <img src="PTIMG.jpeg" alt="Profile Picture">
-        </div>
-        <div class="profile-info">
-            <h2>Clara_Of_Lagos</h2>
-            <p>Ajah, Lagos</p>
-            <p>Service Rates: NGN15,000-25,000</p>
-            <div class="special-services">
-                <h3>Special Services</h3>
-                <p>Facials</p>
-                <p>Blowjob</p>
-                <p>Anal</p>
-                <p>Titty Fuck</p>
-            </div>
-        </div>
+  <div class="profile">
+    <div class="profile-picture">
+      <img src="PTIMG.jpeg" alt="Profile Picture">
     </div>
+    <div class="username">Funke</div>
+    <div class="video">
+      <img src="thumbnail.jpg" alt="See Bio Video">
+      <a href="#" class="play-button">PLAY</a>
+      <!-- Replace 'thumbnail.jpg' with the actual thumbnail image for the video -->
+    </div>
+    <div class="information">
+      <ul>
+        <li><strong>Location:</strong> Ogun</li>
+        <li><strong>Age bracket:</strong> 31+</li>
+        <li><strong>Complexion:</strong> Cocoa</li>
+        <li><strong>Breast Size:</strong> M</li>
+        <li><strong>Back Size:</strong> L</li>
+        <li><strong>Special services:</strong> Anal, Blow job</li>
+        <li><strong>Rating:</strong> 10</li>
+        <li><strong>Service Rates:</strong> 7k-15k</li>
+        <li><strong>Special service:</strong> +15% of original fee.</li>
+        <li><strong>NOTE:</strong> Fees are nonnegotiable.</li>
+      </ul>
+    </div>
+    <div class="make-offer">
+      <button onclick="openForm()">MAKE OFFER</button>
+    </div>
+  </div>
+
+  <div class="form-popup" id="offerForm">
+    <form action="https://api.whatsapp.com/send" method="GET" target="_blank">
+      <input type="hidden" name="phone" value="+2349093966284">
+      <label for="location">Location:</label>
+      <select name="text">
+        <option value="Abuja">Abuja</option>
+        <option value="Anambra">Anambra</option>
+        <option value="Akure">Akure</option>
+        <option value="Ibadan">Ibadan</option>
+        <option value="Lagos">Lagos</option>
+      </select>
+      <br>
+      <label for="time-day">Time & Day:</label>
+      <input type="text" name="text">
+      <br>
+      <label for="special-services">Special Services:</label>
+      <input type="text" name="text">
+      <br>
+      <label for="duration">Duration:</label>
+      <input type="text" name="text">
+      <br>
+      <input type="submit" value="Submit">
+      <button type="button" onclick="closeForm()">Close</button>
+    </form>
+  </div>
+
+  <script>
+    function openForm() {
+      document.getElementById("offerForm").style.display = "block";
+    }
+
+    function closeForm() {
+      document.getElementById("offerForm").style.display = "none";
+    }
+  </script>
 </body>
 </html>
