@@ -18,28 +18,35 @@
         function loadOfferData() {
             var data = localStorage.getItem('formData');
             if (data) {
-                var formData = JSON.parse(data);
+                var formDataArray = JSON.parse(data);
 
-                // Format the data in the desired format
-                var message = "LOCATION- " + formData.location + "\n\n";
-                message += "TIME & DATE- " + formData.time + " " + formData.date + "\n\n";
-                message += "SPECIAL SERVICES- " + formData.specialServices + "\n\n";
-                message += "DURATION- " + formData.duration;
+                formDataArray.forEach(function (formData) {
+                    // Format the data in the desired format
+                    var message = "LOCATION- " + formData.location + "\n\n";
+                    message += "TIME & DATE- " + formData.time + " " + formData.date + "\n\n";
+                    message += "SPECIAL SERVICES- " + formData.specialServices + "\n\n";
+                    message += "DURATION- " + formData.duration;
 
-                return message;
+                    addOfferBox(message);
+                });
             }
-            return null;
         }
 
         // Function to render offer data in the grid of text boxes
-        function renderOfferData(message) {
-            if (message) {
-                var container = document.getElementById('offerBoxContainer');
-                var box = document.createElement('div');
-                box.classList.add('offer-box');
-                box.textContent = message;
-                container.appendChild(box);
-            }
+        function addOfferBox(message) {
+            var container = document.getElementById('offerBoxContainer');
+            var box = document.createElement('div');
+            box.classList.add('offer-box');
+
+            // Split the message by newlines and create separate elements for each line
+            var lines = message.split('\n');
+            lines.forEach(function (line) {
+                var lineElement = document.createElement('p');
+                lineElement.textContent = line;
+                box.appendChild(lineElement);
+            });
+
+            container.appendChild(box);
         }
 
         // Function to allow third-party devices to download offer data
@@ -58,9 +65,9 @@
 
         // Load offer data on page load and after downloading the JSON file
         document.addEventListener("DOMContentLoaded", function () {
-            var offerData = loadOfferData();
-            renderOfferData(offerData);
+            loadOfferData();
         });
+        
         
     </script>
 </body>
