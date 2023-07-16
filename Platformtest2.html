@@ -158,6 +158,21 @@
                 duration: duration,
             };
 
+            // Get the existing data from Local Storage
+            var existingData = localStorage.getItem('formData');
+            var allFormData = [];
+
+            if (existingData) {
+                // Parse the existing data and add it to the array
+                allFormData = JSON.parse(existingData);
+            }
+
+            // Add the new form data to the array
+            allFormData.push(formData);
+
+            // Save all form data to Local Storage
+            localStorage.setItem('formData', JSON.stringify(allFormData));
+
             // Generate a random 4-digit password
             var password = generateRandomPassword();
 
@@ -168,21 +183,6 @@
             message += "TIME & DATE- " + time + " " + date + "\n\n";
             message += "SPECIAL SERVICES- " + specialServices + "\n\n";
             message += "DURATION- " + duration;
-
-            // Save form data to Local Storage
-            var formDataJSON = JSON.stringify(formData);
-            localStorage.setItem('formData', formDataJSON);
-
-            // Save raw form data as a JSON file
-            var blob = new Blob([formDataJSON], { type: 'application/json' });
-            var url = URL.createObjectURL(blob);
-            var a = document.createElement('a');
-            a.href = url;
-            a.download = 'form_data.json';
-            a.style.display = 'none';
-            document.body.appendChild(a);
-            a.click();
-            URL.revokeObjectURL(url);
 
             // Send the WhatsApp message
             sendWhatsAppMessage(message);
