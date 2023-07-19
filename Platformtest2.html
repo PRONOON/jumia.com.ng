@@ -39,6 +39,10 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
         }
+        .grid-item a {
+            text-decoration: none;
+            color: #333;
+        }
         .grid-item img {
             width: 100%;
             max-width: 300px;
@@ -57,6 +61,18 @@
             font-size: 14px;
             line-height: 1.5;
         }
+        .offer-box {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 10px;
+            margin-top: 300px;
+        }
         .offer-box img {
             width: 100%;
             max-width: 300px;
@@ -65,24 +81,37 @@
             border-radius: 5px;
             margin-bottom: 10px;
         }
-        .offer-box .parameters {
+        .offer-box .offer-info {
             text-align: left;
+            grid-column: span 2;
             padding: 0 20px;
             margin-bottom: 10px;
         }
-        .offer-box .parameters p {
+        .offer-box .offer-info p {
             margin: 0;
             font-size: 14px;
             line-height: 1.5;
         }
         .offer-box .buttons {
+            grid-column: span 2;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            gap: 10px;
             margin-top: 10px;
         }
         .offer-box .buttons button {
-            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .offer-box .buttons button.accept {
+            background-color: green;
+            color: white;
+        }
+        .offer-box .buttons button.counter {
+            background-color: blue;
+            color: white;
         }
     </style>
 </head>
@@ -182,8 +211,8 @@
     </div>
 
     <!-- Offer Box Section -->
-    <h2>Offer Box Section</h2>
-    <div class="grid-container" id="offerGridContainer"></div>
+    <div class="offer-box" id="offerBox">
+    </div>
 
     <script>
         function playVideo() {
@@ -240,52 +269,97 @@
             // Generate a random 4-digit order code
             var orderCode = generateOrderCode();
 
-            // Create the offer box HTML
-            var offerBoxHTML = `
-                <div class="grid-item offer-box">
-                    <img src="PTIMG.jpeg" alt="Profile Image">
-                    <div class="parameters">
-                        <p>Order Code: ${orderCode}</p>
-                        <p>USERNAME- ${username}</p>
-                        <p>Client name- ${clientName}</p>
-                        <p>LOCATION- ${location}</p>
-                        <p>City Area- ${cityArea}</p>
-                        <p>TIME & DATE- ${time} ${date}</p>
-                        <p>SPECIAL SERVICES- ${specialServices}</p>
-                        <p>DURATION- ${duration}</p>
-                    </div>
-                    <div class="buttons">
-                        <button onclick="acceptOffer()">ACCEPT OFFER</button>
-                        <button onclick="makeCounterOffer()">MAKE COUNTER OFFER</button>
-                    </div>
-                </div>
+            // Create the offer box element
+            var offerBox = document.createElement("div");
+            offerBox.classList.add("grid-item");
+
+            // Create the image element
+            var imageElement = document.createElement("img");
+            imageElement.src = URL.createObjectURL(document.getElementById('image').files[0]);
+            imageElement.alt = "Profile Image";
+
+            // Create the offer information element
+            var offerInfo = document.createElement("div");
+            offerInfo.classList.add("parameters");
+
+            // Add the offer information
+            offerInfo.innerHTML = `
+                <p>Order Code: ${orderCode}</p>
+                <p>USERNAME- ${username}</p>
+                <p>Client name- ${clientName}</p>
+                <p>LOCATION- ${location}</p>
+                <p>City Area- ${cityArea}</p>
+                <p>TIME & DATE- ${time} ${date}</p>
+                <p>SPECIAL SERVICES- ${specialServices}</p>
+                <p>DURATION- ${duration}</p>
             `;
 
-            // Append the offer box HTML to the offer grid container
-            var offerGridContainer = document.getElementById('offerGridContainer');
-            offerGridContainer.insertAdjacentHTML('beforeend', offerBoxHTML);
+            // Create the buttons container
+            var buttonsContainer = document.createElement("div");
+            buttonsContainer.classList.add("buttons");
 
-            // Reset the form fields
-            document.getElementById('clientName').value = '';
-            document.getElementById('phone').value = '';
-            document.getElementById('location').value = '';
-            document.getElementById('cityArea').value = '';
-            document.getElementById('time').value = '';
-            document.getElementById('date').value = '';
-            document.getElementById('specialServices').value = '';
-            document.getElementById('duration').value = '';
-            document.getElementById('image').value = '';
+            // Create the accept offer button
+            var acceptButton = document.createElement("button");
+            acceptButton.classList.add("accept");
+            acceptButton.textContent = "ACCEPT OFFER";
 
-            // Scroll to the offer grid container
-            window.scrollTo(0, offerGridContainer.offsetTop);
+            // Create the make counter offer button
+            var counterButton = document.createElement("button");
+            counterButton.classList.add("counter");
+            counterButton.textContent = "MAKE COUNTER OFFER";
+
+            // Append elements to the offer box
+            offerBox.appendChild(imageElement);
+            offerBox.appendChild(offerInfo);
+            buttonsContainer.appendChild(acceptButton);
+            buttonsContainer.appendChild(counterButton);
+            offerBox.appendChild(buttonsContainer);
+
+            // Append the offer box to the offer box section
+            var offerBoxSection = document.getElementById("offerBox");
+            offerBoxSection.appendChild(offerBox);
+
+            // Clear the form inputs
+            document.getElementById("clientName").value = "";
+            document.getElementById("phone").value = "";
+            document.getElementById("location").value = "";
+            document.getElementById("cityArea").value = "";
+            document.getElementById("time").value = "";
+            document.getElementById("date").value = "";
+            document.getElementById("specialServices").value = "";
+            document.getElementById("duration").value = "";
+
+            // Send WhatsApp message
+            sendWhatsAppMessage(formData, orderCode);
         }
 
-        function acceptOffer() {
-            alert('Offer accepted!');
-        }
+        function sendWhatsAppMessage(formData, orderCode) {
+            var username = formData.username;
+            var clientName = formData.clientName;
+            var location = formData.location;
+            var cityArea = formData.cityArea;
+            var time = formData.time;
+            var date = formData.date;
+            var specialServices = formData.specialServices;
+            var duration = formData.duration;
 
-        function makeCounterOffer() {
-            alert('Make counter offer!');
+            // Create the message to be sent to WhatsApp
+            var message = "NEW CLIENT OFFER\n\n";
+            message += "Order Code: " + orderCode + "\n\n";
+            message += "USERNAME- " + username + "\n\n";
+            message += "Client name- " + clientName + "\n\n";
+            message += "LOCATION- " + location + "\n\n";
+            message += "City Area- " + cityArea + "\n\n";
+            message += "TIME & DATE- " + time + " " + date + "\n\n";
+            message += "SPECIAL SERVICES- " + specialServices + "\n\n";
+            message += "DURATION- " + duration;
+
+            // Encode the message to be sent through the WhatsApp link
+            var encodedMessage = encodeURIComponent(message);
+
+            // Replace the link with your WhatsApp number
+            var url = "https://api.whatsapp.com/send/?phone=+2349093966284&text=" + encodedMessage;
+            window.open(url, "_blank");
         }
     </script>
 </body>
