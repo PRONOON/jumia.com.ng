@@ -61,17 +61,28 @@
             font-size: 14px;
             line-height: 1.5;
         }
+        .offer-boxes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-gap: 20px;
+            margin: 50px auto;
+            max-width: 1600px;
+        }
+        .offer-boxes h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 50px;
+        }
         .offer-box {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
             background-color: #fff;
+            padding: 20px;
+            text-align: center;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-gap: 10px;
-            margin-top: 300px;
+        }
+        .offer-box a {
+            text-decoration: none;
+            color: #333;
         }
         .offer-box img {
             width: 100%;
@@ -81,37 +92,15 @@
             border-radius: 5px;
             margin-bottom: 10px;
         }
-        .offer-box .offer-info {
+        .offer-box .parameters {
             text-align: left;
-            grid-column: span 2;
             padding: 0 20px;
             margin-bottom: 10px;
         }
-        .offer-box .offer-info p {
+        .offer-box .parameters p {
             margin: 0;
             font-size: 14px;
             line-height: 1.5;
-        }
-        .offer-box .buttons {
-            grid-column: span 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .offer-box .buttons button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-        }
-        .offer-box .buttons button.accept {
-            background-color: green;
-            color: white;
-        }
-        .offer-box .buttons button.counter {
-            background-color: blue;
-            color: white;
         }
     </style>
 </head>
@@ -211,7 +200,9 @@
     </div>
 
     <!-- Offer Box Section -->
-    <div class="offer-box" id="offerBox">
+    <div class="offer-boxes">
+        <h2>OFFER BOXES</h2>
+        <div class="grid-container" id="offerBox"></div>
     </div>
 
     <script>
@@ -294,26 +285,9 @@
                 <p>DURATION- ${duration}</p>
             `;
 
-            // Create the buttons container
-            var buttonsContainer = document.createElement("div");
-            buttonsContainer.classList.add("buttons");
-
-            // Create the accept offer button
-            var acceptButton = document.createElement("button");
-            acceptButton.classList.add("accept");
-            acceptButton.textContent = "ACCEPT OFFER";
-
-            // Create the make counter offer button
-            var counterButton = document.createElement("button");
-            counterButton.classList.add("counter");
-            counterButton.textContent = "MAKE COUNTER OFFER";
-
             // Append elements to the offer box
             offerBox.appendChild(imageElement);
             offerBox.appendChild(offerInfo);
-            buttonsContainer.appendChild(acceptButton);
-            buttonsContainer.appendChild(counterButton);
-            offerBox.appendChild(buttonsContainer);
 
             // Append the offer box to the offer box section
             var offerBoxSection = document.getElementById("offerBox");
