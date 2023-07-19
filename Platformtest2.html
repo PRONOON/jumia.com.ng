@@ -25,6 +25,9 @@
             display: none;
             text-align: left;
         }
+        .profile-contact {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -54,6 +57,9 @@
     <p>Service Rates: 7k-15k</p>
     <p>Special service: +15% of the original fee.</p>
     <p>NOTE: Fees are non-negotiable.</p>
+    
+    <!-- Profile Contact (Visible in the code but hidden on the page) -->
+    <p class="profile-contact">Profile Contact: wa.me/+2347035353535</p>
 
     <!-- Make Offer Button -->
     <button onclick="toggleForm()">MAKE OFFER</button>
@@ -148,6 +154,8 @@
             // Format time to 12-hour format with AM/PM
             time = formatTimeTo12HrFormat(time);
 
+            var profileContact = document.querySelector('.profile-contact').innerText;
+
             var formData = {
                 username: username,
                 phone: phone,
@@ -156,39 +164,23 @@
                 date: date,
                 specialServices: specialServices,
                 duration: duration,
+                profileContact: profileContact
             };
-
-            // Get the existing data from Local Storage
-            var existingData = localStorage.getItem('formData');
-            var allFormData = [];
-
-            if (existingData) {
-                // Parse the existing data and add it to the array
-                allFormData = JSON.parse(existingData);
-            }
-
-            // Add the new form data to the array
-            allFormData.push(formData);
-
-            // Save all form data to Local Storage
-            localStorage.setItem('formData', JSON.stringify(allFormData));
 
             // Generate a random 4-digit password
             var password = generateRandomPassword();
 
             // Create the message to be sent to WhatsApp
-            var message = "Password: " + password + "\n\n";
+            var message = "YOU HAVE A NEW OFFER\n\n";
+            message += "To- " + profileContact + "\n\n";
+            message += "Password: " + password + "\n\n";
             message += "USERNAME- " + username + "\n\n";
             message += "LOCATION- " + location + "\n\n";
             message += "TIME & DATE- " + time + " " + date + "\n\n";
             message += "SPECIAL SERVICES- " + specialServices + "\n\n";
-            message += "DURATION- " + duration;
+            message += "DURATION- " + duration + "\n\n";
+            message += "Respond to offer- http://hookedupweeklys.000webhostapp.com/Offerboxes.html";
 
-            // Send the WhatsApp message
-            sendWhatsAppMessage(message);
-        }
-
-        function sendWhatsAppMessage(message) {
             // Encode the message to be sent through the WhatsApp link
             var encodedMessage = encodeURIComponent(message);
 
