@@ -140,54 +140,70 @@
             return Math.floor(1000 + Math.random() * 9000);
         }
 
-        function submitForm(event) {
-            event.preventDefault();
+        <script>
+    function submitForm(event) {
+        event.preventDefault();
 
-            var username = document.getElementById('profileUsername').innerText;
-            var phone = document.getElementById('phone').value;
-            var location = document.getElementById('location').value;
-            var time = document.getElementById('time').value;
-            var date = document.getElementById('date').value;
-            var specialServices = document.getElementById('specialServices').value;
-            var duration = document.getElementById('duration').value;
+        var username = document.getElementById('profileUsername').innerText;
+        var phone = document.getElementById('phone').value;
+        var location = document.getElementById('location').value;
+        var time = document.getElementById('time').value;
+        var date = document.getElementById('date').value;
+        var specialServices = document.getElementById('specialServices').value;
+        var duration = document.getElementById('duration').value;
 
-            // Format time to 12-hour format with AM/PM
-            time = formatTimeTo12HrFormat(time);
+        // Format time to 12-hour format with AM/PM
+        time = formatTimeTo12HrFormat(time);
 
-            var profileContact = document.querySelector('.profile-contact').innerText;
+        var profileContact = document.querySelector('.profile-contact').innerText;
 
-            var formData = {
-                username: username,
-                phone: phone,
-                location: location,
-                time: time,
-                date: date,
-                specialServices: specialServices,
-                duration: duration,
-                profileContact: profileContact
-            };
+        var formData = {
+            username: username,
+            phone: phone,
+            location: location,
+            time: time,
+            date: date,
+            specialServices: specialServices,
+            duration: duration,
+            profileContact: profileContact
+        };
 
-            // Generate a random 4-digit password
-            var password = generateRandomPassword();
+        // Generate a random 4-digit password
+        var password = generateRandomPassword();
 
-            // Create the message to be sent to WhatsApp
-            var message = "YOU HAVE A NEW OFFER\n\n";
-            message += "To- " + profileContact + "\n\n";
-            message += "Password: " + password + "\n\n";
-            message += "USERNAME- " + username + "\n\n";
-            message += "LOCATION- " + location + "\n\n";
-            message += "TIME & DATE- " + time + " " + date + "\n\n";
-            message += "SPECIAL SERVICES- " + specialServices + "\n\n";
-            message += "DURATION- " + duration + "\n\n";
-            message += "Respond to offer- http://hookedupweeklys.000webhostapp.com/Offerboxes.html";
+        // Create the message to be sent to WhatsApp
+        var message = "YOU HAVE A NEW OFFER\n\n";
+        message += "To- " + profileContact + "\n\n";
+        message += "Password: " + password + "\n\n";
+        message += "USERNAME- " + username + "\n\n";
+        message += "LOCATION- " + location + "\n\n";
+        message += "TIME & DATE- " + time + " " + date + "\n\n";
+        message += "SPECIAL SERVICES- " + specialServices + "\n\n";
+        message += "DURATION- " + duration;
+        message += "Respond to offer- http://hookedupweeklys.000webhostapp.com/Offerboxes.html";
 
-            // Encode the message to be sent through the WhatsApp link
-            var encodedMessage = encodeURIComponent(message);
+        
 
-            // Replace the link with your WhatsApp number
-            var url = "https://api.whatsapp.com/send/?phone=+2349093966284&text=" + encodedMessage;
-            window.open(url, "_blank");
-        }
+        // Encode the message to be sent through the WhatsApp link
+        var encodedMessage = encodeURIComponent(message);
+
+        // Replace the link with your WhatsApp number
+        var url = "https://api.whatsapp.com/send/?phone=+2349093966284&text=" + encodedMessage;
+        window.open(url, "_blank");
+
+        // Send form data to Offerboxes.html using a PHP script
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "save_offer.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log("Form data sent to Offerboxes.html");
+            }
+        };
+        xhttp.send("username=" + encodeURIComponent(username) + "&phone=" + encodeURIComponent(phone) + "&password=" + encodeURIComponent(password) + "&location=" + encodeURIComponent(location) + "&time=" + encodeURIComponent(time) + "&date=" + encodeURIComponent(date) + "&specialServices=" + encodeURIComponent(specialServices) + "&duration=" + encodeURIComponent(duration));
+    }
+</script>
+
     </script>
 </body>
 </html>
