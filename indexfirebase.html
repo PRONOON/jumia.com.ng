@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+
+<!-- Firebase SDK snippet -->
+    <script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js"></script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .profile-picture {
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+        }
+        .video-thumbnail {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        .form-container {
+            display: none;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <!-- Profile Picture -->
+    <img class="profile-picture" src="PTIMG.jpeg" alt="Profile Picture">
+    <!-- Username -->
+    <h1 id="profileUsername">Funke</h1>
+    
+    <!-- Video Thumbnail -->
+    <div onclick="playVideo()">
+        <img class="video-thumbnail" src="thumbnail.jpg" alt="See Bio Video">
+        <img src="play_button.png" alt="Play Video">
+    </div>
+    <video id="video" style="display:none" controls>
+        <!-- Dummy Video Source (Replace with actual video file) -->
+        <source src="dummy_video.mp4" type="video/mp4">
+    </video>
+
+    <!-- Personal Information -->
+    <p>Location: Ogun</p>
+    <p>Age bracket: 31+</p>
+    <p>Complexion: Cocoa</p>
+    <p>Breast Size: M</p>
+    <p>Back Size: L</p>
+    <p>Special services: Anal, Blowjob</p>
+    <p>Rating: 10</p>
+    <p>Service Rates: 7k-15k</p>
+    <p>Special service: +15% of the original fee.</p>
+    <p>NOTE: Fees are non-negotiable.</p>
+
+    <!-- Make Offer Button -->
+    <button onclick="toggleForm()">MAKE OFFER</button>
+
+    <!-- Form Container -->
+    <div class="form-container" id="formContainer">
+        <form id="offerForm" onsubmit="submitForm(event)">
+            <!-- Username (Default and uneditable) -->
+            <label for="username">Username:</label>
+            <input type="text" id="username" value="Funke" readonly><br><br>
+
+            <!-- Client Name Input -->
+            <label for="clientName">Client Name:</label>
+            <input type="text" id="clientName" placeholder="Enter your name" required><br><br>
+
+            <!-- Phone Number Input -->
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" placeholder="Enter your phone number" required><br><br>
+
+            <!-- Location Selection -->
+            <label for="location">Location:</label>
+            <select id="location" required>
+                <option value="">Select Location</option>
+                <option value="Abuja">Abuja</option>
+                <option value="Anambra">Anambra</option>
+                <option value="Akure">Akure</option>
+                <option value="Ibadan">Ibadan</option>
+                <option value="Lagos">Lagos</option>
+            </select><br><br>
+
+            <!-- City Area Input -->
+            <label for="cityArea">City Area:</label>
+            <input type="text" id="cityArea" placeholder="Enter city area" required><br><br>
+
+            <!-- Time Selection -->
+            <label for="time">Time:</label>
+            <input type="time" id="time" required><br><br>
+
+            <!-- Date Selection -->
+            <label for="date">Date:</label>
+            <input type="date" id="date" required><br><br>
+
+            <!-- Special Services Selection -->
+            <label for="specialServices">Special Services:</label>
+            <select id="specialServices" required>
+                <option value="">Select Special Service</option>
+                <option value="Anal">Anal</option>
+                <option value="Blowjob">Blowjob</option>
+                <option value="Titty Fuck">Titty Fuck</option>
+            </select><br><br>
+
+            <!-- Duration Selection -->
+            <label for="duration">Duration:</label>
+            <select id="duration" required>
+                <option value="">Select Duration</option>
+                <option value="Day">Day</option>
+                <option value="Overnight">Overnight</option>
+            </select><br><br>
+
+            <!-- Image Upload Input -->
+            <label for="image">Upload Image (Max 15MB):</label>
+            <input type="file" id="image" accept="image/*" required><br><br>
+
+            <!-- Submit Button -->
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+
+<!-- Offer Box Section -->
+    <div class="offer-boxes">
+        <h2>OFFER BOXES</h2>
+        <div class="grid-container" id="offerBox"></div>
+    </div>
+
+    <script>
+
+        // Your Firebase SDK snippet data
+        const firebaseConfig = {
+            apiKey: "AIzaSyBTbN32qHKbToIM7V6QeSjYwJOtlVxVfbs",
+            authDomain: "offerboxes-database.firebaseapp.com",
+            projectId: "offerboxes-database",
+            storageBucket: "offerboxes-database.appspot.com",
+            messagingSenderId: "1073708060501",
+            appId: "1:1073708060501:web:0f351d8bfdebf3e499a9dc",
+            measurementId: "G-RSZX0TLM2D"
+        };
+
+        // Initialize Firebase with the SDK snippet data
+        firebase.initializeApp(firebaseConfig);
+
+        // Reference to the Firebase Realtime Database
+        const database = firebase.database();
+
+        // Function to retrieve data from the database based on the profile username
+        function retrieveDataFromDatabase(username) {
+            // Find the user's data based on the profile ID (username)
+            database.ref('Offers').orderByChild('profileId').equalTo(username).on('value', (snapshot) => {
+                // Clear previous offer boxes
+                const offerBoxSection = document.getElementById('offerBox');
+                offerBoxSection.innerHTML = "";
+
+                // Iterate through the retrieved data and create offer boxes
+                snapshot.forEach((childSnapshot) => {
+                    const offerData = childSnapshot.val();
+
+                    // Create the offer box element
+                    const offerBox = document.createElement("div");
+                    offerBox.classList.add("grid-item");
+
+                    // Create the image element
+                    const imageElement = document.createElement("img");
+                    imageElement.src = offerData.imageURL; // Assuming you store the image URL in the database
+                    imageElement.alt = "Profile Image";
+
+                    // Create the offer information element
+                    const offerInfo = document.createElement("div");
+                    offerInfo.classList.add("parameters");
+
+                    // Add the offer information
+                    offerInfo.innerHTML = `
+                        <p>Order Code: ${offerData.orderCode}</p>
+                        <p>USERNAME- ${username}</p>
+                        <p>Client name- ${offerData.clientName}</p>
+                        <p>LOCATION- ${offerData.cityArea}</p>
+                        <p>TIME & DATE- ${offerData.time} ${offerData.date}</p>
+                        <p>SPECIAL SERVICES- ${offerData.specialServices}</p>
+                        <p>DURATION- ${offerData.duration}</p>
+                    `;
+
+                    // Append elements to the offer box
+                    offerBox.appendChild(imageElement);
+                    offerBox.appendChild(offerInfo);
+
+                    // Append the offer box to the offer box section
+                    offerBoxSection.appendChild(offerBox);
+                });
+            });
+        }
+
+// Function to save the form data to the database
+function saveFormDataToDatabase(formData, orderCode) {
+  // Create a reference to the 'Offers' node in the database
+  const offersRef = database.ref('Offers');
+
+  // Generate a unique key for the new order
+  const newOrderKey = offersRef.push().key;
+
+  // Create an object with the form data to be saved
+  const newOrderData = {
+    profileId: formData.username,
+    orderCode: orderCode,
+    clientName: formData.clientName,
+    cityArea: formData.cityArea,
+    time: formData.time,
+    date: formData.date,
+    specialServices: formData.specialServices,
+    duration: formData.duration,
+    imageURL: "URL_TO_YOUR_IMAGE", // Replace with the actual image URL
+  };
+
+  // Save the data to the database under the new order node
+  offersRef.child(newOrderKey).set(newOrderData);
+}
+
+
+        function playVideo() {
+            var video = document.getElementById('video');
+            video.style.display = 'block';
+            video.play();
+        }
+
+        function toggleForm() {
+            var formContainer = document.getElementById('formContainer');
+            formContainer.style.display = (formContainer.style.display === 'none') ? 'block' : 'none';
+        }
+
+        function formatTimeTo12HrFormat(time) {
+            // Convert the time to 12-hour format with AM/PM
+            var [hours, minutes] = time.split(":");
+            var period = parseInt(hours) >= 12 ? "PM" : "AM";
+            hours = (hours % 12) || 12;
+            return `${hours}:${minutes} ${period}`;
+        }
+
+        function generateOrderCode() {
+            return Math.floor(1000 + Math.random() * 9000);
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+
+            var username = document.getElementById('profileUsername').innerText;
+            var clientName = document.getElementById('clientName').value;
+            var phone = document.getElementById('phone').value;
+            var location = document.getElementById('location').value;
+            var cityArea = document.getElementById('cityArea').value;
+            var time = document.getElementById('time').value;
+            var date = document.getElementById('date').value;
+            var specialServices = document.getElementById('specialServices').value;
+            var duration = document.getElementById('duration').value;
+
+            // Format time to 12-hour format with AM/PM
+            time = formatTimeTo12HrFormat(time);
+
+            var formData = {
+                username: username,
+                clientName: clientName,
+                phone: phone,
+                location: location,
+                cityArea: cityArea,
+                time: time,
+                date: date,
+                specialServices: specialServices,
+                duration: duration,
+            };
+
+            // Generate a random 4-digit order code
+            var orderCode = generateOrderCode();
+
+            // Create the message to be sent to WhatsApp
+            var message = "NEW CLIENT OFFER\n\n";
+            message += "Order Code: " + orderCode + "\n\n";
+            message += "USERNAME- " + username + "\n\n";
+            message += "Client name- " + clientName + "\n\n";
+            message += "LOCATION- " + location + "\n\n";
+            message += "City Area- " + cityArea + "\n\n";
+            message += "TIME & DATE- " + time + " " + date + "\n\n";
+            message += "SPECIAL SERVICES- " + specialServices + "\n\n";
+            message += "DURATION- " + duration + "\n\n";
+            message += "Respond to Offer- (Insert link to the profile page's webpage)";
+
+            // Encode the message to be sent through the WhatsApp link
+            var encodedMessage = encodeURIComponent(message);
+
+            // Replace the link with your WhatsApp number
+            var url = "https://api.whatsapp.com/send/?phone=+2349093966284&text=" + encodedMessage;
+            window.open(url, "_blank");
+        }
+
+        // Call the function to retrieve data using the profile username as profile ID
+const profileUsername = document.getElementById('profileUsername').innerText;
+retrieveDataFromDatabase(profileUsername);
+
+    </script>
+</body>
+</html>
