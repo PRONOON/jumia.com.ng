@@ -82,24 +82,30 @@
         }
         
   /* Additional styles for the pop-up box */
-        .popup {
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 300px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-        }
+    .popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 20px;
+    background-color: #ff4d4d; /* Pinkish-red background color */
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    color: white; /* White text color */
+}
 
-        .popup-close {
-            float: right;
-            cursor: pointer;
-        }
+
+        
+.popup-close {
+    float: right;
+    cursor: pointer;
+    font-size: 15px; /* Set the font size to adjust the button size */
+    line-height: 1; /* Prevent additional vertical spacing */
+}
+
         
     </style>
 </head>
