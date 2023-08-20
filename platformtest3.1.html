@@ -108,6 +108,25 @@
     line-height: 1; /* Prevent additional vertical spacing */
 }
 
+        .floating-emojis {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.emoji {
+    position: absolute;
+    font-size: 24px; /* Adjust the font size as needed */
+    animation: float 5s infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(-20px, -20px); }
+    50% { transform: translate(20px, -20px); }
+    75% { transform: translate(20px, 20px); }
+}
+
         
     </style>
 </head>
@@ -365,6 +384,13 @@
         <!-- Add more grid items here -->
 
 
+
+        <div class="floating-emojis">
+    <span class="emoji">&#x1F952;</span> <!-- Cucumber emoji -->
+    <span class="emoji">&#x1F351;</span> <!-- Peach emoji -->
+    <span class="emoji">&#x1F61B;</span> <!-- Tongue out emoji -->
+    <span class="emoji">&#x1F4A6;</span> <!-- Water splash emoji -->
+</div>
 
         <!-- Pop-up box content -->
     <div class="popup" id="popupBox">
