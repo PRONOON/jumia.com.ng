@@ -108,23 +108,40 @@
     line-height: 1; /* Prevent additional vertical spacing */
 }
 
-        .floating-emojis {
+        /* Styles for the floating emojis container */
+.floating-emojis {
     position: fixed;
-    z-index: 9999;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
+    z-index: 1000;
 }
 
+/* Styles for each individual emoji */
 .emoji {
     position: absolute;
-    font-size: 24px; /* Adjust the font size as needed */
-    animation: float 5s infinite;
+    font-size: 50px;
+    pointer-events: none;
+    animation: floatEmoji 10s infinite linear; /* Apply the "floatEmoji" animation */
 }
 
-@keyframes float {
-    0%, 100% { transform: translate(0, 0); }
-    25% { transform: translate(-20px, -20px); }
-    50% { transform: translate(20px, -20px); }
-    75% { transform: translate(20px, 20px); }
+/* Define the "floatEmoji" animation */
+@keyframes floatEmoji {
+    0% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(-5px, -5px);
+    }
+    50% {
+        transform: translate(5px, -5px);
+    }
+    75% {
+        transform: translate(-5px, 5px);
+    }
+    100% {
+        transform: translate(5px, 5px);
+    }
 }
 
         
@@ -386,11 +403,12 @@
 
 
         <div class="floating-emojis">
-    <span class="emoji">&#x1F952;</span> <!-- Cucumber emoji -->
-    <span class="emoji">&#x1F351;</span> <!-- Peach emoji -->
-    <span class="emoji">&#x1F61B;</span> <!-- Tongue out emoji -->
-    <span class="emoji">&#x1F4A6;</span> <!-- Water splash emoji -->
+    <div class="emoji">🥒</div>
+    <div class="emoji">🍑</div>
+    <div class="emoji">😛</div>
+    <div class="emoji">💦</div>
 </div>
+
 
         <!-- Pop-up box content -->
     <div class="popup" id="popupBox">
