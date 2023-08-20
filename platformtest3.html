@@ -80,6 +80,27 @@
             font-size: 14px;
             line-height: 1.5;
         }
+        
+  /* Additional styles for the pop-up box */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .popup-close {
+            float: right;
+            cursor: pointer;
+        }
+        
     </style>
 </head>
 <body>
@@ -336,6 +357,21 @@
         </div>
         
         <!-- Add more grid items here -->
+
+
+
+        <!-- Pop-up box content -->
+    <div class="popup" id="popupBox">
+        <span class="popup-close" onclick="closePopup()">&times;</span>
+        <h2>HOW TO USE THE SEARCH INTERFACE</h2>
+        <ol>
+            <li>Select your criteria in any or all of the boxes and the search results above will fetch profiles that match your selection to the top of the results.</li>
+            <li>Profiles that match 4 of your WANTS will be listed first before profiles that match 3 are. And then 2, 1, and 0.</li>
+            <li>Any result that doesn't match your LOCATION SELECTION will not be displayed. To get all results, keep it in ALL.</li>
+            <li>You'll be redirected to a new browser tab/window every time you click on a profile to go to her main profile page, in order to avoid refreshing your Search selection.</li>
+            <li>Final Tip: Have Fun.</li>
+        </ol>
+    </div>
     </div>
 <script>
 
@@ -423,6 +459,22 @@ window.onload = function () {
     select.addEventListener("change", refreshResults);
   }
 };
+
+    // Function to open the pop-up box
+        function openPopup() {
+            document.getElementById("popupBox").style.display = "block";
+        }
+
+        // Function to close the pop-up box
+        function closePopup() {
+            document.getElementById("popupBox").style.display = "none";
+        }
+
+        // Show the pop-up box when the page loads
+        window.onload = function () {
+            openPopup();
+            // Your existing code for initializing other functions
+        };
 
 </script>
     
