@@ -6,7 +6,7 @@
         body {
             font-family: Arial, sans-serif;
             background-color: white;
-            zoom: 60%; /* Zoom out the page */
+            zoom: 70%; /* Zoom out the page */
         }
 
         h1 {
@@ -40,24 +40,23 @@
             border-radius: 5px;
         }
 
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            grid-gap: 20px;
-            margin: 50px auto;
-            max-width: 1600px;
-        }
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust width of columns */
+    grid-gap: 20px;
+    margin: 50px auto;
+    max-width: 1600px;
+}
 
-        .grid-item {
+.grid-item {
     background-color: #87CEEB; /* Make the grid boxes blue */
     border-radius: 15px; /* Give the grid boxes more rounded edges */
-    padding: 20px;
+    padding: 10px; /* Adjust padding for shorter height */
     text-align: center;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     animation: vibrate 5s infinite; /* Apply the "vibrate" animation */
-    width: calc(40% - 40px); /* Make the grid items 20% wider */
-    height: calc(80% - 40px); /* Make the grid items 20% shorter */
 }
+
 
 
         .grid-item a {
