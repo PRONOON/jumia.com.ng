@@ -470,37 +470,19 @@ function refreshResults() {
   filterProfiles();
   prioritizeResults();
 }
-
-// Initialize the functions when the page loads
-window.onload = function () {
-  refreshResults();
-
-  var selects = document.getElementsByTagName("select");
-  for (var i = 0; i < selects.length; i++) {
-    var select = selects[i];
-    select.addEventListener("change", refreshResults);
-  }
-};
-
-    // Function to open the pop-up box
-        function openPopup() {
-            document.getElementById("popupBox").style.display = "block";
-        }
-
-        // Function to close the pop-up box
-        function closePopup() {
-            document.getElementById("popupBox").style.display = "none";
-        }
-
-        // Show the pop-up box when the page loads
-        window.onload = function () {
-            openPopup();
-            // Your existing code for initializing other functions
-        };
-
 </script>
-
+    
 <script>
+    // Function to open the pop-up box
+    function openPopup() {
+        document.getElementById("popupBox").style.display = "block";
+    }
+
+    // Function to close the pop-up box
+    function closePopup() {
+        document.getElementById("popupBox").style.display = "none";
+    }
+
     // Function to stop the vibration animation after a delay
     function stopVibration() {
         var gridItems = document.querySelectorAll(".grid-item");
@@ -511,14 +493,25 @@ window.onload = function () {
         }, 3000);
     }
 
-    // Call the function when the page loads
+    // Initialize functions when the page loads
     window.onload = function() {
+        // Call the functions
+        openPopup();
         stopVibration();
-        // Your existing code for initializing other functions
+
+        // Add event listeners to select elements
+        var selects = document.getElementsByTagName("select");
+        for (var i = 0; i < selects.length; i++) {
+            var select = selects[i];
+            select.addEventListener("change", refreshResults);
+        }
+
+        // Initialize the filtering and prioritizing functions
+        refreshResults();
     };
 </script>
 
-    
+   
     
 </body>
 </html>
