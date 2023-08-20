@@ -109,7 +109,7 @@
 }
 
         /* Styles for the floating emojis container */
-.floati/* Styles for the floating emojis container */
+.floati//* Styles for the floating emojis container */
 .floating-emojis {
     position: fixed;
     width: 100%;
@@ -121,30 +121,29 @@
 /* Styles for each individual emoji */
 .emoji {
     position: absolute;
-    font-size: 50px;
+    font-size: 80px;
     pointer-events: none;
-    animation: floatEmoji 10s infinite linear; /* Apply the "floatEmoji" animation */
+    animation: floatEmoji 5s infinite linear; /* Adjust animation duration */
 }
 
 /* Define the "floatEmoji" animation */
 @keyframes floatEmoji {
     0% {
-        transform: translate(0, 0);
+        transform: translate(0, 0) rotate(0deg); /* Add rotation for variety */
     }
     25% {
-        transform: translate(-5px, -5px);
+        transform: translate(-100px, -100px) rotate(90deg);
     }
     50% {
-        transform: translate(5px, -5px);
+        transform: translate(100px, -100px) rotate(180deg);
     }
     75% {
-        transform: translate(-5px, 5px);
+        transform: translate(-100px, 100px) rotate(270deg);
     }
     100% {
-        transform: translate(5px, 5px);
+        transform: translate(100px, 100px) rotate(360deg);
     }
 }
-
 
         
     </style>
