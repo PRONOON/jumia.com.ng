@@ -108,8 +108,7 @@
     line-height: 1; /* Prevent additional vertical spacing */
 }
 
-        /* Styles for the floating emojis container */
-.floati//* Styles for the floating emojis container */
+  /* Styles for the floating emojis container */
 .floating-emojis {
     position: fixed;
     width: 100%;
@@ -121,27 +120,27 @@
 /* Styles for each individual emoji */
 .emoji {
     position: absolute;
-    font-size: 80px;
+    font-size: 50px;
     pointer-events: none;
-    animation: floatEmoji 5s infinite linear; /* Adjust animation duration */
+    animation: floatEmoji 10s infinite linear;
 }
 
 /* Define the "floatEmoji" animation */
 @keyframes floatEmoji {
     0% {
-        transform: translate(0, 0) rotate(0deg); /* Add rotation for variety */
+        transform: translate(0, 0);
     }
     25% {
-        transform: translate(-100px, -100px) rotate(90deg);
+        transform: translate(-100px, -100px);
     }
     50% {
-        transform: translate(100px, -100px) rotate(180deg);
+        transform: translate(100px, -200px);
     }
     75% {
-        transform: translate(-100px, 100px) rotate(270deg);
+        transform: translate(-150px, 150px);
     }
     100% {
-        transform: translate(100px, 100px) rotate(360deg);
+        transform: translate(200px, 200px);
     }
 }
 
