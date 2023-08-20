@@ -53,6 +53,9 @@
             text-align: center;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
+            animation: vibrate 5s infinite; /* Apply the "vibrate" animation */
+}
+
         }
 
         .grid-item a {
@@ -80,6 +83,16 @@
             font-size: 14px;
             line-height: 1.5;
         }
+
+        
+        /* Define the "vibrate" animation */
+@keyframes vibrate {
+    0% { transform: translate(0); }
+    25% { transform: translate(-2px, 2px); }
+    50% { transform: translate(2px, -2px); }
+    75% { transform: translate(-2px, 2px); }
+    100% { transform: translate(0); }
+}
         
   /* Additional styles for the pop-up box */
 .popup {
@@ -201,7 +214,7 @@
 
     <div class="grid-container">
     
-        <div class="grid-item">
+        <div class="grid-item vibration">
             <a href="profile1.html">
                 <img src="PTIMG.jpeg" alt="Profile Image">
                 <div class="parameters">
@@ -218,7 +231,7 @@
         </div>
 
 
-        <div class="grid-item">
+        <div class="grid-item vibration">
             <a href="Profile2.html" target="_blank">
                 <img class="profile-image" src="PTIMG.jpeg" alt="Profile Image">
                 <div class="parameters">
@@ -234,7 +247,7 @@
             </a>
         </div>
         
-        <div class="grid-item">
+        <div class="grid-item vibration">
             <a href="Profile3.html" target="_blank">
                 <img class="profile-image" src="PTIMG.jpeg" alt="Profile Image">
                 <div class="parameters">
@@ -250,7 +263,7 @@
             </a>
         </div>
         
-        <div class="grid-item">
+        <div class="grid-item vibration">
             <a href="Profile4.html" target="_blank">
                 <img class="profile-image" src="PTIMG.jpeg" alt="Profile Image">
                 <div class="parameters">
@@ -266,7 +279,7 @@
             </a>
         </div>
         
-        <div class="grid-item">
+        <div class="grid-item vibration">
             <a href="Profile5.html" target="_blank">
                 <img class="profile-image" src="PTIMG.jpeg" alt="Profile Image">
                 <div class="parameters">
@@ -282,7 +295,7 @@
             </a>
         </div>
         
-        <div class="grid-item">
+        <div class="grid-item vibration">
             <a href="Profile6.html" target="_blank">
                 <img class="profile-image" src="PTIMG.jpeg" alt="Profile Image">
                 <div class="parameters">
@@ -298,7 +311,7 @@
             </a>
         </div>
         
-        <div class="grid-item">
+        <div class="grid-item vibration">
             <a href="Profile7.html" target="_blank">
                 <img class="profile-image" src="PTIMG.jpeg" alt="Profile Image">
                 <div class="parameters">
@@ -313,8 +326,7 @@
                 </div>
             </a>
         </div>
-        
-        <div class="grid-item">
+        <div class="grid-item vibration">
             <a href="Profile8.html" target="_blank">
                 <img class="profile-image" src="PTIMG.jpeg" alt="Profile Image">
                 <div class="parameters">
@@ -329,8 +341,8 @@
                 </div>
             </a>
         </div>
-        
-        <div class="grid-item">
+      
+        <div class="grid-item vibration">
             <a href="Profile9.html" target="_blank">
                 <img class="profile-image" src="PTIMG.jpeg" alt="Profile Image">
                 <div class="parameters">
@@ -346,7 +358,7 @@
             </a>
         </div>
         
-        <div class="grid-item">
+        <div class="grid-item vibration">
             <a href="Profile10.html" target="_blank">
                 <img class="profile-image" src="PTIMG.jpeg" alt="Profile Image">
                 <div class="parameters">
@@ -487,6 +499,26 @@ window.onload = function () {
         };
 
 </script>
+
+<script>
+    // Function to stop the vibration animation after a delay
+    function stopVibration() {
+        var gridItems = document.querySelectorAll(".grid-item");
+        setTimeout(function() {
+            for (var i = 0; i < gridItems.length; i++) {
+                gridItems[i].classList.remove("vibration");
+            }
+        }, 3000);
+    }
+
+    // Call the function when the page loads
+    window.onload = function() {
+        stopVibration();
+        // Your existing code for initializing other functions
+    };
+</script>
+
+    
     
 </body>
 </html>
