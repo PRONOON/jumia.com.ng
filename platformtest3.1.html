@@ -91,28 +91,27 @@
     object-fit: cover;
     border-radius: 5px;
     margin-bottom: 10px;
+    cursor: pointer; /* Add cursor pointer to indicate interaction */
 }
 
-/* Play button styles */
-.play-button {
+/* Style for the play button overlay */
+.play-button-overlay {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50px;
-    height: 50px;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 50%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
+    cursor: pointer; /* Add cursor pointer to indicate interaction */
 }
 
-.play-button::after {
-    content: "\25B6"; /* Unicode character for play symbol */
-    font-size: 30px;
+/* Style for the play button icon */
+.play-button-icon {
     color: white;
+    font-size: 50px;
 }
 
 
@@ -304,10 +303,11 @@
                 
         <div class="grid-item">
 
-        <div class="media-container">
-            
-            <video src="PTVID1.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
-            <div class="play-button"></div>
+       <div class="media-container">
+            <video id="video1" src="PTVID1.mp4" type="video/mp4" preload="auto" loop playsinline></video>
+            <div class="play-button-overlay">
+                <span class="play-button-icon">&#9658;</span> <!-- Play button icon, you can replace this with your preferred icon -->
+            </div>
         </div>
                 <a href="profile1.html">
         <div class="parameters">
@@ -329,11 +329,11 @@
         
         <div class="grid-item">
     
-        <div class="media-container">
-        
-            <video src="PTVID2.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
-            <div class="play-button"></div>
-        
+      <div class="media-container">
+            <video id="video1" src="PTVID1.mp4" type="video/mp4" preload="auto" loop playsinline></video>
+            <div class="play-button-overlay">
+                <span class="play-button-icon">&#9658;</span> <!-- Play button icon, you can replace this with your preferred icon -->
+            </div>
         </div>
             <a href="profile1.html">
                 <div class="parameters">
