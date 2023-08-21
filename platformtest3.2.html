@@ -255,14 +255,14 @@
         </div>
     </div>
     
-<!-- Replace the <video> element with <div> element and add parameters link -->
-<div class="grid-item">
-        <div class="video-thumbnail">
-            <img src="PTIMG.jpeg" alt="Thumbnail Image">
-        </div>
-        <video src="video1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
-        <a href="Profile1.html" target="_blank">
-        <div class="parameters">
+
+    <div class="grid-container">
+    
+        <div class="grid-item">
+            <a href="Profile2.html" target="_blank">
+            <video id="video2" src="PTVID1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
+            
+                <div class="parameters">
                     <p>Username: Clara_Of_Lagos</p>
                     <p>Location: Abuja</p>
                     <p>Age: 22-25</p>
@@ -276,13 +276,11 @@
         </div>
 
 
-     <div class="grid-item">
-        <div class="video-thumbnail">
-            <img src="PTIMG.jpeg" alt="Thumbnail Image">
-        </div>
-        <video src="video1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
-        <a href="Profile1.html" target="_blank">
-        <div class="parameters">
+        <div class="grid-item">
+            <a href="Profile2.html" target="_blank">
+            <video id="video3" src="PTVID1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
+            
+                <div class="parameters">
                     <p><strong>Username:</strong> Patricia4U</p>
                     <p><strong>Location:</strong> Anambra</p>
                     <p><strong>Age:</strong> 22-25</p>
@@ -534,17 +532,58 @@
     prioritizeResults();
   }
 
-  // Initialize the functions when the page loads
-  window.onload = function () {
-    refreshResults();
+// Function to play videos in 5 seconds loops on click
+function playVideoLoop(video) {
+  video.play();
+  video.addEventListener("ended", function () {
+    video.currentTime = 0;
+    video.play();
+  });
+}
 
-    var selects = document.getElementsByTagName("select");
-    for (var i = 0; i < selects.length; i++) {
-      var select = selects[i];
-      select.addEventListener("change", refreshResults);
-    }
+// Function to set the default thumbnail image
+function setDefaultThumbnail(video) {
+  video.addEventListener("loadeddata", function () {
+    var thumbnail = document.createElement("img");
+    thumbnail.src = video.poster;
+    thumbnail.classList.add("thumbnail");
+    video.parentNode.insertBefore(thumbnail, video);
+  });
+}
 
-    openPopup(); // Open the pop-up when the page loads
+// Function to make the parameters div a clickable link
+function makeParametersClickable() {
+  var parametersDivs = document.querySelectorAll(".grid-item .parameters");
+
+  parametersDivs.forEach(function (parametersDiv) {
+    var link = parametersDiv.parentNode.getAttribute("href");
+    parametersDiv.style.cursor = "pointer";
+    parametersDiv.addEventListener("click", function () {
+      window.location.href = link;
+    });
+  });
+}
+
+// Initialize the functions when the page loads
+window.onload = function () {
+  var videos = document.querySelectorAll("video");
+
+  videos.forEach(function (video) {
+    playVideoLoop(video);
+    setDefaultThumbnail(video);
+  });
+
+  makeParametersClickable();
+
+  refreshResults();
+
+  var selects = document.getElementsByTagName("select");
+  for (var i = 0; i < selects.length; i++) {
+    var select = selects[i];
+    select.addEventListener("change", refreshResults);
+  }
+
+openPopup(); // Open the pop-up when the page loads
   };
 
   // Function to open the pop-up box
@@ -557,47 +596,8 @@
     document.getElementById("popupBox").style.display = "none";
   }
 
-    // Function to toggle video playback on click
-function toggleVideoPlayback(video, thumbnail) {
-  if (video.style.display === "none") {
-    video.style.display = "block";
-    thumbnail.style.display = "none";
-    video.play();
-  } else {
-    video.style.display = "none";
-    thumbnail.style.display = "block";
-    video.pause();
-  }
-}
-
-// Function to set video loop and time updates
-function setupVideoLoop(video, thumbnail) {
-  video.addEventListener("timeupdate", function () {
-    if (video.currentTime >= 5) {
-      video.currentTime = 0;
-    }
-  });
-
-  thumbnail.addEventListener("click", function () {
-    toggleVideoPlayback(video, thumbnail);
-  });
-
-  video.addEventListener("ended", function () {
-    toggleVideoPlayback(video, thumbnail);
-  });
-}
-
-// Initialize video loop for all videos
-var gridItems = document.getElementsByClassName("grid-item");
-for (var i = 0; i < gridItems.length; i++) {
-  var videoThumbnail = gridItems[i].querySelector(".video-thumbnail img");
-  var video = gridItems[i].querySelector("video");
-  setupVideoLoop(video, videoThumbnail);
-}
-
 </script>
 
     
 </body>
 </html>
- 
