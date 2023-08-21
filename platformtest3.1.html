@@ -109,9 +109,7 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-       z-index: -1; /* Adjust the z-index to position the play button below the video */
 }
-
 
 .play-button::before {
     content: '\25B6'; /* Play icon */
@@ -331,15 +329,21 @@
 
 
         
-        <div class="grid-item">
+        
     
-      <div class="media-container">
-            <video id="video2" src="PTVID2.mp4" type="video/mp4" preload="auto" loop autoplay playsinline></video>
-<div class="play-button"></div>
-
+      <div class="grid-item">
+    <a href="profile1.html" class="grid-link">
+        <div class="media-container">
+            <img src="PTIMG.jpeg" alt="Profile Image">
+            <video id="video1" src="PTVID1.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
+            <div class="play-button"></div>
         </div>
-            <a href="profile1.html">
-                <div class="parameters">
+        <div class="parameters">
+            <!-- Profile information here -->
+        </div>
+    </a>
+</div>
+
                     <p><strong>Username:</strong> Patricia4U</p>
                     <p><strong>Location:</strong> Anambra</p>
                     <p><strong>Age:</strong> 22-25</p>
@@ -358,9 +362,15 @@
     <a href="profile1.html" class="grid-link">
         <div class="media-container">
             <img src="PTIMG.jpeg" alt="Profile Image">
-            <video id="video1" src="PTVID1.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
+            <video id="video22" src="PTVID2.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
+            <div class="play-button"></div>
         </div>
-                <div class="parameters">
+        <div class="parameters">
+            <!-- Profile information here -->
+        </div>
+    </a>
+</div>
+
                     <p><strong>Username:</strong> CindyNaija</p>
                     <p><strong>Location:</strong> Akure</p>
                     <p><strong>Age:</strong> 26-30</p>
