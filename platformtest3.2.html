@@ -543,12 +543,27 @@ function playVideoLoop(video) {
 
 // Function to set the default thumbnail image
 function setDefaultThumbnail(video) {
-  video.addEventListener("loadeddata", function () {
-    var thumbnail = document.createElement("img");
-    thumbnail.src = video.poster;
-    thumbnail.classList.add("thumbnail");
-    video.parentNode.insertBefore(thumbnail, video);
-  });
+  var thumbnail = document.createElement("img");
+  thumbnail.src = video.poster;
+  thumbnail.classList.add("thumbnail");
+  video.parentNode.insertBefore(thumbnail, video);
+}
+
+// Function to toggle between video and thumbnail
+function toggleVideoThumbnail(element) {
+  var video = element.querySelector("video");
+  var thumbnail = element.querySelector(".thumbnail");
+
+  if (video.paused) {
+    video.style.display = "block";
+    thumbnail.style.display = "none";
+    playVideoLoop(video);
+    video.play();
+  } else {
+    video.style.display = "none";
+    thumbnail.style.display = "block";
+    video.pause();
+  }
 }
 
 // Function to make the parameters div a clickable link
@@ -556,10 +571,10 @@ function makeParametersClickable() {
   var parametersDivs = document.querySelectorAll(".grid-item .parameters");
 
   parametersDivs.forEach(function (parametersDiv) {
-    var link = parametersDiv.parentNode.getAttribute("href");
     parametersDiv.style.cursor = "pointer";
     parametersDiv.addEventListener("click", function () {
-      window.location.href = link;
+      var gridItem = parametersDiv.closest(".grid-item");
+      toggleVideoThumbnail(gridItem);
     });
   });
 }
@@ -569,13 +584,10 @@ window.onload = function () {
   var videos = document.querySelectorAll("video");
 
   videos.forEach(function (video) {
-    playVideoLoop(video);
     setDefaultThumbnail(video);
   });
 
   makeParametersClickable();
-
-  refreshResults();
 
   var selects = document.getElementsByTagName("select");
   for (var i = 0; i < selects.length; i++) {
@@ -583,6 +595,7 @@ window.onload = function () {
     select.addEventListener("change", refreshResults);
   }
 
+  
 openPopup(); // Open the pop-up when the page loads
   };
 
