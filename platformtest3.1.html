@@ -588,6 +588,32 @@
   function closePopup() {
     document.getElementById("popupBox").style.display = "none";
   }
+
+document.addEventListener("DOMContentLoaded", function() {
+    var gridItems = document.querySelectorAll(".grid-item");
+
+    gridItems.forEach(function(gridItem) {
+        var mediaContainer = gridItem.querySelector(".media-container");
+        var img = mediaContainer.querySelector("img");
+        var video = mediaContainer.querySelector("video");
+
+        // Show the image and hide the video initially
+        img.style.display = "block";
+        video.style.display = "none";
+
+        // Play the video for the first 5 seconds
+        video.currentTime = 0;
+        video.play();
+        setTimeout(function() {
+            // Pause the video and hide it after 5 seconds
+            video.pause();
+            video.style.display = "none";
+            img.style.display = "block";
+        }, 5000);
+    });
+});
+
+    
 </script>
 
     
