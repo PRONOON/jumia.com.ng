@@ -309,10 +309,10 @@
         
         
         <div class="grid-item">
-    <a href="profile1.html">
+    <a href="profile1.html" class="grid-link">
         <div class="media-container">
             <img src="PTIMG.jpeg" alt="Profile Image">
-            <video src="PTVID1.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
+            <video id="video1" src="PTVID1.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
         </div>
                 <div class="parameters">
                     <p><strong>Username:</strong> CindyNaija</p>
@@ -329,10 +329,10 @@
         
         
         <div class="grid-item">
-    <a href="profile1.html">
+    <a href="profile1.html" class="grid-link">
         <div class="media-container">
             <img src="PTIMG.jpeg" alt="Profile Image">
-            <video src="PTVID1.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
+            <video id="video2" src="PTVID2.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
         </div>
                 <div class="parameters">
                     <p><strong>Username:</strong> ThatEdoBabe</p>
@@ -348,10 +348,10 @@
         </div>
         
         <div class="grid-item">
-    <a href="profile1.html">
+    <a href="profile1.html" class="grid-link">
         <div class="media-container">
             <img src="PTIMG.jpeg" alt="Profile Image">
-            <video src="PTVID2.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
+            <video id="video3" src="PTVID2.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
         </div>
                 <div class="parameters">
                     <p><strong>Username:</strong> Bella</p>
@@ -367,10 +367,10 @@
         </div>
         
         <div class="grid-item">
-    <a href="profile1.html">
+    <a href="profile1.html" class="grid-link">
         <div class="media-container">
             <img src="PTIMG.jpeg" alt="Profile Image">
-            <video src="PTVID1.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
+            <video id="video4" src="PTVID1.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
         </div>
                 <div class="parameters">
                     <p><strong>Username:</strong> Funke</p>
@@ -387,10 +387,10 @@
         
         
         <div class="grid-item">
-    <a href="profile1.html">
+    <a href="profile1.html" class="grid-link">
         <div class="media-container">
             <img src="PTIMG.jpeg" alt="Profile Image">
-            <video src="PTVID2.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
+            <video id="video5" src="PTVID2.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
         </div>
                 <div class="parameters">
                     <p><strong>Username:</strong> DemGoTire</p>
@@ -406,10 +406,10 @@
         </div>
         
         <div class="grid-item">
-    <a href="profile1.html">
+    <a href="profile1.html" class="grid-link">
         <div class="media-container">
             <img src="PTIMG.jpeg" alt="Profile Image">
-            <video src="PTVID1.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
+            <video id="video6" src="PTVID1.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
         </div>
                 <div class="parameters">
                     <p><strong>Username:</strong> Damife4rmNaija</p>
@@ -426,10 +426,10 @@
         
         
         <div class="grid-item">
-    <a href="profile1.html">
+    <a href="profile1.html" class="grid-link">
         <div class="media-container">
             <img src="PTIMG.jpeg" alt="Profile Image">
-            <video src="PTVID2.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
+            <video id="video7" src="PTVID2.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
         </div>
                 <div class="parameters">
                     <p><strong>Username:</strong> Seunfunmi</p>
@@ -443,12 +443,11 @@
                 </div>
             </a>
         </div>
-        
         <div class="grid-item">
-    <a href="profile1.html">
+    <a href="profile1.html" class="grid-link">
         <div class="media-container">
             <img src="PTIMG.jpeg" alt="Profile Image">
-            <video src="PTVID1.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
+            <video id="video8" src="PTVID1.mp4" type="video/mp4" preload="auto" loop muted playsinline></video>
         </div>
                 <div class="parameters">
                     <p><strong>Username:</strong> BeauT</p>
@@ -588,28 +587,40 @@
   function closePopup() {
     document.getElementById("popupBox").style.display = "none";
   }
+    
 
-document.addEventListener("DOMContentLoaded", function() {
-    var gridItems = document.querySelectorAll(".grid-item");
+// Add an event listener to each grid item's link
+var gridLinks = document.getElementsByClassName("grid-link");
+for (var i = 0; i < gridLinks.length; i++) {
+    gridLinks[i].addEventListener("click", toggleMedia);
+}
 
-    gridItems.forEach(function(gridItem) {
-        var mediaContainer = gridItem.querySelector(".media-container");
-        var img = mediaContainer.querySelector("img");
-        var video = mediaContainer.querySelector("video");
+// Function to toggle between image and video in the media container
+function toggleMedia(event) {
+    event.preventDefault();
+    var mediaContainer = this.querySelector(".media-container");
+    var img = mediaContainer.querySelector("img");
+    var video = mediaContainer.querySelector("video");
 
-        // Show the image and hide the video initially
+    // Toggle visibility of img and video
+    if (img.style.display === "none") {
         img.style.display = "block";
         video.style.display = "none";
-
-        // Play the video for the first 5 seconds
-        video.currentTime = 0;
+    } else {
+        img.style.display = "none";
+        video.style.display = "block";
+        // Start playing the video
         video.play();
+    }
+}
+
+// Automatically pause videos after 5 seconds
+document.querySelectorAll("video").forEach(function(video) {
+    video.addEventListener("loadedmetadata", function() {
+        var duration = Math.min(video.duration, 5);
         setTimeout(function() {
-            // Pause the video and hide it after 5 seconds
             video.pause();
-            video.style.display = "none";
-            img.style.display = "block";
-        }, 5000);
+        }, duration * 1000);
     });
 });
 
