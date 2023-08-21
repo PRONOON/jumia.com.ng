@@ -255,14 +255,14 @@
         </div>
     </div>
     
-
-    <div class="grid-container">
-    
-        <div class="grid-item">
-            <a href="Profile2.html" target="_blank">
-            <video id="video2" src="PTVID1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
-            
-                <div class="parameters">
+<!-- Replace the <video> element with <div> element and add parameters link -->
+<div class="grid-item">
+        <div class="video-thumbnail">
+            <img src="PTIMG.jpeg" alt="Thumbnail Image">
+        </div>
+        <video src="video1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
+        <a href="Profile1.html" target="_blank">
+        <div class="parameters">
                     <p>Username: Clara_Of_Lagos</p>
                     <p>Location: Abuja</p>
                     <p>Age: 22-25</p>
@@ -276,11 +276,13 @@
         </div>
 
 
-        <div class="grid-item">
-            <a href="Profile2.html" target="_blank">
-            <video id="video3" src="PTVID1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
-            
-                <div class="parameters">
+     <div class="grid-item">
+        <div class="video-thumbnail">
+            <img src="PTIMG.jpeg" alt="Thumbnail Image">
+        </div>
+        <video src="video1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
+        <a href="Profile1.html" target="_blank">
+        <div class="parameters">
                     <p><strong>Username:</strong> Patricia4U</p>
                     <p><strong>Location:</strong> Anambra</p>
                     <p><strong>Age:</strong> 22-25</p>
@@ -555,24 +557,44 @@
     document.getElementById("popupBox").style.display = "none";
   }
 
-    var videos = document.getElementsByTagName("video");
-    for (var i = 0; i < videos.length; i++) {
-        var video = videos[i];
-        video.addEventListener("click", function () {
-            if (this.paused) {
-                this.play();
-            } else {
-                this.pause();
-            }
-        });
-        
-        // Add loop behavior
-        video.addEventListener("timeupdate", function () {
-            if (this.currentTime >= 5) {
-                this.currentTime = 0;
-            }
-        });
+    // Function to toggle video playback on click
+function toggleVideoPlayback(video, thumbnail) {
+  if (video.style.display === "none") {
+    video.style.display = "block";
+    thumbnail.style.display = "none";
+    video.play();
+  } else {
+    video.style.display = "none";
+    thumbnail.style.display = "block";
+    video.pause();
+  }
+}
+
+// Function to set video loop and time updates
+function setupVideoLoop(video, thumbnail) {
+  video.addEventListener("timeupdate", function () {
+    if (video.currentTime >= 5) {
+      video.currentTime = 0;
     }
+  });
+
+  thumbnail.addEventListener("click", function () {
+    toggleVideoPlayback(video, thumbnail);
+  });
+
+  video.addEventListener("ended", function () {
+    toggleVideoPlayback(video, thumbnail);
+  });
+}
+
+// Initialize video loop for all videos
+var gridItems = document.getElementsByClassName("grid-item");
+for (var i = 0; i < gridItems.length; i++) {
+  var videoThumbnail = gridItems[i].querySelector(".video-thumbnail img");
+  var video = gridItems[i].querySelector("video");
+  setupVideoLoop(video, videoThumbnail);
+}
+
 </script>
 
     
