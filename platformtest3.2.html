@@ -617,7 +617,7 @@ function initializePage() {
     var thumbnail = gridItem.getElementsByClassName("thumbnail")[0];
 
     // Set the first frame of the video as the thumbnail
-    video.addEventListener("loadeddata", function() {
+    video.addEventListener("loadedmetadata", function() {
       var canvas = document.createElement("canvas");
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
@@ -648,6 +648,7 @@ window.onload = function() {
 
   openPopup(); // Open the pop-up when the page loads
 };
+
   // Function to open the pop-up box
   function openPopup() {
     document.getElementById("popupBox").style.display = "block";
