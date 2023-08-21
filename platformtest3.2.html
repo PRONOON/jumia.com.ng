@@ -259,9 +259,9 @@
     <div class="grid-container">
     
         <div class="grid-item">
-            
-            <video id="video2" src="PTVID1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
             <a href="Profile2.html" target="_blank">
+            <video id="video2" src="PTVID1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
+            
                 <div class="parameters">
                     <p>Username: Clara_Of_Lagos</p>
                     <p>Location: Abuja</p>
@@ -532,72 +532,54 @@
     prioritizeResults();
   }
 
-// Function to play videos in 5 seconds loops on click
-function playVideoLoop(video) {
-  video.play();
-  video.addEventListener("ended", function () {
-    video.currentTime = 0;
-    video.play();
-  });
-}
-
-// Function to set the default thumbnail image
-function setDefaultThumbnail(video) {
-  var thumbnail = document.createElement("img");
-  thumbnail.src = video.poster;
-  thumbnail.classList.add("thumbnail");
-  video.parentNode.insertBefore(thumbnail, video);
-}
-
-// Function to toggle between video and thumbnail
-function toggleVideoThumbnail(element) {
-  var video = element.querySelector("video");
-  var thumbnail = element.querySelector(".thumbnail");
+  // Function to toggle video playback and thumbnail mode
+function toggleVideo(videoId) {
+  var video = document.getElementById(videoId);
+  var thumbnail = video.nextElementSibling; // Assuming thumbnail is the next element after the video
+  var videoContainer = video.closest(".grid-item");
 
   if (video.paused) {
-    video.style.display = "block";
-    thumbnail.style.display = "none";
-    playVideoLoop(video);
     video.play();
+    thumbnail.style.display = "none";
+    videoContainer.classList.add("playing");
   } else {
-    video.style.display = "none";
-    thumbnail.style.display = "block";
     video.pause();
+    video.currentTime = 0; // Reset video to the beginning
+    thumbnail.style.display = "block";
+    videoContainer.classList.remove("playing");
   }
 }
 
-// Function to make the parameters div a clickable link
-function makeParametersClickable() {
-  var parametersDivs = document.querySelectorAll(".grid-item .parameters");
-
-  parametersDivs.forEach(function (parametersDiv) {
-    parametersDiv.style.cursor = "pointer";
-    parametersDiv.addEventListener("click", function () {
-      var gridItem = parametersDiv.closest(".grid-item");
-      toggleVideoThumbnail(gridItem);
-    });
-  });
+// Function to redirect to Profile1.HTML
+function redirectToProfile() {
+  window.location.href = "Profile1.html";
 }
 
 // Initialize the functions when the page loads
 window.onload = function () {
-  var videos = document.querySelectorAll("video");
+  var videoContainers = document.getElementsByClassName("grid-item");
 
-  videos.forEach(function (video) {
-    setDefaultThumbnail(video);
-  });
+  for (var i = 0; i < videoContainers.length; i++) {
+    var videoContainer = videoContainers[i];
+    var video = videoContainer.querySelector("video");
+    var thumbnail = video.nextElementSibling;
 
-  makeParametersClickable();
+    // Set up click event listeners for video toggle
+    videoContainer.addEventListener("click", function (event) {
+      if (!event.target.matches("video")) {
+        toggleVideo(video.id);
+      }
+    });
 
-  var selects = document.getElementsByTagName("select");
-  for (var i = 0; i < selects.length; i++) {
-    var select = selects[i];
-    select.addEventListener("change", refreshResults);
+    // Set up click event listener for parameters div redirection
+    var parametersDiv = videoContainer.querySelector(".parameters");
+    parametersDiv.addEventListener("click", redirectToProfile);
   }
-
   
-openPopup(); // Open the pop-up when the page loads
-  };
+  openPopup(); // Open the pop-up when the page loads
+};
+
+    
 
   // Function to open the pop-up box
   function openPopup() {
@@ -608,9 +590,9 @@ openPopup(); // Open the pop-up when the page loads
   function closePopup() {
     document.getElementById("popupBox").style.display = "none";
   }
-
 </script>
 
     
 </body>
 </html>
+ 
