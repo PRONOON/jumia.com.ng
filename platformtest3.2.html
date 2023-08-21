@@ -554,6 +554,25 @@
   function closePopup() {
     document.getElementById("popupBox").style.display = "none";
   }
+
+    var videos = document.getElementsByTagName("video");
+    for (var i = 0; i < videos.length; i++) {
+        var video = videos[i];
+        video.addEventListener("click", function () {
+            if (this.paused) {
+                this.play();
+            } else {
+                this.pause();
+            }
+        });
+        
+        // Add loop behavior
+        video.addEventListener("timeupdate", function () {
+            if (this.currentTime >= 5) {
+                this.currentTime = 0;
+            }
+        });
+    }
 </script>
 
     
