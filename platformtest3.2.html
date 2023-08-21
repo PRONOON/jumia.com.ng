@@ -259,9 +259,9 @@
     <div class="grid-container">
     
         <div class="grid-item">
-           
+            <a href="Profile2.html" target="_blank">
             <video id="video2" src="PTVID1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
-             <a href="Profile2.html" target="_blank">
+            
                 <div class="parameters">
                     <p>Username: Clara_Of_Lagos</p>
                     <p>Location: Abuja</p>
@@ -277,9 +277,9 @@
 
 
         <div class="grid-item">
-            
-            <video id="video3" src="PTVID1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
             <a href="Profile2.html" target="_blank">
+            <video id="video3" src="PTVID1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
+            
                 <div class="parameters">
                     <p><strong>Username:</strong> Patricia4U</p>
                     <p><strong>Location:</strong> Anambra</p>
@@ -294,9 +294,9 @@
         </div>
         
         <div class="grid-item">
-            
-            <video id="video4" src="PTVID1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
             <a href="Profile2.html" target="_blank">
+            <video id="video4" src="PTVID1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
+            
                 <div class="parameters">
                     <p><strong>Username:</strong> CindyNaija</p>
                     <p><strong>Location:</strong> Akure</p>
@@ -376,12 +376,61 @@
                     <p><strong>Rating:</strong> 10</p>
                 </div>
             </a>
+<div class="grid-item">
+            
+            <video id="video26" src="PTVID1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
+            <a href="Profile2.html" target="_blank">
+                <div class="parameters">
+                    <p><strong>Username:</strong> Bella</p>
+                    <p><strong>Location:</strong> Osun</p>
+                    <p><strong>Age:</strong> 26-30</p>
+                    <p><strong>Complexion:</strong> Caramel</p>
+                    <p><strong>Breast Size:</strong> XL</p>
+                    <p><strong>Back Size:</strong> XL</p>
+                    <p><strong>Special services:</strong> Anal. Blow job</p>
+                    <p><strong>Rating:</strong> 5</p>
+                </div>
+            </a>
+        </div>
+        
+        <<div class="grid-item">
+        
+            <video id="video27" src="PTVID1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
+            <a href="Profile2.html" target="_blank">
+                <div class="parameters">
+                    <p><strong>Username:</strong> Funke</p>
+                    <p><strong>Location:</strong> Ogun</p>
+                    <p><strong>Age:</strong> 31+</p>
+                    <p><strong>Complexion:</strong> Cocoa</p>
+                    <p><strong>Breast Size:</strong> M</p>
+                    <p><strong>Back Size:</strong> L</p>
+                    <p><strong>Special services:</strong> Anal. Blow job</p>
+                    <p><strong>Rating:</strong> 10</p>
+                </div>
+            </a>
         </div>
         
         <div class="grid-item">
+           
+            <video id="video28" src="PTVID1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
             <a href="Profile2.html" target="_blank">
-            <video id="video72" src="PTVID1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
+                <div class="parameters">
+                    <p><strong>Username:</strong> DemGoTire</p>
+                    <p><strong>Location:</strong> Abuja</p>
+                    <p><strong>Age:</strong> 22-25</p>
+                    <p><strong>Complexion:</strong> Cocoa</p>
+                    <p><strong>Breast Size:</strong> M</p>
+                    <p><strong>Back Size:</strong> XL</p>
+                    <p><strong>Special services:</strong> Dress Up/Role Play</p>
+                    <p><strong>Rating:</strong> 10</p>
+                </div>
+            </a>
+        </div>
+        
+        <div class="grid-item">
             
+            <video id="video72" src="PTVID1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
+            <a href="Profile2.html" target="_blank">
                 <div class="parameters">
                     <p><strong>Username:</strong> Damife4rmNaija</p>
                     <p><strong>Location:</strong> Ogun</p>
@@ -396,9 +445,9 @@
         </div>
         
         <div class="grid-item">
-            <a href="Profile2.html" target="_blank">
+        
             <video id="video492" src="PTVID1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
-            
+            <a href="Profile2.html" target="_blank">
                 <div class="parameters">
                     <p><strong>Username:</strong> Seunfunmi</p>
                     <p><strong>Location:</strong> Akure</p>
@@ -413,9 +462,9 @@
         </div>
         
         <div class="grid-item">
-            <a href="Profile2.html" target="_blank">
+         
             <video id="video52" src="PTVID1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
-            
+            <a href="Profile2.html" target="_blank">
                 <div class="parameters">
                     <p><strong>Username:</strong> BeauT</p>
                     <p><strong>Location:</strong> Lagos</p>
@@ -430,6 +479,7 @@
         </div>
         
         <!-- Add more grid items here -->
+
 
 
 <div class="floating-emojis">
@@ -532,55 +582,74 @@
     prioritizeResults();
   }
 
-  // Function to toggle video playback and thumbnail mode
-function toggleVideo(videoId) {
-  var video = document.getElementById(videoId);
-  var thumbnail = video.nextElementSibling; // Assuming thumbnail is the next element after the video
-  var videoContainer = video.closest(".grid-item");
+// Function to check if a profile meets the selected criteria
+function profileMatchesCriteria(profile, parameter, value) {
+  var profileValue = profile.getElementsByClassName("parameters")[0].getElementsByTagName("p");
+  for (var k = 0; k < profileValue.length; k++) {
+    var profileParam = profileValue[k].textContent.toLowerCase();
+    if (profileParam.includes(parameter.toLowerCase()) && profileParam.includes(value.toLowerCase())) {
+      return true;
+    }
+  }
+  return false;
+}
 
-  if (video.paused) {
-    video.play();
+// Function to toggle between thumbnail and video modes
+function toggleMode(gridItem) {
+  var video = gridItem.getElementsByTagName("video")[0];
+  var thumbnail = gridItem.getElementsByClassName("thumbnail")[0];
+
+  if (video.style.display === "none") {
+    video.style.display = "block";
     thumbnail.style.display = "none";
-    videoContainer.classList.add("playing");
+    video.play();
   } else {
-    video.pause();
-    video.currentTime = 0; // Reset video to the beginning
+    video.style.display = "none";
     thumbnail.style.display = "block";
-    videoContainer.classList.remove("playing");
+    video.pause();
   }
 }
 
-// Function to redirect to Profile1.HTML
-function redirectToProfile() {
-  window.location.href = "Profile1.html";
+// Function to initialize the page
+function initializePage() {
+  var gridItems = document.getElementsByClassName("grid-item");
+  for (var i = 0; i < gridItems.length; i++) {
+    var gridItem = gridItems[i];
+    var video = gridItem.getElementsByTagName("video")[0];
+    var thumbnail = gridItem.getElementsByClassName("thumbnail")[0];
+
+    // Set the first frame of the video as the thumbnail
+    video.addEventListener("loadeddata", function() {
+      var canvas = document.createElement("canvas");
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+      thumbnail.src = canvas.toDataURL();
+    });
+
+    // Toggle video playback on grid item click
+    gridItem.addEventListener("click", function() {
+      toggleMode(this);
+    });
+
+    // Set initial display state
+    video.style.display = "none";
+    thumbnail.style.display = "block";
+  }
 }
 
 // Initialize the functions when the page loads
-window.onload = function () {
-  var videoContainers = document.getElementsByClassName("grid-item");
+window.onload = function() {
+  initializePage();
 
-  for (var i = 0; i < videoContainers.length; i++) {
-    var videoContainer = videoContainers[i];
-    var video = videoContainer.querySelector("video");
-    var thumbnail = video.nextElementSibling;
-
-    // Set up click event listeners for video toggle
-    videoContainer.addEventListener("click", function (event) {
-      if (!event.target.matches("video")) {
-        toggleVideo(video.id);
-      }
-    });
-
-    // Set up click event listener for parameters div redirection
-    var parametersDiv = videoContainer.querySelector(".parameters");
-    parametersDiv.addEventListener("click", redirectToProfile);
+  var selects = document.getElementsByTagName("select");
+  for (var i = 0; i < selects.length; i++) {
+    var select = selects[i];
+    select.addEventListener("change", refreshResults);
   }
-  
+
   openPopup(); // Open the pop-up when the page loads
 };
-
-    
-
   // Function to open the pop-up box
   function openPopup() {
     document.getElementById("popupBox").style.display = "block";
@@ -590,6 +659,7 @@ window.onload = function () {
   function closePopup() {
     document.getElementById("popupBox").style.display = "none";
   }
+    
 </script>
 
     
