@@ -182,12 +182,34 @@
   /* Add any other styles you want to apply to the playing GIF */
 }
 
+        /* New styles for the section label */
+        .section-label {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+
+        .section-label-icon {
+            margin-right: 5px;
+        }
         
     </style>
 </head>
 <body>
     <h1>Ladies' Profiles</h1>
 
+    
+    <!-- New section label for the search form -->
+    <div class="section-label">
+        <span class="section-label-icon">
+            
+            <i class="fa-solid fa-magnifying-glass"></i><!-- Replace with the actual FontAwesome class for a magnifier icon -->
+        </span>
+        <span>SEARCH</span>
+    </div>
+
+    <div class="search-form">
     <div class="search-form">
         <div>
             <label for="location">Location:</label>
