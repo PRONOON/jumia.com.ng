@@ -257,10 +257,12 @@
     
 
     <div class="grid-container">
+        
     <div class="grid-item">
-  <a href="Profile2.html" target="_blank">
-    <video id="video2" src="PTVID1.mp4" type="video/mp4" preload="none" loop muted playsinline></video>
-    <img class="thumbnail" src="" alt="Thumbnail">
+    <div class="thumbnail-container">
+        <img src="PTIMG.jpeg" alt="Thumbnail Image">
+    </div>
+    <video id="video2" src="PTVID1.mp4" type="video/mp4" loop muted playsinline poster="thumbnail.jpg" preload="none"></video>
     <div class="parameters">
       <p>Username: Clara_Of_Lagos</p>
                     <p>Location: Abuja</p>
@@ -271,7 +273,7 @@
                     <p>Special Services: Anal, Blow job</p>
                     <p>Rating: 7</p>
                 </div>
-            </a>
+           
         </div>
 
 <div class="grid-item">
@@ -658,6 +660,53 @@ window.onload = function() {
   function closePopup() {
     document.getElementById("popupBox").style.display = "none";
   }
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Function to play video in a loop for a specific duration
+  function playVideoLoop(videoElement, duration) {
+    videoElement.play();
+    setTimeout(function () {
+      videoElement.pause();
+      videoElement.currentTime = 0;
+    }, duration * 1000);
+  }
+
+  // Add click event listeners to each grid-item to toggle video playback and thumbnail
+  var gridItems = document.getElementsByClassName("grid-item");
+  for (var i = 0; i < gridItems.length; i++) {
+    var gridItem = gridItems[i];
+    var video = gridItem.getElementsByTagName("video")[0];
+    var thumbnail = video.getAttribute("poster"); // Use the "poster" attribute for the default thumbnail
+
+    // Set the initial state to show the thumbnail
+    video.style.display = "none";
+    video.removeAttribute("controls"); // Remove controls to prevent manual play
+
+    // Create and append the thumbnail image
+    var thumbnailImage = new Image();
+    thumbnailImage.src = thumbnail;
+    thumbnailImage.classList.add("thumbnail");
+    gridItem.appendChild(thumbnailImage);
+
+    // Add click event to toggle between video and thumbnail
+    gridItem.addEventListener("click", function () {
+      var video = this.getElementsByTagName("video")[0];
+      var thumbnail = this.getElementsByClassName("thumbnail")[0];
+
+      if (video.style.display === "none") {
+        video.style.display = "block";
+        thumbnail.style.display = "none";
+        playVideoLoop(video, 5); // Play video loop for 5 seconds
+      } else {
+        video.style.display = "none";
+        thumbnail.style.display = "block";
+      }
+    });
+  }
+});
+
+
     
 </script>
 
