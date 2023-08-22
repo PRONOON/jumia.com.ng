@@ -268,7 +268,7 @@
     
         <div class="grid-item">
     <div class="gif-container">
-        <img src="PTGIF1.gif" alt="Animated GIF" class="playing" autoplay="false">
+        <img src="PTGIF1.gif" alt="Animated GIF" class="playing">
     </div>
   <!--  <a href="profile1.html">
         <div class="parameters">
@@ -557,29 +557,17 @@
   }
 
     document.addEventListener("DOMContentLoaded", function () {
-  var gifContainers = document.querySelectorAll(".gif-container");
+  var gifImage = document.querySelector(".playing");
+  var isPlaying = false;
 
-  gifContainers.forEach(function (container) {
-    var gif = container.querySelector("img");
-    var isPlaying = false;
-
-    // Toggle GIF play state and update display
-    function toggleGIF() {
-      if (isPlaying) {
-        gif.classList.remove("playing");
-      } else {
-        gif.classList.add("playing");
-      }
-      isPlaying = !isPlaying;
+  gifImage.addEventListener("click", function () {
+    if (isPlaying) {
+      gifImage.classList.remove("playing");
+      isPlaying = false;
+    } else {
+      gifImage.classList.add("playing");
+      isPlaying = true;
     }
-
-    // Freeze the GIF by default
-    gif.classList.remove("playing");
-
-    // Add click event to toggle GIF playback
-    container.addEventListener("click", function () {
-      toggleGIF();
-    });
   });
 });
 
