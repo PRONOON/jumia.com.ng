@@ -166,6 +166,14 @@
 }
 
         
+        /* Define the styles for the playing state */
+.playing {
+  animation: none; /* This disables any animation applied to the image */
+  filter: none; /* This clears any filters applied to the image */
+  /* Add any other styles you want to apply to the playing GIF */
+}
+
+        
     </style>
 </head>
 <body>
@@ -549,47 +557,30 @@
   }
 
     document.addEventListener("DOMContentLoaded", function () {
-  // Function to play video in a loop for a specific duration
-  function playVideoLoop(videoElement, duration) {
-    videoElement.play();
-    setTimeout(function () {
-      videoElement.pause();
-      videoElement.currentTime = 0;
-    }, duration * 1000);
-  }
+  var gifContainers = document.querySelectorAll(".gif-container");
 
-  var gridItems = document.getElementsByClassName("grid-item");
+  gifContainers.forEach(function (container) {
+    var gif = container.querySelector("img");
+    var isPlaying = false;
 
-  // Add click event listeners to each grid-item to toggle video playback and thumbnail
-  for (var i = 0; i < gridItems.length; i++) {
-    var gridItem = gridItems[i];
-    var video = gridItem.querySelector("video");
-    var thumbnail = video.getAttribute("poster");
-
-    video.style.display = "none";
-    video.removeAttribute("controls");
-
-    var thumbnailImage = new Image();
-    thumbnailImage.src = thumbnail;
-    thumbnailImage.classList.add("thumbnail");
-    gridItem.appendChild(thumbnailImage);
-
-    gridItem.addEventListener("click", function () {
-      var video = this.querySelector("video");
-      var thumbnail = this.querySelector(".thumbnail");
-
-      if (video.style.display === "none") {
-        video.style.display = "block";
-        thumbnail.style.display = "none";
-        playVideoLoop(video, 5);
+    // Toggle GIF play state and update display
+    function toggleGIF() {
+      if (isPlaying) {
+        gif.classList.remove("playing");
       } else {
-        video.style.display = "none";
-        thumbnail.style.display = "block";
-        video.pause(); // Pause the video
-        video.currentTime = 0;
+        gif.classList.add("playing");
       }
+      isPlaying = !isPlaying;
+    }
+
+    // Freeze the GIF by default
+    gif.classList.remove("playing");
+
+    // Add click event to toggle GIF playback
+    container.addEventListener("click", function () {
+      toggleGIF();
     });
-  }
+  });
 });
 
 
