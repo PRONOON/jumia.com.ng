@@ -260,7 +260,7 @@
     
         <div class="grid-item">
     <div class="gif-container">
-        <img src="PTGIF1.gif" alt="Animated GIF">
+        <img src="PTGIF1.gif" alt="Animated GIF" autoplay="false">
     </div>
     <a href="profile1.html">
         <div class="parameters">
@@ -547,6 +547,26 @@
   function closePopup() {
     document.getElementById("popupBox").style.display = "none";
   }
+
+    document.addEventListener("DOMContentLoaded", function () {
+  var gifContainers = document.querySelectorAll(".gif-container");
+
+  // Add click event listeners to each gif-container to toggle GIF playback
+  gifContainers.forEach(function (gifContainer) {
+    var gif = gifContainer.querySelector("img");
+
+    gif.addEventListener("click", function () {
+      if (gifContainer.classList.contains("playing")) {
+        gifContainer.classList.remove("playing");
+        gif.src = gif.src; // Pause the GIF by resetting the src
+      } else {
+        gifContainer.classList.add("playing");
+        gif.src = gif.getAttribute("src"); // Start playing the GIF
+      }
+    });
+  });
+});
+
 </script>
 
     
