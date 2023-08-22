@@ -549,23 +549,49 @@
   }
 
     document.addEventListener("DOMContentLoaded", function () {
-  var gifContainers = document.querySelectorAll(".gif-container");
+  // Function to play video in a loop for a specific duration
+  function playVideoLoop(videoElement, duration) {
+    videoElement.play();
+    setTimeout(function () {
+      videoElement.pause();
+      videoElement.currentTime = 0;
+    }, duration * 1000);
+  }
 
-  // Add click event listeners to each gif-container to toggle GIF playback
-  gifContainers.forEach(function (gifContainer) {
-    var gif = gifContainer.querySelector("img");
+  var gridItems = document.getElementsByClassName("grid-item");
 
-    gif.addEventListener("click", function () {
-      if (gifContainer.classList.contains("playing")) {
-        gifContainer.classList.remove("playing");
-        gif.src = gif.src; // Pause the GIF by resetting the src
+  // Add click event listeners to each grid-item to toggle video playback and thumbnail
+  for (var i = 0; i < gridItems.length; i++) {
+    var gridItem = gridItems[i];
+    var video = gridItem.querySelector("video");
+    var thumbnail = video.getAttribute("poster");
+
+    video.style.display = "none";
+    video.removeAttribute("controls");
+
+    var thumbnailImage = new Image();
+    thumbnailImage.src = thumbnail;
+    thumbnailImage.classList.add("thumbnail");
+    gridItem.appendChild(thumbnailImage);
+
+    gridItem.addEventListener("click", function () {
+      var video = this.querySelector("video");
+      var thumbnail = this.querySelector(".thumbnail");
+
+      if (video.style.display === "none") {
+        video.style.display = "block";
+        thumbnail.style.display = "none";
+        playVideoLoop(video, 5);
       } else {
-        gifContainer.classList.add("playing");
-        gif.src = gif.getAttribute("src"); // Start playing the GIF
+        video.style.display = "none";
+        thumbnail.style.display = "block";
+        video.pause(); // Pause the video
+        video.currentTime = 0;
       }
     });
-  });
+  }
 });
+
 
 </script>
 
