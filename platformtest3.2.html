@@ -556,16 +556,16 @@
     document.getElementById("popupBox").style.display = "none";
   }
 
-    document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function () {
   var gifImage = document.querySelector(".playing");
   var isPlaying = false;
 
   gifImage.addEventListener("click", function () {
     if (isPlaying) {
-      gifImage.classList.remove("playing");
+      gifImage.src = "PTGIF1.gif"; // Reset the image source to freeze the GIF
       isPlaying = false;
     } else {
-      gifImage.classList.add("playing");
+      gifImage.src = "PTGIF1.gif"; // Set the image source to play the GIF
       isPlaying = true;
     }
   });
