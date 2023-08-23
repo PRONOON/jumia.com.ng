@@ -128,14 +128,14 @@ margin-right: auto;
 <script>
     const backgroundMedia = [
         { type: 'gif', source: 'PTGIF1.gif', duration: 5000 }, // Add the first GIF here
-        { type: 'image', source: 'CYCLE1.jpg' }, // Add images here
-        { type: 'image', source: 'CYCLE7.jpg' },
-        { type: 'image', source: 'CYCLE10.jpg' },
-        { type: 'image', source: 'CYCLE11.jpg' },
-        { type: 'image', source: 'CYCLE12.jpg' },
-        { type: 'image', source: 'CYCLE3.jpg' },
-        { type: 'image', source: 'CYCLE4.jpg' },
-        { type: 'gif', source: 'PTGIF1.gif', duration: 3000 } // Add the second GIF here
+        { type: 'image', source: 'CYCLE1.jpg', repeat: 'no-repeat' }, // Add images here
+        { type: 'image', source: 'CYCLE7.jpg', repeat: 'no-repeat' },
+        { type: 'image', source: 'CYCLE10.jpg', repeat: 'no-repeat' },
+        { type: 'image', source: 'CYCLE11.jpg', repeat: 'no-repeat' },
+        { type: 'image', source: 'CYCLE12.jpg', repeat: 'no-repeat' },
+        { type: 'image', source: 'CYCLE3.jpg', repeat: 'repeat' }, // Repeat these images
+        { type: 'image', source: 'CYCLE4.jpg', repeat: 'repeat' }, // to cover uncovered space
+        { type: 'gif', source: 'PTGIF2.gif', duration: 3000 } // Add the second GIF here
     ];
 
     let currentMediaIndex = 0;
@@ -145,7 +145,7 @@ margin-right: auto;
         bodyElement.style.backgroundImage = `url('${media.source}'), url('black.jpg')`;
         bodyElement.style.backgroundSize = 'cover';
         bodyElement.style.backgroundPosition = 'center';
-        bodyElement.style.backgroundRepeat = 'no-repeat';
+        bodyElement.style.backgroundRepeat = `${media.repeat}, repeat`;
     }
     
     function cycleBackgroundMedia() {
