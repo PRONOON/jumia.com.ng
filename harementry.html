@@ -96,6 +96,27 @@ margin-right: auto;
     gap: 10px;
 }
 
+.icon-container {
+    display: flex;
+    justify-content: space-between;
+    width: 600px;
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
     
 </style>
 
@@ -108,12 +129,26 @@ margin-right: auto;
     <div class="loading-animation">
         <div class="loader"></div>
     </div>
-    <div class="button-container hidden">
-        <a href="https://jumia-ng-electronics-category-nig.github.io/jumia.com.ng/platformtest3.2.html" class="app-button">FIND HER</a>
-        <a href="https://t.me/HaremIsABot" class="app-button">REGISTER ON OUR PLATFORM</a>
-        <a href="https://chatbot.hellotars.com/conv/fEJ061" class="app-button">FAQBot (Inquiries)</a>
+        <div class="button-container hidden">
+        <div class="icon-container">
+            <div class="icon">
+                <img src="MAGNIFIER.png" alt="Magnifier Icon">
+            </div>
+            <a href="https://jumia-ng-electronics-category-nig.github.io/jumia.com.ng/platformtest3.2.html" class="app-button">FIND HER</a>
+        </div>
+        <div class="icon-container">
+            <div class="icon">
+                <img src="PERSON.png" alt="Person Icon">
+            </div>
+            <a href="https://t.me/HaremIsABot" class="app-button">REGISTER ON OUR PLATFORM</a>
+        </div>
+        <div class="icon-container">
+            <div class="icon">
+                <img src="QUESTION.png" alt="Question Icon">
+            </div>
+            <a href="https://chatbot.hellotars.com/conv/fEJ061" class="app-button">FAQBot (Inquiries)</a>
+        </div>
     </div>
-
     <script>
     // Wait for the loading animation to finish 7 cycles
     setTimeout(() => {
