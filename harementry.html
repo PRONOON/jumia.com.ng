@@ -135,14 +135,14 @@ margin-right: auto;
         { type: 'image', source: 'CYCLE12.jpg' },
         { type: 'image', source: 'CYCLE3.jpg' },
         { type: 'image', source: 'CYCLE4.jpg' },
-        { type: 'gif', source: 'PTGIF1.gif', duration: 3000 } // Add the second GIF here
+        { type: 'gif', source: 'PTGIF2.gif', duration: 3000 } // Add the second GIF here
     ];
 
     let currentMediaIndex = 0;
     const bodyElement = document.querySelector("body");
 
     function setMediaProperties(media) {
-        bodyElement.style.backgroundImage = `url('${media.source}')`;
+        bodyElement.style.backgroundImage = `url('${media.source}'), url('black.jpg')`;
         bodyElement.style.backgroundSize = 'cover';
         bodyElement.style.backgroundPosition = 'center';
         bodyElement.style.backgroundRepeat = 'no-repeat';
@@ -168,6 +168,7 @@ margin-right: auto;
 
     cycleBackgroundMedia(); // Start cycling
 </script>
+
 
 
 
