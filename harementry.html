@@ -29,6 +29,7 @@ body {
     margin-bottom: 20px;
     width: 30px;
     height: 30px;
+    animation: spin 7s linear infinite;
 }
 
 .loader {
@@ -67,23 +68,46 @@ body {
 .app-button:hover {
     background-color: #ff3333;
 }
+    
+.button-container.hidden {
+    display: none;
+}
 
+.button-container.visible {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
 
+    
 </style>
 
 
 </head>
 <body>
-    <div class="logo-container">
-        <img src="Haremlogo.png" alt="Harem Logo" class="logo">
+       <div class="logo-container">
+        <img src="haremlogo.png" alt="Harem Logo" class="logo">
     </div>
     <div class="loading-animation">
         <div class="loader"></div>
     </div>
-    <div class="button-container">
+    <div class="button-container hidden">
         <a href="https://jumia-ng-electronics-category-nig.github.io/jumia.com.ng/platformtest3.2.html" class="app-button">FIND YOUR GIRL</a>
         <a href="https://t.me/HookedUpWeeklysBot" class="app-button">REGISTER ON OUR PLATFORM</a>
         <a href="https://chatbot.hellotars.com/conv/fEJ061" class="app-button">FAQBot (Inquiries)</a>
     </div>
+
+    <script>
+    // Wait for the loading animation to finish 7 cycles
+    setTimeout(() => {
+        // Hide loading animation
+        document.querySelector('.loading-animation').style.display = 'none';
+        // Show buttons
+        document.querySelector('.button-container').classList.remove('hidden');
+        document.querySelector('.button-container').classList.add('visible');
+    }, 7000); // 7 seconds
+</script>
+
 </body>
 </html>
