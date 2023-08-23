@@ -23,7 +23,10 @@ body {
 
 .logo {
     width: 750px;
+    background-color: white; /* Add white background color */
+    border-radius: 20px; /* Add rounded corners */
 }
+
 
 .loading-animation {
     margin-top: 450px;
@@ -117,6 +120,27 @@ margin-right: auto;
         document.querySelector('.button-container').classList.add('visible');
     }, 7000); // 7 seconds
 </script>
+
+ <script>
+    const backgroundImages = [
+        "CYCLE1.jpg", "CYCLE7.jpg", "CYCLE10.jpg",
+        "CYCLE11.jpg", "CYCLE12.jpg", "CYCLE3.jpg", "CYCLE4.jpg"
+    ];
+
+    let currentImageIndex = 0;
+    const bodyElement = document.querySelector("body");
+
+    function cycleBackgroundImage() {
+        bodyElement.style.backgroundImage = `url('${backgroundImages[currentImageIndex]}')`;
+
+        currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+
+        setTimeout(cycleBackgroundImage, 1000); // Change image every second
+    }
+
+    cycleBackgroundImage(); // Start cycling
+</script>
+
 
 
     <script>(function(){var js,fs,d=document,id="tars-widget-script",b="https://tars-file-upload.s3.amazonaws.com/bulb/";if(!d.getElementById(id)){js=d.createElement("script");js.id=id;js.type="text/javascript";js.src=b+"js/widget.js";fs=d.getElementsByTagName("script")[0];fs.parentNode.insertBefore(js,fs)}})();window.tarsSettings = {"convid": "fEJ061", "href": "https://chatbot.hellotars.com/conv/fEJ061"};</script>
