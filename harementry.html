@@ -123,26 +123,49 @@ margin-right: auto;
 </script>
 
 <script>
-    const backgroundImages = [
-        "PTGIF1.gif", // Add the first GIF here
-        "CYCLE1.jpg", "CYCLE7.jpg", "CYCLE10.jpg",
-        "CYCLE11.jpg", "CYCLE12.jpg", "CYCLE3.jpg", "CYCLE4.jpg",
-        "PTGIF2.gif" // Add the second GIF here
+    const backgroundMedia = [
+        { type: 'gif', source: 'PTGIF1.gif', duration: 5000 }, // Add the first GIF here
+        { type: 'image', source: 'CYCLE1.jpg' }, // Add images here
+        { type: 'image', source: 'CYCLE7.jpg' },
+        { type: 'image', source: 'CYCLE10.jpg' },
+        { type: 'image', source: 'CYCLE11.jpg' },
+        { type: 'image', source: 'CYCLE12.jpg' },
+        { type: 'image', source: 'CYCLE3.jpg' },
+        { type: 'image', source: 'CYCLE4.jpg' },
+        { type: 'gif', source: 'PTGIF2.gif', duration: 3000 } // Add the second GIF here
     ];
 
-    let currentImageIndex = 0;
+    let currentMediaIndex = 0;
     const bodyElement = document.querySelector("body");
 
-    function cycleBackgroundImage() {
-        bodyElement.style.backgroundImage = `url('${backgroundImages[currentImageIndex]}')`;
-
-        currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
-
-        setTimeout(cycleBackgroundImage, 1000); // Change image every second
+    function setMediaProperties(media) {
+        bodyElement.style.backgroundImage = `url('${media.source}')`;
+        bodyElement.style.backgroundSize = 'cover';
+        bodyElement.style.backgroundPosition = 'center';
+        bodyElement.style.backgroundRepeat = 'no-repeat';
+    }
+    
+    function cycleBackgroundMedia() {
+        const currentMedia = backgroundMedia[currentMediaIndex];
+        
+        if (currentMedia.type === 'gif') {
+            setMediaProperties(currentMedia);
+            setTimeout(() => {
+                currentMediaIndex = (currentMediaIndex + 1) % backgroundMedia.length;
+                cycleBackgroundMedia();
+            }, currentMedia.duration);
+        } else if (currentMedia.type === 'image') {
+            setMediaProperties(currentMedia);
+            setTimeout(() => {
+                currentMediaIndex = (currentMediaIndex + 1) % backgroundMedia.length;
+                cycleBackgroundMedia();
+            }, 1000); // 1 second for images
+        }
     }
 
-    cycleBackgroundImage(); // Start cycling
+    cycleBackgroundMedia(); // Start cycling
 </script>
+
 
 
 
