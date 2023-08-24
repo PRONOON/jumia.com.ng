@@ -84,6 +84,26 @@
         .make-offer-button button:hover {
             background-color: #ff3333;
         }
+
+.copy-button {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .copy-button button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff4d4d;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .copy-button button:hover {
+            background-color: #ff3333;
+        }
+        
     </style>
 </head>
 <body>
@@ -122,11 +142,29 @@
         <button onclick="window.location.href='https://t.me/HaremIsABot'">MAKE OFFER</button>
     </div>
 
+
+    <div class="copy-button">
+        <button onclick="copyProfileID()">CLICK TO COPY PROFILE ID</button>
+    </div>
+
+    
+    
     <script>
         function playVideo() {
             const videoElement = document.getElementById('video');
             videoElement.style.display = 'block';
             videoElement.play();
+        }
+
+        function copyProfileID() {
+            const profileIDElement = document.getElementById('profileid');
+            const textArea = document.createElement('textarea');
+            textArea.value = profileIDElement.innerText;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert('Profile ID copied to clipboard: ' + profileIDElement.innerText);
         }
     </script>
 </body>
